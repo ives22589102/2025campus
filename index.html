@@ -22,7 +22,7 @@
 
      @font-face {
     font-family: 'MStiffHeiHK-UltraBold';
-    src: url('./v1/font/MStiffHeiHK-UltraBold.TTF') format('truetype');
+    src: url('./v1/font/MStiffHeiHK-UltraBold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -162,17 +162,28 @@
   </div>
 </header>
     <!-- 
-      ============================================================
-      THEME TITLE SECTION (NEW)
-      ============================================================
-    -->
-    <section class="py-4 md:py-6 bg-gradient-to-r from-[#cb9eb8] to-[#c6c7e5]">
-        <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
-          <h2 class="text-[100px] font-[MStiffHeiHK-UltraBold] text-white tracking-widest" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
-            // 2025 年度主題 //
-          </h2>
-        </div>
-    </section>
+  ============================================================
+  THEME TITLE SECTION (UPDATED with responsive font size)
+  ============================================================
+-->
+<section class="py-4 md:py-6 bg-gradient-to-r from-[#cb9eb8] to-[#c6c7e5]">
+  <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
+      <!-- 
+        主要變更：
+        - 移除了固定的 text-[50px]。
+        - 新增了一系列響應式字體大小 class：
+          - text-2xl: 手機上的基礎字體大小 (24px)。
+          - sm:text-3xl: 在小螢幕 (640px) 以上，字體變為 30px。
+          - md:text-4xl: 在中等螢幕 (768px) 以上，字體變為 36px。
+          - lg:text-5xl: 在大螢幕 (1024px) 以上，字體變為 48px，接近您原本的 50px。
+      -->
+      <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest
+                 text-2xl sm:text-3xl md:text-4xl lg:text-5xl" 
+          style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+        - 2025年度主題 -
+      </h2>
+  </div>
+</section>
 
     <!-- 
       ============================================================
@@ -212,13 +223,15 @@
     -->
     
 
-  <section class="py-4 md:py-6 bg-gradient-to-r from-[#cb9eb8] to-[#c6c7e5]">
-    <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
-      <h2 class="text-[50px] font-[MStiffHeiHK-UltraBold] text-white tracking-widest" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
-        - 活動簡介 -
-      </h2>
-    </div>
-</section>
+    <section class="py-4 md:py-6 bg-gradient-to-r from-[#cb9eb8] to-[#c6c7e5]">
+      <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">         
+          <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest
+                     text-2xl sm:text-3xl md:text-4xl lg:text-5xl" 
+              style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+            - 活動簡介 -
+          </h2>
+      </div>
+    </section>
 
     <!-- 
   ============================================================
