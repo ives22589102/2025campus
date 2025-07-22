@@ -185,36 +185,42 @@
   </div>
 </section>
 
-    <!-- 
-      ============================================================
-      TABS SECTION (UPDATED with images)
-      ============================================================
-    -->
-    <section class="py-12 md:py-16">
-      <!-- 
-        主要變更：
-        1. 將 max-w-7xl (固定寬度) 改為 max-w-[90%] (90% 畫面寬度)。
-        2. 增加了一個 max-w-screen-lg 作為最大上限，避免在超大螢幕上過寬。
-      -->
-      <div class="max-w-[80%] max-w-screen-xl mx-auto px-4 text-center">
-          <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8" data-aos="fade-up">
-              
-              <!-- 
-                主要變更：
-                1. 移除了 max-w-sm，解除了對單張圖片的寬度限制。
-                2. 增加了 sm:w-1/2，讓圖片在小螢幕以上各佔 50% 寬度，使其自動填滿容器。
-              -->
-              <a href="https://asus.feversocial.com/ASUSOPMKT/2025ROGCampus-359?test=evUbhz3hnhDElCOfmEcV8tc9Yilrb760FvRvGyRUaTTxT0Qq1Plj7ionj6ACVjPnta5AVQbNWvUa3OhmrP3XQ0nebH9XgX1D1w93haoOL%2F8%3D&test_code=22e723ee5180f40cf5f88b69ff89a66c297cde4c4813a098d297cdb89bdf8c64&test_expired=1753351746" target="_blank" class="block w-full sm:w-1/2 transition-transform duration-300 hover:scale-105">
-                  <img src="./v1/img/workshopbtn.jpg" alt="菁英工作坊" class="w-full h-auto rounded-lg shadow-md">
-              </a>
-              
-              <a href="#" class="block w-full sm:w-1/2 transition-transform duration-300 hover:scale-105">
-                  <img src="./v1/img/competitionbtn.jpg" alt="校園組裝王" class="w-full h-auto rounded-lg shadow-md">
-              </a>
-  
-          </div>
+<!-- 
+  ============================================================
+  TABS SECTION (UPDATED with larger images)
+  ============================================================
+-->
+<section class="py-12 md:py-16">
+  <!-- 
+    主要變更：
+    1. 將容器寬度從 80% 放大到 90% (max-w-[90%])。
+    2. 將最大寬度從 xl (1280px) 提升到 2xl (1536px) (max-w-screen-2xl)。
+    這是讓圖片變大的最主要改動。
+  -->
+  <div class="max-w-[90%] max-w-screen-2xl mx-auto px-4 text-center">
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8" data-aos="fade-up">
+          
+          <!-- Link 1: 菁英工作坊 -->
+          <a href="https://asus.feversocial.com/ASUSOPMKT/363?test=..." target="_blank" class="block w-full sm:w-1/2 group">
+              <img src="./v1/img/workshopbtn_v2.png" 
+                   alt="菁英工作坊" 
+                   class="w-full h-auto transition-all duration-300 
+                          group-hover:scale-105 
+                          group-hover:drop-shadow-[0_0_15px_#ab5360]">
+          </a>
+          
+          <!-- Link 2: 校園組裝王 -->
+          <a href="#" class="block w-full sm:w-1/2 group">
+              <img src="./v1/img/competitionbtn_v2.png" 
+                   alt="校園組裝王" 
+                   class="w-full h-auto transition-all duration-300 
+                          group-hover:scale-105 
+                          group-hover:drop-shadow-[0_0_15px_#5e5593]">
+          </a>
+
       </div>
-  </section>
+  </div>
+</section>
 
     <!-- 
       ============================================================
