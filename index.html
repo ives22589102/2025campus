@@ -101,30 +101,66 @@
 .accordion-icon-phase2.open {
     transform: rotate(180deg);
 }
+
+/* --- 新增：OMNI 角色浮動動畫 --- */
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* 向上浮動 20px */
+  }
+}
+
+.omni-character {
+  /* 定位與層級 */  
+  position: absolute;
+  bottom: 0;
+  left: 2%; /* 微調角色水平位置 */
+  z-index: 10; /* 確保在背景之上 */
+
+  /* 尺寸與響應式 */
+  width: 50%; /* 根據畫面寬度縮放 */
+  max-width: 1300px; /* 設定最大寬度，避免在超大螢幕上過於巨大 */
+  height: auto;
+
+  /* 套用動畫 */
+  animation: floatAnimation 2s ease-in-out infinite alternate;
+}
   </style>
 
 </head>
 <body class="overflow-x-hidden">
 
   <!-- 
-    ============================================================
-    HEADER & HERO SECTION
-    ============================================================
+  ============================================================
+  HEADER & HERO SECTION (UPDATED with floating character)
+  ============================================================
+-->
+<header class="relative w-full overflow-hidden bg-gray-800">
+  <!-- 
+    主要變更：
+    - Header 加上了 position: relative 和 overflow: hidden 作為定位容器。
+    - 拆分成背景圖和前景 OMNI 角色圖兩層。
   -->
-  <header class="relative w-full bg-gray-800">
-    <!-- The KV Banner Image -->
-    <img src="./v1/img/KV.jpg" 
-         alt="2025 ROG 校園菁英召集令 Code-X 活動主視覺" 
-         class="w-full h-auto object-cover">
-    
-    <!-- Visually hidden content for SEO -->
-    <div class="sr-only">
-      <h1>2025 ROG Campus Program</h1>
-      <h2>ROG 校園菁英召集令 Code-X</h2>
-      <p>WE WANT YOU!</p>
-    </div>
-  </header>
-  <main class="w-full">
+
+  <!-- Layer 1: Background Image -->
+  <img src="v1/img/KV_BG_v2.jpg" 
+       alt="ROG 校園菁英召集令活動主視覺背景" 
+       class="w-full h-auto object-cover">
+       
+  <!-- Layer 2: Floating OMNI Character (PNG) -->
+  <img src="v1/img/omin_fly_v2.png" 
+       alt="ROG OMNI 角色" 
+       class="omni-character">
+
+  <!-- Visually hidden SEO content, positioned on top -->
+  <div class="sr-only absolute inset-0 z-20">
+    <h1>2025 ROG Campus Program</h1>
+    <h2>ROG 校園菁英召集令 Code-X</h2>
+    <p>WE WANT YOU!</p>
+  </div>
+</header>
     <!-- 
       ============================================================
       THEME TITLE SECTION (NEW)
