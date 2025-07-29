@@ -19,7 +19,7 @@
 
   <!-- 
     ============================================================
-    CUSTOM STYLES (RE-ORGANIZED)
+    CUSTOM STYLES (RE-ORGANIZED & CLEANED)
     ============================================================
   -->
   <style>
@@ -32,9 +32,10 @@
     }
 
     body { 
-      background-color: #F8F7FA; 
+      background-color: #f8f7fa; /* Restored to your desired light color */
       font-family: 'Noto Sans TC', sans-serif; 
-      color: #333; 
+      color: #333;
+      padding-top: 80px; /* Offset for the fixed navbar */
     }
     
     p { /* Global bold <p> tag style */
@@ -54,18 +55,24 @@
     .bg-full-scroll {
       position: relative;
       overflow: hidden;
-      background-image: url('v1/img/section_bg_v2.jpg'); /* Default background */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
       background-attachment: scroll;
     }
     
-    .bg-phases-wrapper {
-      background-image: url('v1/img/section_bg_v2.jpg'); /* Background for Phase 1, 2, 3 */
-    }
+    /* Specific backgrounds for different sections */
+    .bg-intro-prizes { background-image: url('v1/img/section_bg_v2.jpg'); }
+    .bg-phases-wrapper { background-image: url('v1/img/section_bg_v2.jpg'); }
 
     /* --- 3. COMPONENTS --- */
+    /* Navbar Styles */
+    #main-nav.scrolled {
+      background-color: rgba(12, 12, 13, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
     /* Accordion (for UGC and Phase 2) */
     .accordion-content, .accordion-content-phase2 { 
       max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; 
@@ -110,10 +117,7 @@
       padding: 2.5rem;
       transition: box-shadow 0.3s ease-in-out;
     }
-    @media (max-width: 768px) {
-      .glowing-frame { padding: 1.5rem; }
-    }
-
+    
     /* Pin-style Timeline */
     .timeline-pin-item { display: flex; flex-direction: column; align-items: center; width: 100%; }
     .timeline-pin-date { font-weight: 700; font-size: 1.125rem; color: #374151; margin-bottom: 0.75rem; }
@@ -134,6 +138,11 @@
     .timeline-pin-desc { text-align: center; color: #4b5563; padding: 0 0.5rem; }
     .timeline-pin-desc h4 { font-size: 1.25rem; color: #1f2937; }
     .timeline-pin-desc p { font-size: 1rem; font-weight: 400; margin-top: 0.25rem; }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .glowing-frame { padding: 1.5rem; }
+    }
     
     @media (min-width: 768px) {
       .timeline-pin-item { width: 33.333333%; }
@@ -167,34 +176,74 @@
     .timeline-pin-item:nth-child(2) .timeline-pin { animation-delay: 0.3s; }
     .timeline-pin-item:nth-child(3) .timeline-pin { animation-delay: 0.6s; }
 
-
-        /* --- NEW: Pulsing Glow CTA Button Animation --- */
+    /* Pulsing Glow CTA Button */
     @keyframes pulse-glow {
-      0% {
-        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); /* pink-500 with 70% opacity */
-      }
-      70% {
-        box-shadow: 0 0 0 20px rgba(236, 72, 153, 0); /* Glow expands to 20px */
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
-      }
+      0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(236, 72, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
     }
-
-    .cta-pulse-button {
-      /* Apply the animation */
-      animation: pulse-glow 2s infinite;
-    }
+    .cta-pulse-button { animation: pulse-glow 2s infinite; }
   </style>
 </head>
 <body class="overflow-x-hidden">
 
-  <!-- HEADER -->
-  <header class="relative w-full overflow-hidden bg-gray-800">
+  <!-- 
+    ============================================================
+    HEADER & NAVIGATION BAR
+    ============================================================
+  -->
+  <header id="main-nav" class="bg-gray-900 fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="#">
+            <img class="h-8 w-auto" src="https://dlcdnimgs.asus.com/websites/global/images/logo_rog.svg" alt="ROG Logo">
+          </a>
+        </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="#intro" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動簡介</a>
+            <a href="#timeline" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動時程</a>
+            <a href="#phase1" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">參與方式</a>
+            <a href="#rewards" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">冠軍獎勵</a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="-mr-2 flex md:hidden">
+          <button id="mobile-menu-button" type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu, show/hide based on menu state. -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800/95 backdrop-blur-sm">
+        <a href="#intro" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動簡介</a>
+        <a href="#timeline" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動時程</a>
+        <a href="#phase1" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">參與方式</a>
+        <a href="#rewards" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍獎勵</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- KV Banner -->
+  <section class="relative w-full overflow-hidden bg-gray-800">
     <img src="v1/img/KV_BG_v3.jpg" alt="ROG 校園菁英召集令活動主視覺背景" class="w-full h-auto object-cover">
     <img src="v1/img/omin_fly_v4.png" alt="ROG OMNI 角色" class="omni-character">
     <div class="sr-only absolute inset-0 z-20"><h1>2025 ROG Campus Program</h1><h2>ROG 校園菁英召集令 Code-X</h2><p>WE WANT YOU!</p></div>
-  </header>
+  </section>
   
   <main>
     <!-- THEME TITLE -->
@@ -219,18 +268,14 @@
     </section>
 
     <!-- INTRO & PRIZES TITLE -->
-    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
+    <section id="intro" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
       <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
           <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 活動簡介 -</h2>
       </div>
     </section>
 
-    <!-- 
-      ============================================================
-      INTRO & PRIZES CONTENT (UPDATED to use CSS background)
-      ============================================================
-    -->
-    <section class="py-12 md:py-20 bg-full-scroll">
+    <!-- INTRO & PRIZES CONTENT -->
+    <section class="py-12 md:py-20 bg-full-scroll bg-intro-prizes">
       <div class="absolute inset-0 bg-white/30 backdrop-blur-md z-10"></div>      
       <div class="relative max-w-7xl mx-auto px-6 z-20">
           <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
@@ -242,17 +287,10 @@
                   <p class="text-gray-700">萬元獎品等你來拿！冠軍獨享 ASUS PBA 組裝電腦！</p>
               </div>
               <div class="flex flex-col items-center gap-y-12">
-                <!-- Row 1: Champion Prize -->
                 <div class="text-center flex flex-col items-center transform transition-transform duration-300 hover:-translate-y-2">
-                    <div class="h-64 flex items-center justify-center mb-4">
-                        <img src="v1/img/price1.png" alt="冠軍獎品：ASUS PBA 組裝電腦" class="max-h-full max-w-full object-contain filter drop-shadow-lg">
-                    </div>
-                    <div>
-                        <h4 class="text-3xl font-bold text-gray-900">🏆 冠軍</h4>
-                        <p class="mt-2 text-xl text-gray-700 font-semibold">ASUS PBA 組裝電腦</p>
-                    </div>
+                    <div class="h-64 flex items-center justify-center mb-4"><img src="v1/img/price1.png" alt="冠軍獎品：ASUS PBA 組裝電腦" class="max-h-full max-w-full object-contain filter drop-shadow-lg"></div>
+                    <div><h4 class="text-3xl font-bold text-gray-900">🏆 冠軍</h4><p class="mt-2 text-xl text-gray-700 font-semibold">ASUS PBA 組裝電腦</p></div>
                 </div>
-                <!-- Row 2: Other Four Prizes -->
                 <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-12">
                     <div class="text-center flex flex-col items-center transform transition-transform duration-300 hover:-translate-y-2">
                         <div class="h-48 flex items-center justify-center mb-4"><img src="v1/img/price2.png" alt="亞軍獎品：ROG 耳機" class="max-h-full max-w-full object-contain filter drop-shadow-lg"></div>
@@ -277,51 +315,44 @@
     </section>
     
     <!-- TIMELINE TITLE -->
-    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
+    <section id="timeline" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
       <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
           <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 活動時間軸 -</h2>
       </div>
     </section>
 
     <!-- TIMELINE CONTENT -->
-    <section class="rog-light-bg py-8 md:py-12">
+    <section class="bg-gray-50 py-8 md:py-12">
       <div class="max-w-7xl mx-auto px-6">
           <div class="relative flex flex-col md:flex-row justify-around items-start gap-y-16 md:gap-y-0 md:gap-x-8">
-              <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="100">
-                  <time class="timeline-pin-date">9月初 - 10月底</time>
+              <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="100">                  
                   <div class="timeline-pin" style="--pin-color: #3b82f6;"><span class="text-4xl">📝</span></div>
                   <div class="timeline-pin-line"></div>
-                  <div class="timeline-pin-desc"><h4 class="font-bold">線上報名</h4><p>填寫報名資料，展現你的DIY熱情與經驗。</p></div>
+                  <div class="timeline-pin-desc"><time class="timeline-pin-date">9月初 - 10月底</time><h4 class="font-bold">線上報名</h4><p>填寫以下報名資料，展現你的DIY熱情與經驗。</p></div>
               </div>
               <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="300">
-                  <time class="timeline-pin-date">11/15 (五)</time>
                   <div class="timeline-pin" style="--pin-color: #ec4899;"><span class="text-4xl">🚀</span></div>
                   <div class="timeline-pin-line"></div>
-                  <div class="timeline-pin-desc"><h4 class="font-bold">初階挑戰賽</h4><p>地點：華碩總部</p></div>
+                  <div class="timeline-pin-desc"><time class="timeline-pin-date">11/15 (五)</time><h4 class="font-bold">初階挑戰賽</h4><p>地點：華碩總部</p></div>
               </div>
               <div class="timeline-pin-item" data-aos="fade-up" data-aos-delay="500">
-                  <time class="timeline-pin-date">12/20 (五)</time>
                   <div class="timeline-pin" style="--pin-color: #8b5cf6;"><span class="text-4xl">👑</span></div>
                   <div class="timeline-pin-line"></div>
-                  <div class="timeline-pin-desc"><h4 class="font-bold">決戰組裝王</h4><p>地點：Gamforce 現場</p></div>
+                  <div class="timeline-pin-desc"><time class="timeline-pin-date">12/20 (五)</time><h4 class="font-bold">決戰組裝王</h4><p>地點：Gamforce 現場</p></div>
               </div>
           </div>
       </div>
     </section>
 
     <!-- PARTICIPATION TITLE -->
-    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
+    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]" id="register">
       <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
           <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 參與方式 -</h2>
       </div>
     </section>
 
-    <!-- 
-      ============================================================
-      CONTINUOUS BACKGROUND WRAPPER (FOR PHASES 1, 2, 3)
-      ============================================================
-    -->
-    <div class="relative overflow-hidden bg-full-scroll bg-phases-wrapper">
+    <!-- PHASES WRAPPER -->
+    <div class="bg-full-scroll bg-phases-wrapper">
       <div class="absolute inset-0 bg-black/30 backdrop-blur-md z-10"></div>
       <div class="relative z-20">
 
@@ -333,24 +364,16 @@
                         <p class="font-bold text-white">STAGE 01</p>
                         <h2 class="text-xl md:text-2xl font-black text-white">第一階段｜線上報名 & 選手徵選</h2>
                         <p class="text-xl md:text-2xl mt-2 text-white">展現你的 DIY 熱情與經驗，爭取進入第二階段的 9 位名額！</p>
-                                                        <!-- 
-                            主要變更：
-                            - 新增了這個 CTA 按鈕區塊。
-                            - 按鈕本身帶有多種 class 來控制樣式、過渡和動畫。
-                          -->
                           <div class="mt-2 py-2 md:py-8">
-                            <a href="#" class="cta-pulse-button inline-block text-white font-bold text-xl 
-                                              px-10 py-4 rounded-full 
-                                              bg-gradient-to-r from-pink-500 to-red-500 
-                                              shadow-lg transition-transform duration-300 hover:scale-105">
+                            <a href="#" class="cta-pulse-button inline-block text-white font-bold text-xl px-10 py-4 rounded-full bg-gradient-to-r from-pink-500 to-red-500 shadow-lg transition-transform duration-300 hover:scale-105">
                                 立即報名，登頂組裝殿堂！
                             </a>
                         </div>
-                      
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
                       <div class="bg-white/80 backdrop-blur-md p-6 rounded-lg shadow-lg h-full border border-black/10">
                           <h4 class="font-bold text-lg mb-3 text-gray-900">📝 報名方式 & 資格條件</h4>
                           <ul class="list-disc list-inside space-y-2 text-gray-700">
+                              <li>詳閱 <a href="https://asus-my.sharepoint.com/:w:/p/ives_lai/EQNZVaoj9glHnmqxyF9KzWwBFgDt9a3cC4LSeeg4pttOWQ?e=oYZ1yf" target="_blank" class="text-blue-600 underline font-semibold hover:text-blue-800 transition">報名簡章</a>。</li>
                               <li>立即填寫 <a href="#" class="text-blue-600 underline font-semibold hover:text-blue-800 transition">此問卷</a> 進行報名。</li>
                               <li>資格：在學學生，需提供在學證明或學生證 (含註冊章)。</li>
                               <li>徵選方式：依據線上報名填寫資料完整性及加分項目總分合計。</li>
@@ -362,74 +385,15 @@
                              <li>基本資料：姓名、性別、年齡、學校、系別、年級。</li><li>PC DIY 經歷分享：請詳細描述你與 PC DIY 的故事。</li><li>報名動機：為何想報名「2025 華碩校園組裝王」？</li><li>What if 情境：如果你贏得冠軍，想如何使用 PBA 主機呢？</li>
                           </ul>
                       </div>
-                      <!-- 
-  ============================================================
-  UGC Bonus Points Section (UPDATED with detailed rules)
-  ============================================================
--->
-<div id="accordion-container-phase1" class="md:col-span-2 bg-white/80 backdrop-blur-md rounded-lg shadow-lg border border-black/10">
-  <button id="accordion-button" class="w-full flex justify-between items-center p-4 text-left font-bold text-lg text-gray-900">
-      <span>🌟 UGC 傳散加分項目</span>
-      <svg id="accordion-icon" class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-      </svg>
-  </button>
-  <div id="accordion-content" class="accordion-content px-4 pb-4 open">
-      <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm text-gray-700">
-              <thead class="bg-black/5">
-                  <tr>
-                      <th class="p-2 font-semibold text-gray-800">加分項目</th>
-                      <th class="p-2 font-semibold text-gray-800">分數</th>
-                      <th class="p-2 font-semibold text-gray-800">說明</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">按讚 ROG 粉絲團</td>
-                      <td class="p-2 font-bold text-green-600">+5分</td>
-                      <td class="p-2">點擊 <a href="https://www.facebook.com/asusrog.tw" target="_blank" class="text-blue-600 underline hover:text-blue-800">連結</a> 前往按讚 ROG 官方粉絲專頁。</td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">加入 ROG玩家基地</td>
-                      <td class="p-2 font-bold text-green-600">+5分</td>
-                      <td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" class="text-blue-600 underline hover:text-blue-800">連結</a> 加入 ROG 官方社團。</td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">分享活動貼文</td>
-                      <td class="p-2 font-bold text-green-600">+5分</td>
-                      <td class="p-2">分享 ROG 粉絲團活動貼文，標註 <strong>#華碩校園組裝王</strong> 並設為公開。</td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">更換專屬頭像</td>
-                      <td class="p-2 font-bold text-orange-600">+10分</td>
-                      <td class="p-2">報名後使用官方素材更換個人社群頭像。<br><span class="text-xs text-gray-500 italic">(需長時間公開，報名截止時檢查)</span></td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">創意加分 (圖文)</td>
-                      <td class="p-2 font-bold text-orange-600">+10分</td>
-                      <td class="p-2">創作一篇含「個人與主機合照」的短圖文，分享於個人社群平台。</td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">創意加分 (影片)</td>
-                      <td class="p-2 font-bold text-red-600">+20分</td>
-                      <td class="p-2">拍攝一部含「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台。</td>
-                  </tr>
-                  <tr class="border-b border-black/10">
-                      <td class="p-2">全校加分 (盟校)</td>
-                      <td class="p-2 font-bold text-green-600">+5分</td>
-                      <td class="p-2">華碩合作之盟校學生專屬福利，<a href="https://asus.feversocial.com/ASUSOPMKT/183" target="_blank" class="text-blue-600 underline hover:text-blue-800">立即加入</a>。</td>
-                  </tr>
-                  <tr>
-                      <td class="p-2">全校加分 (宣傳)</td>
-                      <td class="p-2 font-bold text-green-600">+5分</td>
-                      <td class="p-2">在校內或系所社群/Line群組分享活動資訊，該校學生同享加分。</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
-</div>
+                      <div id="accordion-container-phase1" class="md:col-span-2 bg-white/80 backdrop-blur-md rounded-lg shadow-lg border border-black/10">
+                        <button id="accordion-button" class="w-full flex justify-between items-center p-4 text-left font-bold text-lg text-gray-900">
+                          <span>🌟 UGC 傳散加分項目</span>
+                          <svg id="accordion-icon" class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div id="accordion-content" class="accordion-content px-4 pb-4 open">
+                          <div class="overflow-x-auto"><table class="w-full text-left text-sm text-gray-700"><thead class="bg-black/5"><tr><th class="p-2 font-semibold text-gray-800">加分項目</th><th class="p-2 font-semibold text-gray-800">分數</th><th class="p-2 font-semibold text-gray-800">說明</th></tr></thead><tbody><tr class="border-b border-black/10"><td class="p-2">按讚 ROG 粉絲團</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/asusrog.tw" target="_blank" class="text-blue-600 underline hover:text-blue-800">連結</a> 前往按讚 ROG 官方粉絲專頁。</td></tr><tr class="border-b border-black/10"><td class="p-2">加入 ROG玩家基地</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" class="text-blue-600 underline hover:text-blue-800">連結</a> 加入 ROG 官方社團。</td></tr><tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 ROG 粉絲團活動貼文，標註 <strong>#華碩校園組裝王</strong> 並設為公開。</td></tr><tr class="border-b border-black/10"><td class="p-2">更換專屬頭像</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">報名後使用官方素材更換個人社群頭像。<br><span class="text-xs text-gray-500 italic">(需長時間公開，報名截止時檢查)</span></td></tr><tr class="border-b border-black/10"><td class="p-2">創意加分 (圖文)</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">創作一篇含「個人與主機合照」的短圖文，分享於個人社群平台。</td></tr><tr class="border-b border-black/10"><td class="p-2">創意加分 (影片)</td><td class="p-2 font-bold text-red-600">+20分</td><td class="p-2">拍攝一部含「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台。</td></tr><tr class="border-b border-black/10"><td class="p-2">全校加分 (盟校)</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">華碩合作之盟校學生專屬福利，<a href="https://asus.feversocial.com/ASUSOPMKT/183" target="_blank" class="text-blue-600 underline hover:text-blue-800">立即加入</a>。</td></tr><tr><td class="p-2">全校加分 (宣傳)</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">在校內或系所社群/Line群組分享活動資訊，該校學生同享加分。</td></tr></tbody></table></div>
+                        </div>
+                      </div>
                       <div class="md:col-span-2"><h4 class="font-bold text-lg mb-2 text-white">💡 高分攻略</h4><div class="bg-amber-100 border-l-4 border-amber-400 p-4 rounded-r-lg text-amber-800"><p>想從眾多報名者中脫穎而出？優先完成「創意影片創作」(+20分) 和「更換專屬頭像」(+10分)，是快速累積積分、搶下總部門票的關鍵！</p><p class="mt-2 font-bold">基礎分數 60分 + 所有加分項目 65分 = 總分 125分</p></div></div>
                     </div>
                   </div>
@@ -447,26 +411,17 @@
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch" data-aos="fade-up" data-aos-delay="100">
                       <div class="bg-white/80 backdrop-blur-md p-6 rounded-lg shadow-lg flex flex-col border border-black/10">
-                          <div class="flex-grow">
-                              <h4 class="font-bold text-xl mb-2 text-gray-900">🧠 個人 Kahoot 知識競賽</h4>
-                              <p class="text-gray-700">約 20 題 DIY PC 組裝基本問答、ROG 產品特色問答，包含雙倍分數題目！前三名成為隊長！誰能拔得頭籌，掌握挑選神隊友的先機？</p>
-                          </div>
+                          <div class="flex-grow"><h4 class="font-bold text-xl mb-2 text-gray-900">🧠 個人 Kahoot 知識競賽</h4><p class="text-gray-700">約 20 題 DIY PC 組裝基本問答、ROG 產品特色問答，包含雙倍分數題目！前三名成為隊長！誰能拔得頭籌，掌握挑選神隊友的先機？</p></div>
                           <button class="accordion-trigger-phase2 w-full flex justify-between items-center mt-4 pt-4 border-t border-gray-200 text-left font-semibold text-pink-600"><span>知識大補帖</span><svg class="accordion-icon-phase2 h-5 w-5 transition-transform open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></button>
                           <div class="accordion-content-phase2 open"><div class="pt-4 text-gray-600 text-sm"><p></p><a href="#" class="text-blue-500 hover:underline">範例連結：前往準備資料</a></div></div>
                       </div>
                       <div class="bg-white/80 backdrop-blur-md p-6 rounded-lg shadow-lg flex flex-col border border-black/10">
-                          <div class="flex-grow">
-                              <h4 class="font-bold text-xl mb-2 text-gray-900">🤝 團體組裝接力賽 9 進 3</h4>
-                              <p class="text-gray-700">9 人分成 3 組競賽，每輪 1 分 30 秒限時組裝，團隊默契的極致考驗，優勝隊伍 3 人直接晉級決賽！踏上王者之路！</p>
-                          </div>
+                          <div class="flex-grow"><h4 class="font-bold text-xl mb-2 text-gray-900">🤝 團體組裝接力賽 9 進 3</h4><p class="text-gray-700">9 人分成 3 組競賽，每輪 1 分 30 秒限時組裝，團隊默契的極致考驗，優勝隊伍 3 人直接晉級決賽！踏上王者之路！</p></div>
                           <button class="accordion-trigger-phase2 w-full flex justify-between items-center mt-4 pt-4 border-t border-gray-200 text-left font-semibold text-pink-600"><span>團體組裝接力規則</span><svg class="accordion-icon-phase2 h-5 w-5 transition-transform open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></button>
                           <div class="accordion-content-phase2 open"><ul class="pt-4 list-disc list-inside space-y-1 text-gray-600 text-sm"><li>Kahoot 前三名擔任隊長，依序挑選隊員。</li><li>競賽每輪限時 1 分 30 秒，時間到立即換人。</li><li>必須完成組裝並開機進入 BIOS。</li><li>獲勝隊伍 3 人直接晉級決賽。</li></ul></div>
                       </div>
                       <div class="bg-white/80 backdrop-blur-md p-6 rounded-lg shadow-lg flex flex-col border border-black/10">
-                          <div class="flex-grow">
-                              <h4 class="font-bold text-xl mb-2 text-gray-900">⚡ 敗部復活 6 搶 1</h4>
-                              <p class="text-gray-700">剩餘 6 人的最後機會！Debug 情境搶答，成功解決問題開機者得分，最高分晉級！這是敗部復活的最後機會！你，能在壓力下找出致命錯誤嗎？</p>
-                          </div>
+                          <div class="flex-grow"><h4 class="font-bold text-xl mb-2 text-gray-900">⚡ 敗部復活 6 搶 1</h4><p class="text-gray-700">剩餘 6 人的最後機會！Debug 情境搶答，成功解決問題開機者得分，最高分晉級！這是敗部復活的最後機會！你，能在壓力下找出致命錯誤嗎？</p></div>
                           <button class="accordion-trigger-phase2 w-full flex justify-between items-center mt-4 pt-4 border-t border-gray-200 text-left font-semibold text-pink-600"><span>Debug 挑戰情境</span><svg class="accordion-icon-phase2 h-5 w-5 transition-transform open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></button>
                           <div class="accordion-content-phase2 open"><ul class="pt-4 list-disc list-inside space-y-1 text-gray-600 text-sm"><li>Debug 燈號卡在 DRAM 該如何排除？</li><li>風扇不轉燈光沒亮如何解決？</li><li>如何快速拆下 ROG 主板的顯示卡？</li><li>其他現場 Debug 實戰情境。</li></ul></div>
                       </div>
@@ -510,7 +465,7 @@
     </div>
         
     <!-- CHAMPION REWARDS & MISSION TITLE -->
-    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
+    <section id="rewards" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#952a1c]">
       <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
           <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 冠軍榮耀與使命 -</h2>
       </div>
@@ -523,7 +478,7 @@
           <div class="bg-white p-6 rounded-lg shadow-sm">
             <h4 class="font-bold text-lg mb-3">🏅 冠軍獎勵</h4>
             <ul class="list-disc list-inside space-y-2 text-gray-700">
-                <li>ASUS PBA 主機 + 螢幕 + 全套配件</li>
+                <li>ASUS PBA 主機</li>
                 <li>與活動年度大使拍攝影片乙支</li>
                 <li>ROG 校園菁英通行證 (獨享限定活動邀請)</li>
             </ul>
@@ -572,45 +527,20 @@
         </div>
     </section>
 
-   <!-- 
-  ============================================================
-  CTA SECTION (UPDATED with Countdown Timer)
-  ============================================================
--->
-<section class="py-20 text-center bg-gray-800 text-white">
-  <div class="max-w-3xl mx-auto px-6" data-aos="zoom-in">
-      <h2 class="text-3xl md:text-4xl font-black">準備成為最強組裝王了嗎？</h2>
-      <p class="mt-4 text-gray-300 mb-8">距離報名截止日 2025 / 10 / 31 還有...</p>
-      
-      <!-- 
-          主要變更：
-          - 新增了這個倒數計時器的容器。
-          - 每個時間單位 (天、時、分、秒) 都有自己的 <span> 標籤，並帶有 ID，方便 JS 抓取並更新數字。
-      -->
-      <div id="countdown-timer" class="flex justify-center items-center gap-4 md:gap-8 my-10">
-          <div class="text-center">
-              <span id="days" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span>
-              <span class="text-xs md:text-sm text-gray-400">天</span>
+   <!-- CTA SECTION -->
+    <section class="py-20 text-center bg-gray-800 text-white">
+      <div class="max-w-3xl mx-auto px-6" data-aos="zoom-in">
+          <h2 class="text-3xl md:text-4xl font-black">準備成為最強組裝王了嗎？</h2>
+          <p class="mt-4 text-gray-300 mb-8">距離報名截止日 2025 / 10 / 31 還有...</p>
+          <div id="countdown-timer" class="flex justify-center items-center gap-4 md:gap-8 my-10">
+              <div class="text-center"><span id="days" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">天</span></div>
+              <div class="text-center"><span id="hours" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">時</span></div>
+              <div class="text-center"><span id="minutes" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">分</span></div>
+              <div class="text-center"><span id="seconds" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">秒</span></div>
           </div>
-          <div class="text-center">
-              <span id="hours" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span>
-              <span class="text-xs md:text-sm text-gray-400">時</span>
-          </div>
-          <div class="text-center">
-              <span id="minutes" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span>
-              <span class="text-xs md:text-sm text-gray-400">分</span>
-          </div>
-          <div class="text-center">
-              <span id="seconds" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span>
-              <span class="text-xs md:text-sm text-gray-400">秒</span>
-          </div>
+          <a href="#" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-xl btn-hover">立即報名參加！</a>
       </div>
-      
-      <a href="#" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-xl btn-hover">
-          立即報名參加！
-      </a>
-  </div>
-</section>
+    </section>
   </main>
   
   <!-- FOOTER -->
@@ -627,84 +557,91 @@
 
   <!-- 
     ============================================================
-    JAVASCRIPT FOR INTERACTIVITY (REVISED & OPTIMIZED)
+    JAVASCRIPT FOR INTERACTIVITY
     ============================================================
   -->
   <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    });
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- AOS Initialization ---
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+      });
 
-    // --- OPTIMIZED Accordion Logic for ALL accordions on the page ---
-    // 1. Find all buttons that are meant to trigger an accordion
-    const allAccordionTriggers = document.querySelectorAll('#accordion-button, .accordion-trigger-phase2');
+      // --- Accordion Logic ---
+      const allAccordionTriggers = document.querySelectorAll('#accordion-button, .accordion-trigger-phase2');
+      allAccordionTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const content = trigger.nextElementSibling;
+          const icon = trigger.querySelector('.accordion-icon, .accordion-icon-phase2');
+          if (content) content.classList.toggle('open');
+          if (icon) icon.classList.toggle('open');
+        });
+      });
 
-    // 2. Loop through each trigger button and add an event listener
-    allAccordionTriggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        // Find the content element that comes right after the button
-        const content = trigger.nextElementSibling;
-        
-        // Find the icon element inside the button
-        const icon = trigger.querySelector('.accordion-icon, .accordion-icon-phase2');
+      // --- Countdown Timer Logic ---
+      const countdownEndDate = new Date(2025, 9, 31, 23, 59, 59).getTime();
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      const timerEl = document.getElementById('countdown-timer');
 
-        // Toggle the 'open' class to trigger CSS animations
-        if (content) {
-            content.classList.toggle('open');
-        }
-        if (icon) {
-            icon.classList.toggle('open');
-        }
+      const timerInterval = setInterval(() => {
+          const now = new Date().getTime();
+          const distance = countdownEndDate - now;
+
+          if (distance < 0) {
+              clearInterval(timerInterval);
+              if (timerEl) timerEl.innerHTML = '<div class="text-2xl font-bold text-red-500">報名已截止！</div>';
+              return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          if (daysEl) daysEl.innerText = days < 10 ? '0' + days : days;
+          if (hoursEl) hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+          if (minutesEl) minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+          if (secondsEl) secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+      }, 1000);
+      
+      // --- Navbar Logic ---
+      const nav = document.getElementById('main-nav');
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+      const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+              nav.classList.add('scrolled');
+          } else {
+              nav.classList.remove('scrolled');
+          }
+      });
+
+      // Mobile menu toggle
+      mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          hamburgerIcon.classList.toggle('hidden');
+          closeIcon.classList.toggle('hidden');
+      });
+      
+      // Close mobile menu when a link is clicked
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
       });
     });
-
-    /* --- NEW: Countdown Timer Logic --- */
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. SETTINGS ---
-    // Set the end date for the countdown (YYYY-MM-DD HH:MM:SS)
-    // IMPORTANT: The month is 0-indexed (0=Jan, 1=Feb, ..., 9=Oct)
-    // So, for October 31st, 23:59:59, the month is 9.
-    const countdownEndDate = new Date(2025, 9, 31, 23, 59, 59).getTime();
-
-    // Get the HTML elements
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-    const timerEl = document.getElementById('countdown-timer');
-
-    // --- 2. TIMER FUNCTION ---
-    const timerInterval = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = countdownEndDate - now;
-
-        // If the countdown is over
-        if (distance < 0) {
-            clearInterval(timerInterval);
-            if (timerEl) {
-                // You can replace the timer with a message
-                timerEl.innerHTML = '<div class="text-2xl font-bold text-red-500">報名已截止！</div>';
-            }
-            return;
-        }
-
-        // Calculate time units
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Update the HTML elements, adding a leading zero if the number is less than 10
-        if (daysEl) daysEl.innerText = days < 10 ? '0' + days : days;
-        if (hoursEl) hoursEl.innerText = hours < 10 ? '0' + hours : hours;
-        if (minutesEl) minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
-        if (secondsEl) secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
-
-    }, 1000); // Run this function every 1 second
-});
   </script>
 
 </body>
