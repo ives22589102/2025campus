@@ -127,26 +127,77 @@
       transition: box-shadow 0.3s ease-in-out;
     }
     
-    /* Pin-style Timeline */
-    .timeline-pin-item { display: flex; flex-direction: column; align-items: center; width: 100%; }
-    .timeline-pin-date { font-weight: 700; font-size: 1.125rem; color: #374151; margin-bottom: 0.75rem; }
-    .timeline-pin { 
-      position: relative; width: 6rem; height: 6rem; border-radius: 9999px; 
-      display: flex; align-items: center; justify-content: center; 
-      color: white; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      background-color: var(--pin-color); transition: transform 0.3s ease-in-out;
-    }
-    .timeline-pin-item:hover .timeline-pin { transform: translateY(-0.5rem); }
-    .timeline-pin::after { 
-      content: ''; position: absolute; width: 0; height: 0; 
-      border-left: 12px solid transparent; border-right: 12px solid transparent; 
-      border-top: 12px solid var(--pin-color); 
-      top: 95%; left: 50%; transform: translateX(-50%);
-    }
-    .timeline-pin-line { width: 1px; height: 5rem; border-left: 2px dotted #9ca3af; margin: 1rem 0; }
-    .timeline-pin-desc { text-align: center; color: #4b5563; padding: 0 0.5rem; }
-    .timeline-pin-desc h4 { font-size: 1.25rem; color: #1f2937; }
-    .timeline-pin-desc p { font-size: 1rem; font-weight: 400; margin-top: 0.25rem; }
+    /* --- Pin-style Timeline (REVISED FOR MOBILE) --- */
+
+/* 手機版：水平滾動容器 */
+.timeline-mobile-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  /* 隱藏滾動條 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.timeline-mobile-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* 基礎樣式 (Mobile First) */
+.timeline-pin-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0; /* 防止項目被壓縮 */
+  width: 60%;     /* 每個項目佔螢幕寬度的 60% */
+}
+
+.timeline-pin-date { font-weight: 700; font-size: 1rem; color: #374151; margin-bottom: 0.5rem; }
+.timeline-pin { 
+  position: relative; width: 5rem; height: 5rem; border-radius: 9999px; 
+  display: flex; align-items: center; justify-content: center; 
+  color: white; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  background-color: var(--pin-color); transition: transform 0.3s ease-in-out;
+}
+.timeline-pin-item:hover .timeline-pin { transform: translateY(-0.25rem); }
+.timeline-pin::after { 
+  content: ''; position: absolute; width: 0; height: 0; 
+  border-left: 10px solid transparent; border-right: 10px solid transparent; 
+  border-top: 10px solid var(--pin-color); 
+  top: 95%; left: 50%; transform: translateX(-50%);
+}
+.timeline-pin-line { display: none; /* 手機上隱藏 dotted line */ }
+.timeline-pin-desc { text-align: center; color: #4b5563; padding: 0.5rem; }
+.timeline-pin-desc h4 { font-size: 1.125rem; color: #1f2937; }
+.timeline-pin-desc p { font-size: 0.875rem; font-weight: 400; margin-top: 0.25rem; }
+.has-arrow-connector::after { display: none; /* 手機上隱藏箭頭 */ }
+
+/* 電腦版：恢復三欄式佈局 */
+@media (min-width: 768px) {
+  .timeline-mobile-scroll {
+    overflow-x: visible; /* 恢復可見 */
+    justify-content: space-around;
+    gap: 2rem;
+  }
+  .timeline-pin-item {
+    width: 33.333333%;
+    padding-top: 0;
+  }
+  .timeline-pin-date { font-size: 1.125rem; margin-bottom: 0.75rem; }
+  .timeline-pin { width: 6rem; height: 6rem; }
+  .timeline-pin::after { border-left-width: 12px; border-right-width: 12px; border-top-width: 12px; }
+  .timeline-pin-line { display: block; width: 1px; height: 5rem; border-left: 2px dotted #9ca3af; margin: 1rem 0; }
+  .timeline-pin-desc h4 { font-size: 1.25rem; }
+  .timeline-pin-desc p { font-size: 1rem; }
+
+  .has-arrow-connector { position: relative; padding-right: 2rem; }
+  .has-arrow-connector::after {
+    display: block; /* 恢復顯示箭頭 */
+    content: '››'; position: absolute; right: -0.5rem; top: 40%;
+    transform: translateY(-50%); font-size: 3rem; font-weight: 100;
+    color: #5d6166; line-height: 1;
+  }
+}
     
     /* Responsive Styles */
     @media (max-width: 768px) {
@@ -231,14 +282,14 @@
   animation-timing-function: ease-in-out;
 }
 
-  /* --- 6. INFINITE SCROLL MARQUEE --- */
+  /* --- 6. INFINITE SCROLL MARQUEE (ULTIMATE FIX) --- */
 @keyframes scroll-right {
   from {
     transform: translateX(0);
   }
   to {
-    /* 移動一個圖片組的寬度，實現無縫銜接 */
-    transform: translateX(-100%);
+    /* 移動一個照片組的寬度 */
+    transform: translateX(-50%);
   }
 }
 
@@ -246,26 +297,45 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  /* (可選) 左右兩側的淡出遮罩，讓進出更柔和 */
-  -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, white 5%, white 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, white 5%, white 95%, transparent);
 }
 
 .marquee-content {
-  display: flex; /* 使用 flex 讓圖片組水平排列 */
-  width: 200%;   /* 兩組圖片，所以寬度是 200% */
-  animation: scroll-right 60s linear infinite; /* 應用動畫 */
+  display: flex;
+  /* 寬度是其子元素寬度的兩倍 */
+  width: 200%; 
+  animation: scroll-right 60s linear infinite;
 }
 
-/* 滑鼠懸停時暫停動畫 */
 .marquee-container:hover .marquee-content {
   animation-play-state: paused;
 }
 
+/* (優化) marquee-group 現在是 flex 容器 */
 .marquee-group {
-  flex-shrink: 0; /* 防止組被壓縮 */
-  width: 50%;     /* 每個組佔據 50% 的寬度 */
-  padding: 0 0.5rem; /* 組之間的微小間距 */
+  flex-shrink: 0;
+  width: 50%;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-around; /* 讓欄位均勻分佈 */
+  gap: 1rem; /* 欄位之間的間距 */
+}
+
+/* (優化) 新增 marquee-column class */
+.marquee-column {
+  display: flex;
+  flex-direction: column; /* 讓圖片垂直堆疊 */
+  justify-content: center; /* 垂直方向的對齊 */
+  gap: 1rem; /* 圖片之間的垂直間距 */
+  width: 25%; /* 每欄佔 1/4 寬度 */
+}
+
+/* (優化) 確保圖片不會被拉伸 */
+.marquee-column img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* --- 7. UTILITY CLASSES (UPGRADED) --- */
@@ -519,16 +589,17 @@
       </div>
     </section>
 
-    <!-- TIMELINE CONTENT -->
+    <!-- TIMELINE CONTENT (REVISED FOR MOBILE) -->
 <section class="py-8 md:py-12" style="background-color: #ffffffe5;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="relative flex flex-col md:flex-row justify-around items-start gap-y-16 md:gap-y-0 md:gap-x-8">
+  <!-- (優化) 移除 max-w-7xl 和 mx-auto，讓滾動容器可以觸及螢幕邊緣 -->
+  <div class="mx-auto px-6"> 
+    <!-- (優化) 在手機上增加 overflow-x-auto 以允許水平滑動 -->
+    <div class="timeline-mobile-scroll">
       
       <!-- Timeline Item 1: 線上徵選 -->
       <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="100">                  
         <div class="timeline-pin" style="--pin-color: #3b82f6;">
-          <!-- SVG Icon: 文件/表單 -->
-          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
         </div>
@@ -541,10 +612,9 @@
       </div>
       
       <!-- Timeline Item 2: 初階挑戰賽 -->
-      <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="300">
+      <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="200">
         <div class="timeline-pin" style="--pin-color: #ec4899;">
-          <!-- SVG Icon: 火箭/啟動 -->
-          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </div>
@@ -557,15 +627,11 @@
       </div>
       
       <!-- Timeline Item 3: 決戰組裝王 -->
-      <div class="timeline-pin-item" data-aos="fade-up" data-aos-delay="500">
+      <div class="timeline-pin-item" data-aos="fade-up" data-aos-delay="300">
         <div class="timeline-pin" style="--pin-color: #8b5cf6;">
-          
-          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-             d="M8 21h8M12 17v4m4-18H8a1 1 0 00-1 1v2a5 5 0 004 4.9A5 5 0 0017 6V4a1 1 0 00-1-1zM6 6H5a2 2 0 00-2 2v1a4 4 0 003 3.87M18 6h1a2 2 0 012 2v1a4 4 0 01-3 3.87"/>
-     </svg>
-
+          <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21h8M12 17v4m4-18H8a1 1 0 00-1 1v2a5 5 0 004 4.9A5 5 0 0017 6V4a1 1 0 00-1-1zM6 6H5a2 2 0 00-2 2v1a4 4 0 003 3.87M18 6h1a2 2 0 012 2v1a4 4 0 01-3 3.87"/>
+          </svg>
         </div>
         <div class="timeline-pin-line"></div>
         <div class="timeline-pin-desc">
@@ -849,66 +915,53 @@
     </section>
 
     
-    <!-- ===== (REVISED) 賽事回顧 - 無限滾動版 ===== -->
+    <!-- ===== (REVISED) 賽事回顧 - 無限滾動版 (ULTIMATE FIX) ===== -->
 <section class="py-12 md:py-20 bg-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    
-
-    <!-- Marquee 容器 (這是滾動的"視窗") -->
+    <!-- Marquee 容器 -->
     <div class="marquee-container">
-      <!-- Marquee 內容 (這是實際移動的"軌道") -->
+      <!-- Marquee 內容 (軌道) -->
       <div class="marquee-content">
 
         <!-- ===== 照片組 1 (原始) ===== -->
+        <!-- (優化) group 內部直接使用 flex -->
         <div class="marquee-group">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- Column 1 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_1.jpg" alt="賽事回顧照片1"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_2.jpg" alt="賽事回顧照片2"></div>
+            <!-- (優化) 每個 Column 都是一個 flex item -->
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_1.jpg" alt="賽事回顧照片1">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_2.jpg" alt="賽事回顧照片2">
             </div>
-            <!-- Column 2 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_3.jpg" alt="賽事回顧照片3"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_4.jpg" alt="賽事回顧照片4"></div>
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_3.jpg" alt="賽事回顧照片3">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_4.jpg" alt="賽事回顧照片4">
             </div>
-            <!-- Column 3 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_5.jpg" alt="賽事回顧照片5"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_6.jpg" alt="賽事回顧照片6"></div>
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_5.jpg" alt="賽事回顧照片5">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_6.jpg" alt="賽事回顧照片6">
             </div>
-            <!-- Column 4 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_7.jpg" alt="賽事回顧照片7"></div>              
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_7.jpg" alt="賽事回顧照片7">
             </div>
-          </div>
         </div>
 
-        <!-- ===== 照片組 2 (複製) - 為了無縫銜接 ===== -->
-        <!-- aria-hidden="true" 讓螢幕閱讀器忽略這份重複的內容，對身障人士友好 -->
+        <!-- ===== 照片組 2 (複製) ===== -->
         <div class="marquee-group" aria-hidden="true">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- Column 1 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_1.jpg" alt="賽事回顧照片1"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_2.jpg" alt="賽事回顧照片2"></div>
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_1.jpg" alt="">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_2.jpg" alt="">
             </div>
-            <!-- Column 2 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_3.jpg" alt="賽事回顧照片3"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_4.jpg" alt="賽事回顧照片4"></div>
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_3.jpg" alt="">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_4.jpg" alt="">
             </div>
-            <!-- Column 3 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_5.jpg" alt="賽事回顧照片5"></div>
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_6.jpg" alt="賽事回顧照片6"></div>
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_5.jpg" alt="">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_6.jpg" alt="">
             </div>
-            <!-- Column 4 -->
-            <div class="grid gap-4">
-              <div><img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_7.jpg" alt="賽事回顧照片7"></div>              
+            <div class="marquee-column">
+              <img class="h-auto w-full rounded-lg shadow-lg" src="v1/img/view_7.jpg" alt="">
             </div>
-          </div>
         </div>
         
       </div>
