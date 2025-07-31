@@ -34,6 +34,9 @@
   <!-- AOS (Animate On Scroll) Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Swiper.js (輪播元件) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -251,47 +254,41 @@
       animation-timing-function: ease-in-out;
     }
 
-    /* --- 6. INFINITE SCROLL MARQUEE --- */
-    @keyframes scroll-right {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    .marquee-container {
-      position: relative;
-      width: 100%;
+    /* --- 6. SWIPER.JS STYLES (REPLACED MARQUEE) --- */
+    .review-swiper .swiper-slide {
+      background: #fff;
+      border-radius: 0.75rem;
       overflow: hidden;
-      -webkit-mask-image: linear-gradient(to right, transparent, white 5%, white 95%, transparent);
-      mask-image: linear-gradient(to right, transparent, white 5%, white 95%, transparent);
-    }
-    .marquee-content {
-      display: flex;
-      width: 200%; 
-      animation: scroll-right 60s linear infinite;
-    }
-    .marquee-container:hover .marquee-content {
-      animation-play-state: paused;
-    }
-    .marquee-group {
-      flex-shrink: 0;
-      width: 50%;
-      padding: 0 1rem;
-      display: flex;
-      justify-content: space-around;
-      gap: 1rem;
-    }
-    .marquee-column {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-      width: 25%;
-    }
-    .marquee-column img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 0.75rem; /* (優化) 增加圓角 */
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      /* 讓圖片高度一致，避免跳動 */
+      aspect-ratio: 4 / 3;
+    }
+    .review-swiper .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* 自訂 Swiper 導航按鈕與分頁圓點顏色 */
+    .review-swiper .swiper-button-next,
+    .review-swiper .swiper-button-prev {
+      color: #D70026; /* ROG Red */
+      background-color: rgba(255, 255, 255, 0.7);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    .review-swiper .swiper-button-next:hover,
+    .review-swiper .swiper-button-prev:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .review-swiper .swiper-button-next::after,
+    .review-swiper .swiper-button-prev::after {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .review-swiper .swiper-pagination-bullet-active {
+      background: #D70026; /* ROG Red */
     }
 
     /* --- 7. UTILITY CLASSES --- */
@@ -389,7 +386,10 @@
         </div>
       </header>
 
-  <!-- (SEO 優化) 將主要內容包裹在 <main> 標籤中 -->
+  <!-- ============================================================
+    (以下為方便閱讀，省略大部分未修改的 HTML 內容)
+    ...
+  ============================================================ -->
   <main>
     <!-- KV Banner -->
     <section class="relative w-full overflow-hidden bg-gray-800" aria-labelledby="main-heading">
@@ -758,51 +758,46 @@
       </div>
     </section>
 
-    <!-- REVIEW CONTENT (Marquee) -->
+    <!-- START: 歷屆賽事回顧 (優化版) -->
     <section class="py-12 md:py-20 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="marquee-container">
-          <div class="marquee-content">
-            <!-- 照片組 1 (原始) -->
-            <div class="marquee-group">
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_1.jpg" alt="歷屆賽事回顧照片：參賽者專注組裝電腦" loading="lazy">
-                  <img class="h-auto w-full" src="v1/img/view_2.jpg" alt="歷屆賽事回顧照片：活動現場大合照" loading="lazy">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_3.jpg" alt="歷屆賽事回顧照片：KOL 與參賽者互動" loading="lazy">
-                  <img class="h-auto w-full" src="v1/img/view_4.jpg" alt="歷屆賽事回顧照片：參賽者展示完成品" loading="lazy">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_5.jpg" alt="歷屆賽事回顧照片：緊張刺激的比賽過程" loading="lazy">
-                  <img class="h-auto w-full" src="v1/img/view_6.jpg" alt="歷屆賽事回顧照片：頒獎典禮時刻" loading="lazy">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_7.jpg" alt="歷屆賽事回顧照片：精美的電腦內部理線" loading="lazy">
-                </div>
+        <!-- Swiper -->
+        <div class="swiper review-swiper">
+          <div class="swiper-wrapper">
+            <!-- 每個 swiper-slide 就是一張照片 -->
+            <div class="swiper-slide">
+              <img src="v1/img/view_1.jpg" alt="歷屆賽事回顧照片：參賽者專注組裝電腦" loading="lazy">
             </div>
-            <!-- 照片組 2 (複製，對 a11y 隱藏) -->
-            <div class="marquee-group" aria-hidden="true">
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_1.jpg" alt="">
-                  <img class="h-auto w-full" src="v1/img/view_2.jpg" alt="">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_3.jpg" alt="">
-                  <img class="h-auto w-full" src="v1/img/view_4.jpg" alt="">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_5.jpg" alt="">
-                  <img class="h-auto w-full" src="v1/img/view_6.jpg" alt="">
-                </div>
-                <div class="marquee-column">
-                  <img class="h-auto w-full" src="v1/img/view_7.jpg" alt="">
-                </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_2.jpg" alt="歷屆賽事回顧照片：活動現場大合照" loading="lazy">
+            </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_3.jpg" alt="歷屆賽事回顧照片：KOL 與參賽者互動" loading="lazy">
+            </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_4.jpg" alt="歷屆賽事回顧照片：參賽者展示完成品" loading="lazy">
+            </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_5.jpg" alt="歷屆賽事回顧照片：緊張刺激的比賽過程" loading="lazy">
+            </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_6.jpg" alt="歷屆賽事回顧照片：頒獎典禮時刻" loading="lazy">
+            </div>
+            <div class="swiper-slide">
+              <img src="v1/img/view_7.jpg" alt="歷屆賽事回顧照片：精美的電腦內部理線" loading="lazy">
             </div>
           </div>
+          <!-- 分頁圓點 -->
+          <div class="swiper-pagination"></div>
+          
+          <!-- 左右導航按鈕 -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
       </div>
     </section>
+    <!-- END: 歷屆賽事回顧 (優化版) -->
+
 
    <!-- CTA SECTION -->
     <section class="py-20 text-center bg-gray-800 text-white">
@@ -931,6 +926,10 @@
         </div>
     </div>
   </footer>
+
+  <!-- START: 新增 Swiper.js 腳本 -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- END: 新增 Swiper.js 腳本 -->
 
   <!-- 
     ============================================================
@@ -1088,6 +1087,45 @@
             if (secondsEl) secondsEl.innerText = format(Math.floor((distance % (1000 * 60)) / 1000));
         }, 1000);
       }
+
+      // --- START: 新增賽事回顧 Swiper 初始化腳本 ---
+      const reviewSwiper = new Swiper('.review-swiper', {
+        // 啟用無限循環
+        loop: true,
+        // 設定自動播放
+        autoplay: {
+          delay: 2500, // 每 2.5 秒切換一張
+          disableOnInteraction: false, // 使用者互動後 (如滑動)，繼續自動播放
+          pauseOnMouseEnter: true, // 滑鼠移入時暫停播放
+        },
+        // 設定分頁圓點
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true, // 允許點擊圓點切換
+        },
+        // 設定導航按鈕
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        // 響應式設定：不同螢幕寬度顯示不同數量的幻燈片
+        slidesPerView: 1, // 手機預設顯示 1 張
+        spaceBetween: 15, // 幻燈片之間的間距
+        breakpoints: {
+          // 當螢幕寬度 >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          // 當螢幕寬度 >= 1024px
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        },
+      });
+      // --- END: 新增賽事回顧 Swiper 初始化腳本 ---
+
     });
   </script>
 
