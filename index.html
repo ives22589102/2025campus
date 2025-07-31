@@ -35,7 +35,12 @@
       background-color: #f8f7fa; /* Restored to your desired light color */
       font-family: 'Noto Sans TC', sans-serif; 
       color: #333;
-      padding-top: 80px; /* Offset for the fixed navbar */
+      padding-top: 64px; /* (優化) 手機版 Navbar 高度 */
+}
+@media (min-width: 768px) {
+  body {
+    padding-top: 80px; /* (優化) 電腦版恢復 80px */
+  }
     }
     
     p { /* Global bold <p> tag style */
@@ -263,9 +268,12 @@
   padding: 0 0.5rem; /* 組之間的微小間距 */
 }
 
-/* --- 7. UTILITY CLASSES --- */
-.touch-pan-x {
-  touch-action: pan-x;
+/* --- 7. UTILITY CLASSES (UPGRADED) --- */
+.touch-scroll-priority {
+  /* 優先處理平移手勢，改善滾動體驗 */
+  touch-action: pan-y pan-x; 
+  /* (關鍵) 阻止子元素的滾動傳播到父元素 */
+  overscroll-behavior: contain; 
 }
 
 /* --- 8. TABS COMPONENT FOR PHASES --- */
@@ -300,60 +308,61 @@
 </head>
 <body class="overflow-x-hidden">
 
-  <!-- 
-    ============================================================
-    HEADER & NAVIGATION BAR
-    ============================================================
-  -->
-  <header id="main-nav" class="bg-gray-900 fixed top-0 left-0 w-full z-50 transition-all duration-300">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <a href="#">
-            <img class="h-40 w-auto" src="v1/img/ROG landscape logo_white.png" alt="ROG Logo">
-          </a>
-        </div>
-        
-        <!-- Desktop Menu -->
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            <a href="#intro" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動簡介</a>
-            <a href="#timeline" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動時程</a>
-            <a href="#phase1" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">參與方式</a>
-            <a href="#rewards" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">冠軍獎勵</a>
-            <a href="#lineup" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">超強陣容</a>
-            <a href="#review" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">賽事回顧</a>
+  <!-- ============================================================
+    HEADER & NAVIGATION BAR (OPTIMIZED FOR MOBILE)
+    ============================================================ -->
+    <header id="main-nav" class="bg-gray-900 fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <!-- (優化) 調整 nav 內 padding -->
+        <nav class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"> 
+          <!-- (優化) 調整 h-16 (64px) for mobile, md:h-20 for desktop -->
+          <div class="flex items-center justify-between h-16 md:h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+              <a href="#">
+                <!-- (優化) 調整 h-28 for mobile, md:h-40 for desktop -->
+                <img class="h-28 md:h-40 w-auto" src="v1/img/ROG landscape logo_white.png" alt="ROG Logo">
+              </a>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                <a href="#intro" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動簡介</a>
+                <a href="#timeline" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">活動時程</a>
+                <a href="#phase1" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">參與方式</a>
+                <a href="#rewards" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">冠軍獎勵</a>
+                <a href="#lineup" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">超強陣容</a>
+                <a href="#review" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">賽事回顧</a>
+              </div>
+            </div>
+    
+            <!-- Mobile Menu Button -->
+            <div class="-mr-2 flex md:hidden">
+              <button id="mobile-menu-button" type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </nav>
+    
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800/95 backdrop-blur-sm">
+            <a href="#intro" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動簡介</a>
+            <a href="#timeline" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動時程</a>
+            <a href="#phase1" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">參與方式</a>
+            <a href="#rewards" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍獎勵</a>
+            <a href="#lineup" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">超強陣容</a>
+            <a href="#review" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">賽事回顧</a>
           </div>
         </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="-mr-2 flex md:hidden">
-          <button id="mobile-menu-button" type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Mobile Menu, show/hide based on menu state. -->
-    <div class="md:hidden hidden" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800/95 backdrop-blur-sm">
-        <a href="#intro" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動簡介</a>
-        <a href="#timeline" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動時程</a>
-        <a href="#phase1" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">參與方式</a>
-        <a href="#rewards" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍獎勵</a>
-        <a href="#lineup" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">超強陣容</a>
-        <a href="#review" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">賽事回顧</a>
-      </div>
-    </div>
-  </header>
+      </header>
 
   <!-- KV Banner -->
   <section class="relative w-full overflow-hidden bg-gray-800">
@@ -408,7 +417,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start" data-aos="fade-up" data-aos-delay="100">
 
           <!-- ===== 左欄：獎品展示區 (含閃爍特效) ===== -->
-          <div class="prize-showcase p-6 md:p-8 rounded-2xl shadow-2xl min-h-[500px] lg:min-h-full flex items-center justify-center">
+          <div class="prize-showcase p-6 md:p-8 rounded-2xl shadow-2xl min-h-[300px] md:min-h-[500px] lg:min-h-full flex items-center justify-center">
               
             <!-- ===== 背景星星 (位置已微調) ===== -->
             <div class="sparkle-star" style="top: 10%; left: 15%; width: 30px; height: 30px; animation-delay: 0s;"></div>
@@ -650,7 +659,7 @@
                                   <svg id="accordion-icon" class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 <div id="accordion-content" class="accordion-content px-4 pb-4 open">
-                                  <div class="overflow-x-auto touch-pan-x">
+                                  <div class="overflow-x-auto touch-scroll-priority">
                                     <!-- 加分項目表格內容... (與你原本的相同) -->
                                     <table class="w-full text-left text-sm text-gray-700">
                                         <thead class="bg-black/5"><tr><th class="p-2 font-semibold text-gray-800">加分項目</th><th class="p-2 font-semibold text-gray-800">分數</th><th class="p-2 font-semibold text-gray-800">說明</th></tr></thead>
@@ -703,7 +712,7 @@
                         </div>
                         <div class="text-center mt-12" data-aos="fade-up">
                             <h2 class="text-2xl md:text-3xl font-black text-white" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
-                                綜合評比分數最高者，將成為<span class="text-highlight relative"> 2025 華碩校園最強組裝王</span>！
+                                綜合評比分數最高者，將成為<span class="text-highlight relative inline-block"> 2025 華碩校園最強組裝王</span>！
                             </h2>
                         </div>
                     </div>
@@ -926,125 +935,60 @@
 
     
 
-    <!-- ===== (REVISED) ROG 菁英通行證詳細說明 Modal (科技感 HUD 風格) ===== -->
-<div id="pass-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-[999] hidden font-sans">
-    
-    <!-- Modal 內容框 -->
-    <!-- 移除原本的 padding，因為我們要自己控制內部間距 -->
-    <div class="bg-gradient-to-br from-[#382626] to-[#1e1c26] text-white rounded-lg shadow-xl w-full max-w-2xl relative border-t-2 border-red-500/50 overflow-hidden">
-        
-        <!-- 裝飾性 HUD 元素 -->
-        <div class="absolute top-4 right-6 text-xs text-gray-400 font-mono flex items-center space-x-4">
-            <div class="flex items-center space-x-1">
-                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span>codex</span>
-                <span>0000</span>
+        <!-- =================================================================================
+      (REVISED) ROG 菁英通行證詳細說明 Modal (OPTIMIZED FOR MOBILE)
+      ================================================================================= -->
+      <div id="pass-modal" class="fixed inset-0 bg-black/70 flex items-start sm:items-center justify-center p-4 z-[999] hidden font-sans overflow-y-auto">
+        <!-- Modal 內容框 -->
+        <div class="bg-gradient-to-br from-[#382626] to-[#1e1c26] text-white rounded-lg shadow-xl w-full max-w-2xl relative border-t-2 border-red-500/50 overflow-hidden my-auto">
+            <!-- 裝飾性 HUD 元素 -->
+            <div class="absolute top-4 right-6 text-xs text-gray-400 font-mono items-center space-x-4 hidden sm:flex">
+                <div class="flex items-center space-x-1"><div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div><span>codex</span><span>0000</span></div>
+                <span>// FOR THOSE WHO DARE</span>
+                <div class="w-16 h-1 bg-red-500/50 overflow-hidden"><div class="w-1/2 h-full bg-red-400"></div></div>
             </div>
-            <span>// FOR THOSE WHO DARE</span>
-            <div class="w-16 h-1 bg-red-500/50 overflow-hidden"><div class="w-1/2 h-full bg-red-400"></div></div>
-        </div>
-        
-        <!-- 關閉按鈕 -->
-        <button id="close-pass-modal" class="absolute top-2 right-2 text-gray-400 hover:text-white transition z-20">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            <span class="sr-only">關閉視窗</span>
-        </button>
+            
+            <!-- 關閉按鈕 -->
+            <button id="close-pass-modal" class="absolute top-2 right-2 text-gray-400 hover:text-white transition z-20">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <span class="sr-only">關閉視窗</span>
+            </button>
 
-        <!-- 主要內容區域 -->
-        <div class="p-8 md:p-10">
-
-            <!-- 主標題 -->
-            <h3 class="text-3xl font-bold mb-1">專屬三大禮遇</h3>
-            <p class="text-sm text-gray-400 mb-8">(效期: 自核發日起一年內有效)</p>
-
-            <!-- 禮遇列表 -->
-            <div class="space-y-6">
-                <!-- 禮遇 1 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">1</div>
-                    <div>
-                        <strong class="text-xl font-semibold">新品搶先體驗：</strong>
-                        <span class="text-gray-300">每季都有機會搶先開箱 ROG 最新產品，直接寄到你家試用，第一手體驗最酷最潮的 ROG 新品！分享使用心得，還有精美好禮等你拿！</span>
-                    </div>
+            <!-- 主要內容區域 -->
+            <div class="p-6 md:p-10">
+                <!-- 主標題 -->
+                <h3 class="text-2xl md:text-3xl font-bold mb-1">專屬三大禮遇</h3>
+                <p class="text-sm text-gray-400 mb-8">(效期: 自核發日起一年內有效)</p>
+                <!-- 禮遇列表 -->
+                <div class="space-y-6">
+                    <!-- 禮遇 1 -->
+                    <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">1</div><div><strong class="text-lg md:text-xl font-semibold">新品搶先體驗：</strong><span class="text-gray-300">每季皆有機會優先開箱 ROG 最新產品，直接寄到你家試用，第一手體驗最酷最潮的 ROG 新品！分享使用心得，還有精美好禮等你拿！</span></div></div>
+                    <!-- 禮遇 2 -->
+                    <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">2</div><div><strong class="text-lg md:text-xl font-semibold">活動優先權：</strong><span class="text-gray-300">年底的 ROG DAY 等熱門活動皆名額有限、報名踴躍，校園菁英可享專屬保障名額 (每場高達 5 名)，讓你不再錯過任何精彩現場！</span></div></div>
+                    <!-- 禮遇 3 -->
+                    <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">3</div><div><strong class="text-lg md:text-xl font-semibold">專屬折扣碼：</strong><span class="text-gray-300">享有專屬菁英優惠碼 30 組，可以超值價格購入全新 ROG 產品。不僅自己拿好康，還能分享給親友、同學一起沾光！一年內使用達 10 組，還可延長通行證效期一年！(限延長一次)</span></div></div>
                 </div>
-                <!-- 禮遇 2 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">2</div>
-                    <div>
-                        <strong class="text-xl font-semibold">活動優先權：</strong>
-                        <span class="text-gray-300">年底的 ROG DAY 等熱門活動皆名額有限、報名踴躍，校園菁英可享專屬保障名額 (每場高達 5 名)，讓你不再錯過任何精彩現場！</span>
-                    </div>
-                </div>
-                <!-- 禮遇 3 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">3</div>
-                    <div>
-                        <strong class="text-xl font-semibold">專屬折扣碼：</strong>
-                        <span class="text-gray-300">享有專屬菁英優惠碼 30 組，可以超值價格購入全新 ROG 產品。不僅自己拿好康，還能分享給親友、同學一起沾光！一年內使用達 10 組，還可延長通行證效期一年！(限延長一次)</span>
+                <!-- 分隔線 -->
+                <hr class="border-gray-700 my-8">
+                <!-- 注意事項 -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 flex items-center"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>注意事項</h4>
+                    <div class="space-y-5 text-xs text-gray-300">
+                        <div><strong class="block text-white mb-1">資訊蒐集與隱私</strong><p>為提供會員完整體驗，ROG 將蒐集與使用會員於註冊與活動過程中所提供之個人資料，並依法保護個資安全。會員可隨時申請查閱、修改或刪除其個人資訊。</p></div>
+                        <div><strong class="block text-white mb-1">資格與責任</strong><ul class="list-disc list-inside space-y-2"><li>如發現會員有不當行為（如提供不實資訊、轉售福利、濫用資格等），ROG 有權取消其資格並追回贈品。</li><li>本卡為限量發行且為記名制，遺失恕不補發，請妥善保管。</li><li>參與任一專屬活動前，ROG 有權要求提供身份證明與卡片序號以確認會員真實性。</li></ul></div>
+                        <div><strong class="block text-white mb-1">權利與聲明</strong><ul class="list-disc list-inside space-y-2"><li>ROG 保留對所有活動與會員制度的最終解釋與變更權利，任何變動將公告於官方平台。</li><li>遇天災、疫情、供應延遲等不可抗力因素，導致部分福利（如新品寄送或活動舉辦）無法如期提供，ROG 保留延後、調整、替代等處理方式之權利。</li><li>會員於試用活動所撰寫之開箱心得與相關圖片，若經授權，可供 ROG 官方行銷使用。。</li><li>本卡僅為會員識別用途，非金融支付工具，無儲值、提款、消費功能，請勿混淆使用。</li><li>試用商品、贈品與優惠視庫存與活動安排而定，ROG 不保證提供特定項目，亦不接受更換或折現。</li></ul></div>
                     </div>
                 </div>
             </div>
             
-            <!-- 分隔線 -->
-            <hr class="border-gray-700 my-8">
-
-                        <!-- (REVISED) 注意事項 (移除 QR Code，寬度佔滿) -->
-                        <div>
-                            <!-- 左側注意事項 -->
-                            <div>
-                                <h4 class="text-xl font-semibold mb-4 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                    注意事項
-                                </h4>
-                                                   <!-- (REVISED) 可滾動的內容框 (優化整合版) -->
-                    <div class="h-48 overflow-y-auto pr-4 space-y-5 text-xs text-gray-300">
-                        
-                        <div>
-                            <strong class="block text-white mb-1">資訊蒐集與隱私</strong>
-                            <p>為提供會員完整體驗，ROG 將蒐集與使用會員於註冊與活動過程中所提供之個人資料，並依法保護個資安全。會員可隨時申請查閱、修改或刪除其個人資訊。</p>
-                        </div>
-
-                        <div>
-                            <strong class="block text-white mb-1">資格與責任</strong>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li>如發現會員有不當行為（如提供不實資訊、轉售福利、濫用資格等），ROG 有權取消其資格並追回贈品。</li>
-                                <li>本卡為限量發行且為記名制，遺失恕不補發，請妥善保管。</li>                                
-                                <li>參與任一專屬活動前，ROG 有權要求提供身份證明與卡片序號以確認會員真實性。</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <strong class="block text-white mb-1">權利與聲明</strong>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li>ROG 保留對所有活動與會員制度的最終解釋與變更權利，任何變動將公告於官方平台。</li>
-                                <li>遇天災、疫情、供應延遲等不可抗力因素，導致部分福利（如新品寄送或活動舉辦）無法如期提供，ROG 保留延後、調整、替代等處理方式之權利。</li>
-                                <li>會員於試用活動所撰寫之開箱心得與相關圖片，若經授權，可供 ROG 官方行銷使用。。</li>
-                                <li>本卡僅為會員識別用途，非金融支付工具，無儲值、提款、消費功能，請勿混淆使用。</li>
-                                <li>試用商品、贈品與優惠視庫存與活動安排而定，ROG 不保證提供特定項目，亦不接受更換或折現。</li>
-                            </ul>
-                        </div>
-
-                    </div>
-                            </div>
-                        </div>
-
-        </div>
-        
-        <!-- 底部裝飾性 HUD 元素 -->
-        <div class="absolute bottom-2 left-4 right-4 text-xs text-gray-500 font-mono flex justify-between items-center">
-            <<<<<<<<<<<<<<<<
-            <div class="flex-grow flex items-center justify-center">
-                <div class="w-24 h-px bg-red-500/30"></div>
-                
-                <div class="w-24 h-px bg-red-500/30"></div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <div class="bg-red-600 px-2 py-0.5">ROG</div>
-                <span>#1206</span>
+            <!-- 底部裝飾性 HUD 元素 -->
+            <div class="absolute bottom-2 left-4 right-4 text-xs text-gray-500 font-mono items-center hidden sm:flex justify-between">
+                <span><<<<<<<<<<<<<<</span>
+                <div class="flex-grow flex items-center justify-center"><div class="w-24 h-px bg-red-500/30"></div><div class="w-24 h-px bg-red-500/30"></div></div>
+                <div class="flex items-center space-x-4"><div class="bg-red-600 px-2 py-0.5">ROG</div><span>#1206</span></div>
             </div>
         </div>
     </div>
-</div>
 
   </main>
   
