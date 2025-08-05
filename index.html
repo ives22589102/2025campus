@@ -324,6 +324,149 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* --- Shiny Card Effect --- */
+@keyframes cardShine {
+  0% {
+    /* 動畫開始時，反光條在卡片左側外 */
+    transform: translateX(-150%) skewX(-25deg);
+  }
+  60% {
+    /* 動畫進行到 60% 時，反光條已掃過卡片，到達右側外 */
+    transform: translateX(150%) skewX(-25deg);
+  }
+  100% {
+    /* 剩餘時間保持在原位，製造一個停留的間隔 */
+    transform: translateX(150%) skewX(-25deg);
+  }
+}
+
+.card-shine-container {
+  position: relative; /* 作為反光條的定位基準 */
+  overflow: hidden;   /* 隱藏超出卡片範圍的反光條 */
+  border-radius: 1rem; /* 確保圓角能裁剪反光條，數值可依卡片圓角調整 */
+  
+  /* 以下為優化動畫效能的屬性 */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  
+  /* 將 hover 效果放在容器上，讓特效和圖片一起放大 */
+  transition: transform 0.3s ease;
+}
+
+.card-shine-container:hover {
+  transform: scale(1.05);
+}
+
+.card-shine-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%; /* 反光條的寬度 */
+  
+  /* 反光條的漸層背景，從透明到半透明白再到透明 */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+
+  /* 應用動畫：持續 4 秒，無限循環，第一次播放前延遲 1 秒 */
+  animation: cardShine 4s infinite 1s;
+  animation-timing-function: ease-in-out; /* 動畫速度曲線 */
+  pointer-events: none; /* 讓滑鼠可以穿透此元素，點擊到圖片 */
+}
+
+/* --- Champion Card Styles --- */
+.champion-card {
+  position: relative;
+  transform-style: preserve-3d; /* 啟用 3D 空間 */
+  transform: perspective(1000px); /* 設置視角 */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.champion-card:hover {
+  transform: perspective(1000px) rotateY(var(--rotateY, 0)) rotateX(var(--rotateX, 0)) scale3d(1.05, 1.05, 1.05);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); /* 調整為更適合淺色背景的陰影 */
+}
+
+/* 冠軍卡片光暈掃光效果 */
+.champion-shine {
+  position: absolute;
+  top: 0;
+  left: -100%; /* 從左側外開始 */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 60%);
+  transform: skewX(-25deg);
+  transition: left 0.8s ease-in-out;
+  z-index: 1;
+  opacity: 0;
+}
+
+.champion-card:hover .champion-shine {
+  left: 100%; /* 滑鼠移入時，掃光動畫移動到右側外 */
+  opacity: 1;
+}
+
+/* 冠軍資訊區塊 */
+.champion-info {
+  z-index: 2; /* 確保文字在掃光效果之上 */
+  transform: translateZ(20px); /* 讓文字在 3D 空間中稍微突出 */
+  transition: transform 0.4s ease;
+}
+
+.champion-card:hover .champion-info {
+    transform: translateZ(50px) translateY(-5px); /* 滑鼠移入時，文字更突出 */
+}
+
+/* 冠軍年份徽章樣式 */
+.champion-year {
+  display: inline-block;
+  background-color: #D70026; /* ROG Red */
+  color: white;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  margin-bottom: 0.5rem;
+}
+
+/* --- START: 新增解決方案的 CSS --- */
+
+/* --- 9. HORIZONTAL SCROLL HINT (Fading Edge) --- */
+/* 手機版橫向捲動提示 - 活動時程 */
+.timeline-scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60px; /* 漸層的寬度 */
+  /* 從透明漸變到背景色，營造淡出效果 */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffffe5 80%);
+  pointer-events: none; /* 讓滑鼠可以穿透此漸層，點擊到底下內容 */
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+
+
+/* 在中等尺寸 (md, 768px) 以上的螢幕，隱藏這些提示 */
+@media (min-width: 768px) {
+  .timeline-scroll-container::after,
+  .horizontal-scroll-fade::after {
+    opacity: 0; /* 使用 opacity 搭配 transition，效果更平滑 */
+  }
+}
+/* --- END: 新增解決方案的 CSS --- */
   </style>
 </head>
 <body class="overflow-x-hidden">
@@ -353,7 +496,9 @@
                 <a href="#participation" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">參與方式</a>
                 <a href="#rewards" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">冠軍獎勵</a>
                 <a href="#lineup" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">超強陣容</a>
+                <a href="#hall-of-fame" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">冠軍殿堂</a>
                 <a href="#review" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">賽事回顧</a>
+                <a href="#faq" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">常見問題</a>
               </div>
             </div>
     
@@ -381,7 +526,9 @@
             <a href="#participation" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">參與方式</a>
             <a href="#rewards" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍獎勵</a>
             <a href="#lineup" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">超強陣容</a>
+            <a href="#hall-of-fame" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍殿堂</a>
             <a href="#review" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">賽事回顧</a>
+            <a href="#faq" class="mobile-menu-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">常見問題</a>
           </div>
         </div>
       </header>
@@ -405,13 +552,13 @@
     <!-- THEME TITLE -->
     <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
       <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
-        <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 2025年度主題 -</h2>
+        <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 2025 華碩校園活動年度主題 -</h2>
       </div>
     </section>
 
     <!-- TABS SECTION -->
     <section class="py-12 md:py-16">
-      <div class="max-w-[90%] max-w-screen-2xl mx-auto px-4 text-center">
+      <div class="max-w-[50%] max-w-screen-xl mx-auto px-4 text-center">
           <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8" data-aos="fade-up">
               <!-- (優化) 埋設 UTM code，並增加 rel 屬性 -->
               <a href="https://asus.feversocial.com/ASUSOPMKT/363?utm_source=codex_page&utm_medium=button&utm_campaign=rog_codex_2025" target="_blank" rel="noopener noreferrer" class="block w-full sm:w-1/2 group">
@@ -419,7 +566,7 @@
               </a>
               <!-- (優化) 埋設 UTM code -->
               <a href="#register" class="block w-full sm:w-1/2 group">
-                  <img src="./v1/img/competitionbtn_v2.png" alt="前往報名校園組裝王" class="w-full h-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_#5e5593]" loading="lazy">
+                  <img src="./v1/img/competitionbtn_v3.png" alt="前往報名校園組裝王" class="w-full h-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_#5e5593]" loading="lazy">
               </a>
           </div>
       </div>
@@ -459,12 +606,14 @@
                 </div>
               </div>
 
+              
               <div class="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg h-full flex flex-col justify-center">
                   <div>
                       <h3 class="text-3xl md:text-4xl font-black mb-6 text-gray-800"><span class="text-highlight relative">ASUS 端上好禮</span></h3>
                       <div class="space-y-4">
                           <!-- (優化) 增加文字大小與粗體，提升可讀性 -->
-                          <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 組裝電腦</span></p></div>
+                          <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 組裝電腦+周邊<br>(價值 $35,000)</span></p></div>
+                          
                           <div class="flex items-start"><span class="text-2xl mr-3">🥈</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">亞軍：</strong><span class="text-gray-700">ASUS 電競耳機</span></p></div>
                           <div class="flex items-start"><span class="text-2xl mr-3">🥉</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">季軍：</strong><span class="text-gray-700">ASUS 電競鍵盤</span></p></div>
                           <div class="flex items-start"><span class="text-2xl mr-3">🏅</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">殿軍：</strong><span class="text-gray-700">ASUS 電競滑鼠</span></p></div>
@@ -475,9 +624,9 @@
                   <div class="mt-12 pt-8 border-t border-gray-300">
                     <h4 class="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left">關於 ROG 菁英通行證</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                      <div class="md:col-span-1">
-                          <img src="v1/img/price5.png" alt="ROG 菁英通行證卡片示意圖" class="w-4/5 md:w-full mx-auto h-auto object-contain drop-shadow-lg transform transition-transform duration-300 hover:scale-105" loading="lazy">
-                      </div>
+                      <div class="card-shine-container mx-auto w-4/5 md:w-full">
+                        <img src="v1/img/price5.png" alt="ROG 菁英通行證卡片示意圖" class="w-full h-auto object-contain drop-shadow-lg" loading="lazy">
+                    </div>
                       <div class="md:col-span-2 space-y-3">
                           <p class="text-gray-600 font-medium">成功入選挑戰賽，即可獲得「ROG 菁英通行證」，解鎖玩家專屬的尊榮福利！</p>
                           <ul class="list-disc list-inside space-y-2 text-gray-700 font-semibold">
@@ -513,6 +662,7 @@
     <!-- TIMELINE CONTENT -->
     <section class="py-8 md:py-12" style="background-color: #ffffffe5;">
       <div class="px-4 sm:px-6 lg:px-8"> 
+        <div class="relative timeline-scroll-container">
         <div class="timeline-mobile-scroll">
           
           <div class="timeline-pin-item has-arrow-connector" data-aos="fade-up" data-aos-delay="100">                  
@@ -551,6 +701,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -626,24 +777,31 @@
                                   <svg class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 <div class="accordion-content px-4 pb-4 open">
-                                  <div class="overflow-x-auto touch-scroll-priority">
+                                  <div class="relative overflow-x-auto touch-scroll-priority horizontal-scroll-fade">
                                     <table class="w-full text-left text-sm text-gray-700">
                                         <thead class="bg-black/5"><tr><th class="p-2 font-semibold text-gray-800">加分項目</th><th class="p-2 font-semibold text-gray-800">分數</th><th class="p-2 font-semibold text-gray-800">說明</th></tr></thead>
                                         <tbody>
                                             <tr class="border-b border-black/10"><td class="p-2">按讚 ROG 粉絲團</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">連結</a> 前往按讚 ROG 官方粉絲專頁。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">加入 ROG玩家基地</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">連結</a> 加入 ROG 官方社團。</td></tr>
-                                            <tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 ROG 粉絲團活動貼文，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
+                                            <tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">ROG 粉絲團活動貼文</a>，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <!--<tr class="border-b border-black/10"><td class="p-2">更換專屬頭像</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">報名後使用<a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">此官方素材</a>更換個人社群頭像。<br><span class="text-xs text-gray-500 italic">(需長時間公開，報名截止時檢查)</span></td></tr>-->
                                             <tr class="border-b border-black/10"><td class="p-2">創意加分 (圖文)</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">創作一篇含「個人與主機合照」的短圖文，分享於個人社群平台，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">創意加分 (影片)</td><td class="p-2 font-bold text-red-600">+20分</td><td class="p-2">結合自身 DIY PC 的經歷、故事、學校等元素，拍攝一部「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台，影片中需要出現個人 DIY PC 電腦，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
-                                            <tr class="border-b border-black/10"><td class="p-2">全校加分 (盟校)</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">如果您是華碩既有 ROG 盟校之學生，則自動加 5 分，<a href="https://asus.feversocial.com/ASUSOPMKT/183" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">點我了解更多</a>。</td></tr>
-                                            <tr><td class="p-2">全校加分 (宣傳)</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">在校內或系所社群/Line群組分享活動資訊，該校學生同享加分。</td></tr>
+                                            <tr class="border-b border-black/10">
+                                              <td class="p-2">全校加分 (盟校)</td>
+                                              <td class="p-2 font-bold text-green-600">+5分</td>
+                                              <td class="p-2">
+                                                  如果您是華碩既有 ROG 盟校之學生，則自動加 5 分。
+                                                  <button id="open-school-modal-button" type="button" class="ml-2 text-blue-600 underline font-semibold hover:text-blue-800 transition">點此查看盟校列表</button>
+                                              </td>
+                                          </tr>
+                                            <tr><td class="p-2">全校加分 (宣傳)</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">在校內或系所社群/Line群組分享活動資訊，截圖後上傳至問券中回填表單，該校學生同享加分。</td></tr>
                                         </tbody>
                                     </table>
                                   </div>
                                 </div>
                             </div>
-                            <div class="md:col-span-2"><h3 class="font-bold text-lg mb-2 text-white">💡 高分攻略</h3><div class="bg-amber-100 border-l-4 border-amber-400 p-4 rounded-r-lg text-amber-800 font-medium"><p>想從眾多報名者中脫穎而出？優先完成「創意影片創作」(+20分) 、「創意圖文創作」(+10分) 和「更換專屬頭像」(+10分)，是快速累積積分、搶下總部門票的關鍵！</p></div></div>
+                            <div class="md:col-span-2"><h3 class="font-bold text-lg mb-2 text-white">💡 高分攻略</h3><div class="bg-amber-100 border-l-4 border-amber-400 p-4 rounded-r-lg text-amber-800 font-medium"><p>想從眾多報名者中脫穎而出？優先完成「創意影片創作」(+20分) 、「創意圖文創作」(+10分)，是快速累積積分、搶下總部門票的關鍵！</p></div></div>
                         </div>
                     </div>
                     <!-- ----- PHASE 2 CONTENT ----- -->
@@ -749,7 +907,71 @@
             </div>
         </div>
     </section>
+    
+    <!-- ============================================================
+    HALL OF FAME TITLE (歷屆冠軍殿堂標題)
+    ============================================================ -->
+<section id="hall-of-fame" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
+  <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
+      <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 歷屆冠軍殿堂 -</h2>
+  </div>
+</section>
 
+
+<!-- ============================================================
+    HALL OF FAME CONTENT (歷屆冠軍殿堂內容) - 榮耀光暈版
+    ============================================================ -->
+    <section class="py-12 md:py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12" data-aos="fade-up">
+              
+              <p class="mt-4 text-lg text-gray-600 font-medium">他們曾在這裡證明自己，現在，輪到你了！</p>
+          </div>
+        
+          <!-- 冠軍卡片網格 - 新版 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 justify-center" data-aos="fade-up" data-aos-delay="100">
+  
+              <!-- 冠軍卡片 (2023) - 新增 champion-card class -->
+              <div class="champion-card group relative block w-full aspect-[4/5] rounded-xl overflow-hidden shadow-lg">
+                  <!-- 光暈效果元素 -->
+                  <span class="champion-shine"></span>
+                  <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="v1/img/2023champion.jpg" alt="2023 華碩校園組裝王冠軍 黃羿捷" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <!-- 浮動文字內容 - 新增 champion-info class -->
+                  <div class="champion-info absolute inset-x-0 bottom-0 p-5 md:p-6 text-white">
+                      <div class="champion-year">2023 Champion</div>
+                      <h3 class="text-2xl md:text-3xl font-bold mt-1 tracking-wide">黃羿捷</h3>
+                      <p class="text-sm font-medium opacity-80 mt-1">明新科技大學 多媒體與遊戲發展學系</p>
+                  </div>
+                </div>
+  
+              <!-- 冠軍卡片 (2024) - 新增 champion-card class -->
+              <div class="champion-card group relative block w-full aspect-[4/5] rounded-xl overflow-hidden shadow-lg">
+                  <!-- 光暈效果元素 -->
+                  <span class="champion-shine"></span>
+                  <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="v1/img/2024champion.png" alt="2024 華碩校園組裝王冠軍 鄧仰軒" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <!-- 浮動文字內容 - 新增 champion-info class -->
+                  <div class="champion-info absolute inset-x-0 bottom-0 p-5 md:p-6 text-white">
+                      <div class="champion-year">2024 Champion</div>
+                      <h3 class="text-2xl md:text-3xl font-bold mt-1 tracking-wide">鄧仰軒</h3>
+                      <p class="text-sm font-medium opacity-80 mt-1">致用高中 資訊科</p>
+                  </div>
+                </div>
+  
+              <!-- 冠軍卡片 (2025 - 虛位以待) -->
+              <div class="group relative flex flex-col items-center justify-center w-full aspect-[4/5] rounded-xl bg-gray-200 border-2 border-dashed border-gray-400 transition-all duration-300 hover:bg-white hover:border-red-500 hover:shadow-xl">
+                <div class="text-center text-gray-600 group-hover:text-red-600 transition-colors">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400 group-hover:text-red-500 transition-all duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                    <p class="text-lg font-semibold">2025 Champion</p>
+                    <h3 class="text-2xl md:text-3xl font-black mt-2">下一個...就是你！</h3>
+                </div>
+                <a href="#register" class="absolute inset-0 z-10" aria-label="立即報名，成為下一位冠軍"></a>
+            </div>
+  
+          </div>
+      </div>
+  </section>
 
     <!-- REVIEW TITLE -->
     <section id="review" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
@@ -798,10 +1020,110 @@
     </section>
     <!-- END: 歷屆賽事回顧 (優化版) -->
 
+    <!-- ============================================================
+    FAQ SECTION (常見問題專區)
+    ============================================================ -->
+
+    <section id="faq" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
+      <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
+          <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 常見問題 FAQ -</h2>
+      </div>
+    </section>
+
+<section id="faq" class="py-12 md:py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     
+      <!-- Accordion Container -->
+      <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+
+          <!-- FAQ Item 1 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 總部挑戰賽在平日，需要上課怎麼辦？交通住宿有補助嗎？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>我們完全理解同學的考量！總部挑戰賽為整天活動，主辦單位將會提供<strong class="text-red-600">官方公假證明</strong>，協助您完成請假手續。對於從非雙北地區前來參賽的選手，我們也會提供<strong class="text-red-600">定額的交通費用補助</strong>，讓您能無後顧之憂地前來挑戰。詳細補助辦法將於入選通知中說明。</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 我不會拍片或剪輯，做「創意影片」會不會很吃虧？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>完全不用擔心！我們看的不是專業的攝影技巧或華麗的後製，而是您<strong class="text-red-600">對 DIY 的熱情與創意</strong>。用手機拍攝、簡單的剪輯軟體（甚至手機 App）製作即可。評分的重點在於<strong class="text-red-600">內容的真誠度、故事性</strong>，以及您如何展現自己與 PC DIY 的連結。勇敢秀出你的熱情，比任何技巧都重要！</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 我的電腦不是自己組的/配備很普通，跟主機合照會不會沒機會？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>絕對不會！這個比賽的核心是尋找「組裝王」，看重的是你的<strong class="text-red-600">知識、技巧與潛力</strong>，而不是你現在的設備。初選的圖文/影片是為了讓我們認識你，即使主機不是最頂級，你依然可以透過<strong class="text-red-600">分享你的 DIY 故事、學習過程，或是對未來升級的憧憬</strong>來打動我們。真實的熱情遠比昂貴的設備更有價值！</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 團體賽要跟陌生人合作壓力好大，比賽氣氛會很嚴肅嗎？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>這正是挑戰賽的樂趣之一！我們希望這不只是一場比賽，更是一次<strong class="text-red-600">技術交流與社群同樂會</strong>。活動氛圍是「緊張刺激」與「歡樂交流」並存的。團體賽考驗的是溝通與快速協作，也是一個認識 DIY 同好的絕佳機會。別擔心，現場的工作人員和 KOL 都會引導氣氛，讓大家在享受挑戰的同時也能交到朋友！</p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- FAQ Item 5 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 決賽的理線、燈效評分標準是什麼？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>決賽評分會兼顧「美學」與「實用性」。<strong class="text-red-600">理線</strong>部分會評估整潔度、線材走向的合理性、是否影響散熱風道等。而<strong class="text-red-600">燈效</strong>則著重於創意、色彩搭配與主題契合度，技術操作的流暢度也會納入考量。我們鼓勵選手在規範內盡情發揮創意！更詳細的評分細則會在決賽前向選手說明，您也可以參考歷屆賽事回顧影片，觀摩學長姐們的作品尋找靈感。</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ Item 6 -->
+          <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+              <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <span class="text-lg">Q: 成為冠軍後的「使命」具體要做什麼？會佔用很多時間嗎？</span>
+                  <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                  <div class="p-5 pt-0 text-gray-700">
+                      <p>「冠軍使命」更像是一個榮譽合作計畫，而非硬性工作。我們希望冠軍能成為校園中的 ROG 精神代表。主要內容包含：<br>
+                      1. <strong class="text-gray-900">內容創作：</strong>任期內至少完成 2-3 篇的活動或產品體驗分享文 (類似開箱文)。<br>
+                      2. <strong class="text-gray-900">活動參與：</strong>視情況邀請您參與 1-2 場大型線下活動 (如 ROG DAY) 或影片拍攝，我們會提前協調您的時間，並提供相應的車馬費或福利。<br>
+                      所有合作都會以<strong class="text-red-600">不影響課業為前提</strong>進行協調，我們希望這是一段愉快且能為您的履歷加分的寶貴經驗！</p>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</section>
 
    <!-- CTA SECTION -->
     <section class="py-20 text-center bg-gray-800 text-white">
-      <div class="max-w-3xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto px-6" >
           <h2 class="text-3xl md:text-4xl font-black">準備成為最強組裝王了嗎？</h2>
           <p class="mt-4 text-gray-300 mb-8 font-medium">距離報名截止日 2025/10/20 還有...</p>
           <div id="countdown-timer" class="flex justify-center items-center gap-4 md:gap-8 my-10">
@@ -843,6 +1165,53 @@
             </div>
         </div>
     </div>
+
+      <!-- ============================================================
+    SCHOOL LIST MODAL (盟校列表視窗)
+    ============================================================ -->
+<div id="school-list-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-[999] hidden" role="dialog" aria-modal="true" aria-labelledby="school-modal-title">
+  <!-- Modal 容器 -->
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-lg relative max-h-[80vh] flex flex-col">
+      <!-- Modal 標題 -->
+      <div class="flex justify-between items-center p-4 border-b">
+          <h3 id="school-modal-title" class="text-xl font-bold text-gray-800">ROG 盟校列表</h3>
+          <button id="close-school-modal-button" type="button" class="text-gray-400 hover:text-gray-700 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span class="sr-only">關閉視窗</span>
+          </button>
+      </div>
+      
+      <!-- Modal 內容 (可滾動) -->
+      <div class="p-6 overflow-y-auto">
+          <p class="mb-4 text-sm text-gray-600">若您的學校在以下列表，報名即可自動加 5 分！</p>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-700">
+              <li>三信高級家事商業職業學校</li>
+              <li>中山高級工商職業學校</li>
+              <li>臺北城市科技大學</li>
+              <li>台北海洋科技大學</li>
+              <li>臺北市幼華高級中學</li>
+              <li>弘光科技大學</li>
+              <li>正修科技大學</li>
+              <li>桃園私立光啟高級中學</li>
+              <li>北市育達高級中等學校</li>
+              <li>臺中市明台高級中學</li>
+              <li>明新科技大學</li>
+              <li>東南科技大學</li>
+              <li>青年高中</li>
+              <li>修平科技大學</li>
+              <li>莊敬高職</li>
+              <li>華梵大學</li>
+              <li>慈明高中</li>
+              <li>僑光科技大學</li>
+              <li>僑泰高級中學</li>
+              <li>遠東科技大學</li>
+              <!-- 列表結束 -->
+          </ul>
+      </div>
+  </div>
+</div>
+
+  
 
    <!-- TERMS & CONDITIONS (Accordion) -->
    <section id="terms" class="w-full bg-gray-200">
@@ -1130,9 +1499,103 @@
           },
         });
       }
-    });
-  </script>
-  
-</body>
 
+            // --- 8. Champion Card 3D Tilt Effect ---
+            const cards = document.querySelectorAll('.champion-card');
+      if (cards.length > 0) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.setProperty('--rotateX', `${rotateX}deg`);
+                card.style.setProperty('--rotateY', `${rotateY}deg`);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--rotateX', '0deg');
+                card.style.setProperty('--rotateY', '0deg');
+            });
+        });
+      }
+    });
+
+          // --- 9. School List Modal Logic ---
+          const openSchoolModalBtn = document.getElementById('open-school-modal-button');
+      const closeSchoolModalBtn = document.getElementById('close-school-modal-button');
+      const schoolListModal = document.getElementById('school-list-modal');
+
+      if (schoolListModal) {
+          const openSchoolModal = () => {
+            schoolListModal.classList.remove('hidden');
+            // 選用：打開 modal 時禁止背景滾動，與另一個 modal 邏輯一致
+            document.body.style.overflow = 'hidden'; 
+          };
+          const closeSchoolModal = () => {
+            schoolListModal.classList.add('hidden');
+            // 選用：恢復背景滾動
+            document.body.style.overflow = ''; 
+          };
+
+          if (openSchoolModalBtn) openSchoolModalBtn.addEventListener('click', openSchoolModal);
+          if (closeSchoolModalBtn) closeSchoolModalBtn.addEventListener('click', closeSchoolModal);
+          
+          // 點擊 modal 背景區域時關閉
+          schoolListModal.addEventListener('click', (event) => {
+              // 確保點擊的是背景本身，而不是其子元素 (modal 內容)
+              if (event.target === schoolListModal) {
+                closeSchoolModal();
+              }
+          });
+
+          // 按下 'Escape' 鍵時關閉
+          document.addEventListener('keydown', (event) => {
+              if (event.key === 'Escape' && !schoolListModal.classList.contains('hidden')) {
+                  closeSchoolModal();
+              }
+          });
+      }
+
+            // --- 10. FAQ Accordion Logic ---
+            const faqItems = document.querySelectorAll('.faq-item');
+      if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+          const trigger = item.querySelector('.faq-trigger');
+          const content = item.querySelector('.faq-content');
+          const icon = item.querySelector('.faq-icon');
+
+          if (trigger && content && icon) {
+            trigger.addEventListener('click', () => {
+              const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+              // Close all other items
+              faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.querySelector('.faq-content').style.maxHeight = null;
+                  otherItem.querySelector('.faq-icon').classList.remove('rotate-180');
+                }
+              });
+
+              // Toggle the clicked item
+              if (isOpen) {
+                content.style.maxHeight = null;
+                icon.classList.remove('rotate-180');
+              } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.classList.add('rotate-180');
+              }
+            });
+          }
+        });
+      }
+  </script>
+
+</body>
 </html>
