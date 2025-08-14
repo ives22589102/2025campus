@@ -609,7 +609,7 @@
                   <div>
                       <h3 class="text-3xl md:text-4xl font-black mb-6 text-gray-800"><span class="text-highlight relative">ROG 端上好禮</span></h3>
                       <div class="space-y-4">
-                          <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 主機+周邊 乙套<br>(價值 $35,000)</span></p></div>
+                          <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 主機+周邊 乙套</span></p></div>
                           <div class="flex items-start"><span class="text-2xl mr-3">🥈</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">亞軍：</strong><span class="text-gray-700">電競耳機 乙台</span></p></div>
                           <div class="flex items-start"><span class="text-2xl mr-3">🥉</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">季軍：</strong><span class="text-gray-700">電競鍵盤 乙台</span></p></div>
                           <div class="flex items-start"><span class="text-2xl mr-3">🏅</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">殿軍：</strong><span class="text-gray-700">電競滑鼠 乙台</span></p></div>
@@ -677,7 +677,7 @@
             </div>
             <div class="timeline-pin-line"></div>
             <div class="timeline-pin-desc">
-              <time datetime="2025-09-01" class="timeline-pin-date">9/1 - 10/20</time> <!-- (優化) 增加 datetime 屬性 -->
+              <time datetime="2025-09-01" class="timeline-pin-date">8/25 - 10/20</time> <!-- (優化) 增加 datetime 屬性 -->
               <h4 class="font-bold">線上徵選</h4>
               <p>填寫報名資料，展現你的DIY熱情與經驗。</p>
             </div>
@@ -748,7 +748,7 @@
                     <!-- ----- PHASE 1 CONTENT ----- -->
                     <div id="content-phase1" class="phase-content active">
                         <div class="text-center mb-10" data-aos="fade-up">
-                            <p class="text-white font-semibold">活動時間：9/1 - 10/20</p>
+                            <p class="text-white font-semibold">活動時間：8/25 - 10/20</p>
                             <p class="text-xl md:text-2xl mt-2 text-white font-bold">展現你的 DIY 熱情與經驗，爭取進入第二階段的 9 位名額！</p>
                             <div class="mt-8">
                                 <!-- (優化) 埋設 UTM code，並明確指出是註冊按鈕 -->
@@ -891,29 +891,85 @@
       </div>
     </section>
     
-    <!-- KOL CONTENT -->
-    <section class="py-12 md:py-20 bg-gray-50">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <p class="mt-2 text-gray-600 font-medium text-lg">決賽當天將邀請知名 KOL 一同參與，不只是比拼技術，更是一場熱血與人氣的交流舞台！</p>
+   <!-- KOL CONTENT (方案二：現代簡約風格) - 已新增神秘嘉賓 -->
+<section class="py-12 md:py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- (優化) 將 grid 調整為支援 4 個項目，在中螢幕為 2x2，大螢幕為 1x4 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-24 md:gap-x-8" data-aos="fade-up" data-aos-delay="100">
+          
+          <!-- 講師卡片 1 -->
+          <article class="relative flex flex-col items-center text-center group">
+              <!-- 圓形頭像 -->
+              <div class="relative w-56 h-56 -mb-20 z-10 overflow-hidden rounded-full shadow-xl border-4 border-white">
+                <img src="./v1/img/KOL1.jpg" 
+                     alt="講師照片：秉哥" 
+                     class="w-full h-full object-cover scale-125" 
+                     loading="lazy">
+              </div>
+              
+              <!-- 資訊卡片 -->
+              <div class="w-full bg-white rounded-xl shadow-lg pt-24 p-6 transform transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+                  <h3 class="text-2xl font-bold text-gray-900">秉哥</h3>
+                  <p class="text-gray-500 font-medium mt-1 mb-4">主機板超頻達人</p>
+                  <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
+                  
+              </div>
+          </article>
+
+          <!-- 講師卡片 2 -->
+          <article class="relative flex flex-col items-center text-center group">
+            <div class="relative w-56 h-56 -mb-20 z-10 overflow-hidden rounded-full shadow-xl border-4 border-white">
+              <img src="./v1/img/KOL2.jpg" 
+                   alt="講師照片：AK MOD" 
+                   class="w-full h-full object-cover scale-125" 
+                   loading="lazy">
             </div>
-            <!-- (優化) 建議使用 <article> 標籤包裹每個獨立項目 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
-                <article class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up">
-                    <img src="https://placehold.co/400x300/e2e8f0/334155?text=Coming+Soon" alt="年度大使一 (即將揭曉)" class="w-full h-48 object-cover" loading="lazy">
-                    <div class="p-4 text-center"><h3 class="font-bold text-lg">大使名稱一</h3><p class="text-sm text-gray-600 mt-1">知名電競實況主</p></div>
-                </article>
-                <article class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="150">
-                    <img src="https://placehold.co/400x300/fecaca/991b1b?text=Coming+Soon" alt="年度大使二 (即將揭曉)" class="w-full h-48 object-cover" loading="lazy">
-                    <div class="p-4 text-center"><h3 class="font-bold text-lg">大使名稱二</h3><p class="text-sm text-gray-600 mt-1">專業電腦 DIY 達人</p></div>
-                </article>
-                <article class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://placehold.co/400x300/dbeafe/1e3a8a?text=Coming+Soon" alt="年度大使三 (即將揭曉)" class="w-full h-48 object-cover" loading="lazy">
-                    <div class="p-4 text-center"><h3 class="font-bold text-lg">大使名稱三</h3><p class="text-sm text-gray-600 mt-1">ROG 品牌忠實玩家</p></div>
-                </article>
+              <div class="w-full bg-white rounded-xl shadow-lg pt-24 p-6 transform transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+                  <h3 class="text-2xl font-bold text-gray-900">AK MOD</h3>
+                  <p class="text-gray-500 font-medium mt-1 mb-4">PC 改裝世界冠軍</p>
+                  <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
+                  
+              </div>
+          </article>
+
+          <!-- 講師卡片 3 -->
+          <article class="relative flex flex-col items-center text-center group">
+            <div class="relative w-56 h-56 -mb-20 z-10 overflow-hidden rounded-full shadow-xl border-4 border-white">
+              <img src="./v1/img/KOL3.jpg" 
+                   alt="講師照片：BLUE 王" 
+                   class="w-full h-full object-cover scale-125" 
+                   loading="lazy">
             </div>
-        </div>
-    </section>
+              <div class="w-full bg-white rounded-xl shadow-lg pt-24 p-6 transform transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+                  <h3 class="text-2xl font-bold text-gray-900">BLUE 王</h3>
+                  <p class="text-gray-500 font-medium mt-1 mb-4">百萬短影音創作者</p>
+                  <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
+                  
+              </div>
+          </article>
+
+          <!-- START: 神秘嘉賓卡片 -->
+          <article class="relative flex flex-col items-center text-center group">
+              <!-- 圓形頭像 (使用 SVG 問號圖示) -->
+              <div class="relative w-56 h-56 -mb-20 z-10 flex items-center justify-center overflow-hidden rounded-full shadow-xl border-4 border-white bg-gray-200">
+                <svg class="w-24 h-24 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+              </div>
+              
+              <!-- 資訊卡片 -->
+              <div class="w-full bg-white rounded-xl shadow-lg pt-24 p-6 transform transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+                  <h3 class="text-2xl font-bold text-gray-900">超人氣 KOL</h3>
+                  <p class="text-gray-500 font-medium mt-1 mb-4">即將揭曉</p>
+                 
+              </div>
+          </article>
+          <!-- END: 神秘嘉賓卡片 -->
+
+      </div>
+  </div>
+</section>
     
     <!-- ============================================================
     HALL OF FAME TITLE (歷屆冠軍殿堂標題)
@@ -1028,20 +1084,54 @@
     <!-- END: 歷屆賽事回顧 (優化版) -->
 
     <!-- ============================================================
+        START: 新增的影片區塊
+        ============================================================ -->
+    <!-- VIDEO TITLE -->
+    <section class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+          <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 電腦組裝王出任務！ -</h2>
+      </div>
+    </section>
+
+    <!-- VIDEO CONTENT -->
+    <section class="py-12 md:py-20 bg-gray-100">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" >
+        <!-- Responsive Video Wrapper -->
+        <div class="relative w-full overflow-hidden rounded-xl shadow-2xl aspect-video">
+          <iframe 
+            class="absolute top-0 left-0 w-full h-full" 
+            src="https://www.youtube.com/embed/2Tr3m6RW1CY" 
+            title="YouTube video player: 和妮妮汝一起組電腦！2024 校園組裝王冠軍圓夢計畫" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <p class="text-center text-gray-600 mt-6 font-medium text-lg">
+          看看 2024 年的冠軍鄧仰軒，如何與實況主 <a href="https://www.youtube.com/@ninyanini" target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:underline font-bold">妮妮汝</a> 一起完成他的夢幻主機！
+        </p>
+      </div>
+    </section>
+    <!-- ============================================================
+        END: 新增的影片區塊
+        ============================================================ -->
+
+    <!-- ============================================================
     FAQ SECTION (常見問題專區)
     ============================================================ -->
 
     <section id="faq" class="py-4 md:py-6 bg-gradient-to-r from-[#ce9dba] to-[#4d4486]">
-      <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
+      <div class="max-w-7xl mx-auto px-6 text-center">
           <h2 class="font-[MStiffHeiHK-UltraBold] text-white tracking-widest text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- 常見問題 FAQ -</h2>
       </div>
     </section>
 
-<section id="faq" class="py-12 md:py-20 bg-white">
+<section class="py-12 md:py-20 bg-white">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
      
       <!-- Accordion Container -->
-      <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="space-y-4" >
 
           
 
@@ -1244,6 +1334,7 @@
                             <li>若因不可抗力因素（如天災、疫情等）導致活動無法進行，主辦單位有權變更活動時程或內容。</li>
                             <li>本活動之相關爭議，以中華民國法律為準據法，並以臺灣臺北地方法院為第一審管轄法院。</li>
                             <li>凡報名參賽者，即視為已詳閱並同意本活動所有條款與規範。</li>
+                            <li>參賽者同意並授權主辦單位於決賽現場及相關活動中進行攝影、錄影及其他形式之影像紀錄，並得無償地使用、重製、編輯、公開展示及發佈該等影像（包括肖像、聲音及表演），作為活動紀錄、品牌行銷及宣傳素材之用。</li>
                         </ul>
                     </div>
 
