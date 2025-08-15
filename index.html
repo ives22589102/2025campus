@@ -5,16 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
-    <title>2025 華碩校園組裝王大賽 | ROG 校園菁英召集令 Code-X</title>
+    <title>華碩校園組裝王大賽 | ROG 校園菁英召集令 Code-X</title>
   
     <!-- SEO: 網頁描述 (description) -->
-    <meta name="description" content="想成為 2025 華碩校園組裝王嗎？立即報名 ROG 校園菁英召集令 Code-X，挑戰你的電腦組裝實力！通過三階段競賽，就有機會贏得 Powered by ASUS 全套主機與萬元好禮！" />
+    <meta name="description" content="想成為華碩校園組裝王嗎？立即報名 ROG 校園菁英召集令 Code-X，挑戰你的電腦組裝實力！通過三階段競賽，就有機會贏得 Powered by ASUS 全套主機與萬元好禮！" />
     
     <!-- SEO: 網頁關鍵字 (keywords) -->
     <meta name="keywords" content="ROG, Republic of Gamers, 華碩, ASUS, 校園組裝王, 電腦組裝, DIY PC, 電競比賽, 學生競賽, Code-X, 菁英召集令, 學生組裝電腦, 電競主機 DIY, Powered by ASUS" />
     
     <!-- --- Open Graph (社群分享預覽) --- -->
-    <meta property="og:title" content="挑戰最強組裝王！2025 ROG 校園菁英召集令 Code-X 現正報名中" />
+    <meta property="og:title" content="挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中" />
     <meta property="og:description" content="專為學生打造的年度 PC DIY 盛事！挑戰你的組裝極限，贏取夢幻電競主機，下一個冠軍就是你！" />
     <!-- TODO: 確認活動主視覺圖 URL 正確 (建議 1200x630) -->
     <meta property="og:image" content="https://rog.asus.com/event/campus_PCDIY/tw/v1/img/rog_pcdiy_og_1200x630.jpg" />
@@ -27,7 +27,7 @@
   
     <!-- --- Twitter Card (Twitter/X 分享預覽) --- -->
     <meta name="twitter:card" content="summary_large_image" />    
-    <meta name="twitter:title" content="挑戰最強組裝王！2025 ROG 校園菁英召集令 Code-X 現正報名中" />
+    <meta name="twitter:title" content="挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中" />
     <meta name="twitter:description" content="專為學生打造的年度 PC DIY 盛事！挑戰你的組裝極限，贏取夢幻電競主機，下一個冠軍就是你！" />
     <!-- Twitter 會自動抓取 og:image -->
     <meta name="twitter:image" content="https://rog.asus.com/event/campus_PCDIY/tw/v1/img/rog_pcdiy_og_1200x630.jpg" />
@@ -37,6 +37,15 @@
   
     <!-- Favicon 網站圖示 -->
     <link rel="icon" href="https://rog.asus.com/favicon.ico" type="image/x-icon">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NJRLM8');</script>
+      <!-- End Google Tag Manager -->
+  
       
     <!-- ============================================================
       SEO: JSON-LD 結構化資料 (活動)
@@ -123,15 +132,21 @@
   </head>
 <body class="overflow-x-hidden">
 
+  <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJRLM8"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      
+
   <!-- ============================================================
     開場歡迎 Modal
     ============================================================ -->
-  <div id="prize-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-[1000] hidden" role="dialog" aria-modal="true" aria-labelledby="prize-modal-title">
-    <!-- Modal 內容卡片 -->
-    <div class="modal-content relative bg-gradient-to-br from-[#382626] to-[#1e1c26] text-white w-full max-w-2xl rounded-2xl shadow-2xl text-center p-6 md:p-10 border-t-2 border-red-500/50 overflow-hidden">
+    <div id="prize-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-start sm:items-center justify-center p-4 z-[1000] hidden overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="prize-modal-title">
+      <!-- Modal 內容卡片 -->
+      <div class="modal-content relative bg-gradient-to-br from-[#382626] to-[#1e1c26] text-white w-full max-w-2xl rounded-2xl shadow-2xl text-center p-6 md:p-10 border-t-2 border-red-500/50 my-auto">
         
         <!-- 關閉按鈕 -->
-        <button id="prize-modal-close-btn" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10" aria-label="關閉視窗">
+        <button id="prize-modal-close-btn" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10" aria-label="關閉視窗" onclick="trackClick('modal-prize-close')">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
@@ -142,15 +157,15 @@
         <h2 id="prize-modal-title" class="text-3xl md:text-4xl font-black text-white" style="text-shadow: 0 0 15px rgba(255,255,255,0.3);">
           2025 華碩校園組裝王大賽
         </h2>
-        <p class="text-lg md:text-xl font-bold text-gray-300 mt-2">挑戰你的組裝極限！</p>
+        <p class="text-lg md:text-xl font-bold text-gray-300 mt-2">挑戰你的電腦組裝極限！</p>
         
         <!-- 獎金區塊 -->
         <div class="my-6">
-          <p class="text-xl font-semibold text-gray-300">本屆決賽獎品價值</p>
-          <div class="font-rog font-black text-6xl md:text-8xl lg:text-9xl tracking-tighter text-gradient-gold my-2" style="text-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);">
-            77,000
+          <p class="text-xl font-semibold text-gray-300">決賽獎品總價值</p>
+          <div class="font-rog font-black text-4xl md:text-4xl lg:text-6xl tracking-tighter text-gradient-gold my-2" style="text-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);">
+            $ 70,000
           </div>
-          <p class="text-base text-gray-300">成功入選挑戰賽還有機會獲得萬元通行證!</p>
+          <p class="text-base text-gray-300">晉級挑戰賽 還能獲得價值上萬元【校園菁英通行證】！</p>
         </div>
         
         <!-- 分隔線 -->
@@ -158,14 +173,14 @@
         
         <!-- 報名截止資訊 -->
         <div>
-            <h4 class="text-lg font-semibold text-gray-300 mb-2">報名時間</h4>
+            <h4 class="text-lg font-semibold text-gray-300 mb-2">線上徵選時間</h4>
             <p class="font-poppins font-bold text-4xl text-white">即日起至 10/20</p>
             <p class="text-gray-400 mt-1 text-sm">錯過再等一年！</p>
         </div>
 
         <!-- 行動呼籲按鈕 -->
         <div class="mt-10 flex justify-center">
-          <a href="#intro" id="prize-modal-cta" class="prize-modal-cta-button w-full sm:w-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-10 py-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-105">
+          <a href="#" id="prize-modal-cta" class="prize-modal-cta-button w-full sm:w-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-10 py-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-105" onclick="trackClick('modal-prize-cta-start')">
             我準備好了！
           </a>
         </div>
@@ -182,21 +197,21 @@
             <!-- 桌機版選單 -->
             <div class="hidden md:block">
                 <div class="flex items-baseline space-x-1">
-                    <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">校園電競聯盟</a>
-                    <a href="#intro" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">關於組裝王</a>
-                    <a href="#timeline" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">活動時程</a>
-                    <a href="#participation" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">參與方式</a>
-                    <a href="#rewards" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">冠軍獎勵</a>
-                    <a href="#lineup" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">超強陣容</a>
-                    <a href="#hall-of-fame" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">冠軍殿堂</a>
-                    <a href="#review" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">賽事回顧</a>
-                    <a href="#faq" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">常見問題</a>
+                    <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-alliance')">校園電競聯盟</a>
+                    <a href="#intro" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-about')">關於組裝王</a>
+                    <a href="#timeline" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-timeline')">活動時程</a>
+                    <a href="#participation" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-participation')">參與方式</a>
+                    <a href="#rewards" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-rewards')">冠軍獎勵</a>
+                    <a href="#lineup" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-lineup')">超強陣容</a>
+                    <a href="#hall-of-fame" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-hof')">冠軍殿堂</a>
+                    <a href="#review" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-review')">賽事回顧</a>
+                    <a href="#faq" class="text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors" onclick="trackClick('nav-desktop-faq')">常見問題</a>
                 </div>
             </div>
     
             <!-- 手機版漢堡選單按鈕 -->
             <div class="-mr-2 flex md:hidden">
-                <button id="mobile-menu-button" type="button" class="bg-white/10 inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                <button id="mobile-menu-button" type="button" class="bg-white/10 inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="trackClick('nav-mobile-toggle')">
                     <span class="sr-only">開啟主選單</span>
                     <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -211,15 +226,15 @@
     <!-- 手機版展開選單 -->
     <div class="md:hidden hidden" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#76729d]/95 backdrop-blur-sm">
-            <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">校園電競聯盟</a>
-            <a href="#intro" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">關於組裝王</a>
-            <a href="#timeline" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">活動時程</a>
-            <a href="#participation" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">參與方式</a>
-            <a href="#rewards" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍獎勵</a>
-            <a href="#lineup" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">超強陣容</a>
-            <a href="#hall-of-fame" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">冠軍殿堂</a>
-            <a href="#review" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">賽事回顧</a>
-            <a href="#faq" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium">常見問題</a>
+            <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-alliance')">校園電競聯盟</a>
+            <a href="#intro" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-about')">關於組裝王</a>
+            <a href="#timeline" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-timeline')">活動時程</a>
+            <a href="#participation" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-participation')">參與方式</a>
+            <a href="#rewards" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-rewards')">冠軍獎勵</a>
+            <a href="#lineup" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-lineup')">超強陣容</a>
+            <a href="#hall-of-fame" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-hof')">冠軍殿堂</a>
+            <a href="#review" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-review')">賽事回顧</a>
+            <a href="#faq" class="mobile-menu-link text-gray-200 hover:bg-white/10 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="trackClick('nav-mobile-faq')">常見問題</a>
         </div>
     </div>
   </header>
@@ -250,11 +265,11 @@
       <div class="max-w-[50%] max-w-screen-xl mx-auto px-4 text-center">
           <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8" data-aos="fade-up">
               <!-- 外部連結: 菁英工作坊 (含 UTM) -->
-              <a href="https://rog.asus.com/event/campus_workshop/tw" target="_blank" rel="noopener noreferrer" class="block w-full sm:w-1/2 group">
+              <a href="https://rog.asus.com/event/campus_workshop/tw" target="_blank" rel="noopener noreferrer" class="block w-full sm:w-1/2 group" onclick="trackClick('tab-link-workshop')">
                   <img src="./v1/img/workshop_btn.png" alt="前往報名菁英工作坊" class="w-full h-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_#ab5360]" loading="lazy">
               </a>
               <!-- 當前頁面: 校園組裝王 -->
-              <a href="#" class="block w-full sm:w-1/2 group">
+              <a href="#" class="block w-full sm:w-1/2 group" onclick="trackClick('tab-link-pcdiy')">
                   <img src="./v1/img/pcdiy_btn.png" alt="前往報名校園組裝王" class="w-full h-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_#5e5593]" loading="lazy">
               </a>
           </div>
@@ -284,71 +299,65 @@
           <!-- Grid 容器: 讓左右兩欄等高 -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
               
-              <!-- 左側: 獎品圖片展示 -->
-              <div class="prize-showcase p-6 md:p-8 rounded-2xl shadow-2xl min-h-[300px] md:min-h-[500px] flex items-center justify-center">
-                <!-- 背景裝飾星星 -->
-                <div class="sparkle-star" style="top: 10%; left: 15%; width: 30px; height: 30px; animation-delay: 0s;"></div>
-                <div class="sparkle-star" style="top: 20%; right: 10%; width: 50px; height: 50px; animation-delay: -0.5s;"></div>
-                <div class="sparkle-star" style="bottom: 10%; left: 20%; width: 25px; height: 25px; animation-delay: -1.2s;"></div>
-                <div class="sparkle-star" style="bottom: 15%; right: 18%; width: 40px; height: 40px; animation-delay: -1.8s;"></div>
-                <div class="sparkle-star" style="top: 50%; left: 5%; width: 20px; height: 20px; animation-delay: -0.8s;"></div>
-                <div class="sparkle-star" style="top: 75%; left: 55%; width: 35px; height: 35px; animation-delay: -2.2s;"></div>
-                <div class="relative z-10 w-full transform transition-transform duration-300 hover:scale-105">
-                  <img src="v1/img/price_all.png" alt="ASUS 全系列獎品，包含組裝電腦、電競耳機、鍵盤與滑鼠" class="w-full h-auto object-contain drop-shadow-lg" loading="lazy">
+            <!-- 左側: 獎品圖片展示 (已修改) -->
+            <div class="prize-showcase rounded-2xl shadow-2xl min-h-[300px] md:min-h-[500px] overflow-hidden">
+                <img src="v1/img/price_all.jpg" 
+                     alt="ASUS 全系列獎品，包含組裝電腦、電競耳機、鍵盤與滑鼠" 
+                     class="w-full h-full object-cover transition-transform duration-300 ease-in-out" 
+                     loading="lazy">
+            </div>
+        
+            <!-- 右側: 獎品內容與通行證介紹 (維持不變) -->
+            <div class="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg">
+                <div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-6 text-gray-800"><span class="text-highlight relative">ROG 端上好禮</span></h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 主機+周邊 乙套</span></p></div>
+                        <div class="flex items-start"><span class="text-2xl mr-3">🥈</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">亞軍：</strong><span class="text-gray-700">電競耳機 乙台</span></p></div>
+                        <div class="flex items-start"><span class="text-2xl mr-3">🥉</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">季軍：</strong><span class="text-gray-700">電競鍵盤 乙台</span></p></div>
+                        <div class="flex items-start"><span class="text-2xl mr-3">🏅</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">殿軍：</strong><span class="text-gray-700">電競滑鼠 乙台</span></p></div>
+                        <div class="flex items-center"><span class="text-2xl mr-3">🎟️</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">挑戰賽入選者：</strong><span class="text-gray-700">ROG 菁英通行證 乙張</span></p></div>
+                    </div>
                 </div>
-              </div>
-
-              <!-- 右側: 獎品內容與通行證介紹 -->
-              <div class="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg">
-                  <div>
-                      <h3 class="text-3xl md:text-4xl font-black mb-6 text-gray-800"><span class="text-highlight relative">ROG 端上好禮</span></h3>
-                      <div class="space-y-4">
-                          <div class="flex items-start"><span class="text-2xl mr-3">🏆</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">冠軍：</strong><span class="text-gray-700">Powered by ASUS 主機+周邊 乙套</span></p></div>
-                          <div class="flex items-start"><span class="text-2xl mr-3">🥈</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">亞軍：</strong><span class="text-gray-700">電競耳機 乙台</span></p></div>
-                          <div class="flex items-start"><span class="text-2xl mr-3">🥉</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">季軍：</strong><span class="text-gray-700">電競鍵盤 乙台</span></p></div>
-                          <div class="flex items-start"><span class="text-2xl mr-3">🏅</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">殿軍：</strong><span class="text-gray-700">電競滑鼠 乙台</span></p></div>
-                          <div class="flex items-center"><span class="text-2xl mr-3">🎟️</span><p class="text-xl md:text-2xl"><strong class="font-bold text-gray-900">挑戰賽入選者：</strong><span class="text-gray-700">ROG 菁英通行證 乙張</span></p></div>
-                      </div>
-                  </div>
-              
-                  <!-- 通行證區塊 -->
-                  <div class="mt-12 pt-8 border-t border-gray-300">
-                    <h4 class="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left">關於 ROG 菁英通行證</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                      <div class="card-shine-container mx-auto w-4/5 md:w-full">
-                        <img src="v1/img/price5.png" alt="ROG 菁英通行證卡片示意圖" class="w-full h-auto object-contain drop-shadow-lg" loading="lazy">
-                      </div>
-                      <div class="md:col-span-2 space-y-3">
-                          <p class="text-gray-600 font-medium">成功入選挑戰賽，即可獲得「ROG 菁英通行證」，解鎖玩家專屬的尊榮福利！</p>
-                          <ul class="list-disc list-inside space-y-2 text-gray-700 font-semibold">
-                              <li>新品搶先體驗</li>
-                              <li>活動優先參與權</li>
-                              <li>專屬購機回饋金</li>
-                          </ul>
-                          
-                          <!-- CTA 按鈕組 -->
-                          <div class="pt-4 flex flex-wrap items-center gap-4">
-                            <!-- 按鈕一：查看完整福利 (觸發 Modal) -->
-                            <button id="open-pass-modal" type="button" class="inline-flex items-center px-6 py-3 font-bold text-white bg-gradient-to-r from-[#c59eb8] to-[#4c467e] rounded-lg shadow-md hover:scale-105 transform transition duration-300">
-                              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                              查看完整福利
-                            </button>
-                            <!-- 按鈕二：領取回饋金 -->
-                            <a href="https://www.asus.com/tw/events/infoM/activity_2025Campus_pass" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 font-bold text-white bg-gradient-to-r from-[#c59eb8] to-[#4c467e] rounded-lg shadow-md hover:scale-105 transform transition duration-300">
-                              <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61483 7.84006L12.0006 0.5L15.3864 7.84006L23.4133 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26ZM12.0006 15.9684L16.2473 18.3451L15.2988 13.5718L18.8718 10.2918L14.039 9.69434L12.0006 5.27502L9.96221 9.69434L5.12942 10.2918L8.70239 13.5718L7.75394 18.3451L12.0006 15.9684Z"></path></svg>
-                              領取回饋金
-                            </a>
-                          </div>
-                      </div>
+            
+                <!-- 通行證區塊 -->
+                <div class="mt-12 pt-8 border-t border-gray-300">
+                  <h4 class="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left">關於 ROG 菁英通行證</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="card-shine-container mx-auto w-4/5 md:w-full">
+                      <img src="v1/img/price5.png" alt="ROG 菁英通行證卡片示意圖" class="w-full h-auto object-contain drop-shadow-lg" loading="lazy">
+                    </div>
+                    <div class="md:col-span-2 space-y-3">
+                        <p class="text-gray-600 font-medium">成功入選挑戰賽，即可獲得「ROG 菁英通行證」，解鎖玩家專屬的尊榮福利！</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 font-semibold">
+                            <li>新品搶先體驗</li>
+                            <li>活動優先參與權</li>
+                            <li>專屬購機回饋金</li>
+                        </ul>
+                        
+                        <!-- CTA 按鈕組 -->
+                        <div class="pt-4 flex flex-wrap items-center gap-4">
+                          <!-- 按鈕一：查看完整福利 (觸發 Modal) -->
+                          <button id="open-pass-modal" type="button" class="inline-flex items-center px-6 py-3 font-bold text-white bg-gradient-to-r from-[#c59eb8] to-[#4c467e] rounded-lg shadow-md hover:scale-105 transform transition duration-300" onclick="trackClick('button-pass-modal-open')">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            查看完整福利
+                          </button>
+                          <!-- 按鈕二：領取回饋金 -->
+                          <a href="https://www.asus.com/tw/events/infoM/activity_2025Campus_pass" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 font-bold text-white bg-gradient-to-r from-[#c59eb8] to-[#4c467e] rounded-lg shadow-md hover:scale-105 transform transition duration-300" onclick="trackClick('link-pass-rebate')">
+                            <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61483 7.84006L12.0006 0.5L15.3864 7.84006L23.4133 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26ZM12.0006 15.9684L16.2473 18.3451L15.2988 13.5718L18.8718 10.2918L14.039 9.69434L12.0006 5.27502L9.96221 9.69434L5.12942 10.2918L8.70239 13.5718L7.75394 18.3451L12.0006 15.9684Z"></path></svg>
+                            領取回饋金
+                          </a>
+                        </div>
                     </div>
                   </div>
-                
-                  <!-- 備註 -->
-                  <div class="mt-8 pt-4 border-t border-gray-300">
-                      <p class="text-sm text-gray-600 italic">※ 圖片為示意圖，獎品以最終實際公告為主，主辦單位保留更動權利。</p>
-                  </div>
-              </div>
-          </div>
+                </div>
+              
+                <!-- 備註 -->
+                <div class="mt-8 pt-4 border-t border-gray-300">
+                    <p class="text-sm text-gray-600 italic">※ 圖片為示意圖，獎品以最終實際公告為主，主辦單位保留更動權利。</p>
+                </div>
+            </div>
+        </div>
       </div>
     </section>
     
@@ -423,15 +432,15 @@
                 <!-- Tab Navigation -->
                 <div class="border-b border-white/20 mb-8">
                     <div class="flex justify-start md:justify-center -mx-4 px-4 overflow-x-auto touch-scroll-priority">
-                        <button type="button" class="phase-tab active flex-shrink-0" data-target="#content-phase1">
+                        <button type="button" class="phase-tab active flex-shrink-0" data-target="#content-phase1" onclick="trackClick('tab-phase-1')">
                             <span class="text-xs md:text-lg">STAGE 01</span>
                             <span class="block text-base md:text-xl font-bold">線上徵選</span>
                         </button>
-                        <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase2">
+                        <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase2" onclick="trackClick('tab-phase-2')">
                             <span class="text-xs md:text-lg">STAGE 02</span>
                             <span class="block text-base md:text-xl font-bold">總部挑戰賽</span>
                         </button>
-                        <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase3">
+                        <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase3" onclick="trackClick('tab-phase-3')">
                             <span class="text-sm md:text-lg">FINAL STAGE</span>
                             <span class="block text-base md:text-xl font-bold">決戰組裝王</span>
                         </button>
@@ -446,7 +455,7 @@
                             <p class="text-white font-semibold">活動時間：8/25 - 10/20</p>
                             <p class="text-xl md:text-2xl mt-2 text-white font-bold">展現你的 DIY 熱情與經驗，爭取進入第二階段的 9 位名額！</p>
                             <div class="mt-8">
-                                <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="cta-pulse-button inline-block text-white font-bold text-xl px-10 py-4 rounded-full bg-gradient-to-r from-[#c59eb8] to-[#4c467e] shadow-lg transition-transform duration-300 hover:scale-105">
+                                <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="cta-pulse-button inline-block text-white font-bold text-xl px-10 py-4 rounded-full bg-gradient-to-r from-[#c59eb8] to-[#4c467e] shadow-lg transition-transform duration-300 hover:scale-105" onclick="trackClick('cta-register-main')">
                                     立即報名，登頂組裝殿堂！
                                 </a>
                             </div>
@@ -455,7 +464,7 @@
                             <div class="bg-white/90 p-6 rounded-lg shadow-lg h-full border border-black/10">
                                 <h3 class="font-bold text-xl mb-3 text-gray-900">📝 報名方式 & 資格</h3>
                                 <ul class="list-disc list-inside space-y-2 text-gray-700">
-                                  <li>立即填寫 <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800 transition">此問卷</a> 進行報名。</li>
+                                  <li>立即填寫 <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800 transition" onclick="trackClick('link-register-form-inline')">此問卷</a> 進行報名。</li>
                                   <li>資格：在學學生，需提供在學證明或學生證。</li>
                                   <li>徵選方式：依據線上報名填寫資料完整性及加分項目總分合計。</li>
                                   <li>活動小組將於 10/24(五) 起陸續寄發入選通知，請務必回信確認參加，逾期未回視同放棄，名額將遞補。</li>
@@ -472,7 +481,7 @@
                             </div>
                             <!-- 加分項目 (可折疊) -->
                             <div class="md:col-span-2 bg-white/90 rounded-lg shadow-lg border border-black/10">
-                                <button id="accordion-button-phase1" type="button" class="accordion-trigger w-full flex justify-between items-center p-4 text-left font-bold text-xl text-gray-900">
+                                <button id="accordion-button-phase1" type="button" class="accordion-trigger w-full flex justify-between items-center p-4 text-left font-bold text-xl text-gray-900" onclick="trackClick('accordion-phase1-bonus')">
                                   <span>🌟 加分項</span>
                                   <svg class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
@@ -481,9 +490,9 @@
                                     <table class="w-full text-left text-sm text-gray-700">
                                         <thead class="bg-black/5"><tr><th class="p-2 font-semibold text-gray-800">加分項目</th><th class="p-2 font-semibold text-gray-800">分數</th><th class="p-2 font-semibold text-gray-800">說明</th></tr></thead>
                                         <tbody>
-                                            <tr class="border-b border-black/10"><td class="p-2">按讚 ROG 粉絲團</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">連結</a> 前往按讚 ROG 官方粉絲專頁。</td></tr>
-                                            <tr class="border-b border-black/10"><td class="p-2">加入 ROG玩家基地</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">連結</a> 加入 ROG 官方社團。</td></tr>
-                                            <tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 <a href="https://tw.rog.gg/campus_post" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">ROG 粉絲團活動貼文</a>，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
+                                            <tr class="border-b border-black/10"><td class="p-2">按讚 ROG 粉絲團</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800" onclick="trackClick('link-bonus-rog-fanpage')">連結</a> 前往按讚 ROG 官方粉絲專頁。</td></tr>
+                                            <tr class="border-b border-black/10"><td class="p-2">加入 ROG玩家基地</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800" onclick="trackClick('link-bonus-rog-group')">連結</a> 加入 ROG 官方社團。</td></tr>
+                                            <tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 <a href="https://tw.rog.gg/campus_post" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800" onclick="trackClick('link-bonus-rog-post')">ROG 粉絲團活動貼文</a>，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">創意加分 (圖文)</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">創作一篇含「個人與主機合照」的短圖文，分享於個人社群平台，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">創意加分 (影片)</td><td class="p-2 font-bold text-red-600">+20分</td><td class="p-2">結合自身 DIY PC 的經歷、故事、學校等元素，拍攝一部「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台，影片中需要出現個人 DIY PC 電腦，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10">
@@ -556,9 +565,9 @@
                       <h3 class="text-3xl font-black text-gray-800">冠軍獎勵</h3>
                   </div>
                   <ul class="space-y-5">
-                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>Powered by ASUS 組裝電腦</strong> — 親手打造的夢幻戰機</p></li>
-                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>KOL 影片拍攝</strong> — 與年度大使同框，一戰成名</p></li>
-                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>ROG 菁英通行證</strong> — 獨享限定活動與專屬福利</p></li>
+                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>Powered by ASUS 組裝電腦</strong> — 精心設計的夢幻戰機</p></li>
+                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>全套電競裝備</strong> — 讓您稱霸電競領域，一戰成名</p></li>
+                      <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>ROG 菁英通行證</strong> — 優先出席限定活動並享專屬福利</p></li>
                   </ul>
               </div>
 
@@ -571,6 +580,7 @@
                       <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>品牌推廣</strong> — 積極分享 ROG 品牌精神與產品優勢</p></li>
                       <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>內容創作</strong> — 撰寫活動心得與產品深度體驗文</p></li>
                       <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>活動參與</strong> — 視品牌需求出席線下活動或影片拍攝</p></li>
+                      
                   </ul>
               </div>
           </div>
@@ -599,7 +609,7 @@
                       <p class="text-gray-500 font-medium mt-1 mb-4">世界超頻紀錄王者</p>
                       <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
                       <div class="flex-grow flex flex-col justify-center items-center min-h-[100px]">
-                        <a href="https://esurvey.asus.com/?id=9926&code=bf9b353d-4456-48b5-8db4-70db1d38f966&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300">
+                        <a href="https://esurvey.asus.com/?id=9926&code=bf9b353d-4456-48b5-8db4-70db1d38f966&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="trackClick('link-kol-bingo-workshop')">
                           水冷超頻 AI 競化論
                         </a>
                       </div>
@@ -616,7 +626,7 @@
                       <p class="text-gray-500 font-medium mt-1 mb-4">PC 改裝世界冠軍</p>
                       <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
                       <div class="flex-grow flex flex-col justify-center items-center min-h-[100px]">
-                        <a href="https://esurvey.asus.com/?id=9926&code=bf9b353d-4456-48b5-8db4-70db1d38f966&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300">
+                        <a href="https://esurvey.asus.com/?id=9926&code=bf9b353d-4456-48b5-8db4-70db1d38f966&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="trackClick('link-kol-akmod-workshop')">
                           水冷超頻 AI 競化論
                         </a>
                       </div>
@@ -633,7 +643,7 @@
                       <p class="text-gray-500 font-medium mt-1 mb-4">電競短影音流量密碼</p>
                       <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
                        <div class=" flex-grow flex flex-col justify-center items-center min-h-[100px]">
-                        <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300">
+                        <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="trackClick('link-kol-blue-tour')">
                           校園巡迴講座限定
                         </a>
                       </div>
@@ -650,7 +660,7 @@
                       <p class="text-gray-500 font-medium mt-1 mb-4">即將揭曉</p>
                       <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
                       <div class=" flex-grow flex flex-col justify-center items-center min-h-[100px]">
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="trackClick('link-kol-mystery-pcdiy')">
                           2025 校園組裝王競賽
                         </a>
                       </div>
@@ -707,7 +717,7 @@
                     <p class="text-lg font-semibold">2025 Champion</p>
                     <h3 class="text-2xl md:text-3xl font-black mt-2">下一個...就是你！</h3>
                 </div>
-                <a href="#register" class="absolute inset-0 z-10" aria-label="立即報名，成為下一位冠軍"></a>
+                <a href="#register" class="absolute inset-0 z-10" aria-label="立即報名，成為下一位冠軍" onclick="trackClick('cta-hof-register')"></a>
             </div>
           </div>
       </div>
@@ -782,7 +792,7 @@
           <div class="space-y-4" >
               <!-- FAQ Item -->
               <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition" onclick="trackClick('faq-q1-video')">
                       <span class="text-lg">Q: 加分項目中，我不會拍片或剪輯，做「創意影片」會不會很吃虧？</span>
                       <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -794,7 +804,7 @@
               </div>
               <!-- FAQ Item -->
               <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition" onclick="trackClick('faq-q2-criteria')">
                       <span class="text-lg">Q: 決賽的理線、燈效評分標準是什麼？</span>
                       <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -806,7 +816,7 @@
               </div>
               <!-- FAQ Item -->
               <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                  <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition" onclick="trackClick('faq-q3-mission')">
                       <span class="text-lg">Q: 成為冠軍後的「使命」具體要做什麼？會佔用很多時間嗎？</span>
                       <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -821,7 +831,7 @@
               </div>
               <!-- FAQ Item -->
               <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-                <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition" onclick="trackClick('faq-q4-team')">
                     <span class="text-lg">Q: 可不可以和同學一起組隊報名？</span>
                     <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                 </button>
@@ -834,14 +844,14 @@
               </div>
               <!-- FAQ Item -->
               <div class="faq-item bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-                <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition">
+                <button type="button" class="faq-trigger w-full flex justify-between items-center text-left p-5 font-semibold text-gray-800 hover:bg-gray-100 transition" onclick="trackClick('faq-q5-beginner')">
                     <span class="text-lg">Q: 我對電腦組裝還不太熟，甚至沒組過，這樣也能報名嗎？</span>
                     <svg class="faq-icon h-6 w-6 text-gray-500 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
                     <div class="p-5 pt-0 text-gray-700">
                         <p class="mb-3">
-                            絕對歡迎！「校園組裝王」不僅是技術競賽，更是<strong class="text-red-600">熱情的展現</strong>。ROG 一直致力於推廣 PC DIY 文化，像是在今年我們就舉辦了「<a href="https://rog.asus.com/event/campus_workshop/tw?utm_source=pcdiy_page&utm_medium=faq_link&utm_campaign=rog_codex_2025" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800 transition">ROG 校園菁英工作坊</a>」，邀請世界冠軍親自帶領同學從零入門。
+                            絕對歡迎！「校園組裝王」不僅是技術競賽，更是<strong class="text-red-600">熱情的展現</strong>。ROG 一直致力於推廣 PC DIY 文化，像是在今年我們就舉辦了「<a href="https://rog.asus.com/event/campus_workshop/tw?utm_source=pcdiy_page&utm_medium=faq_link&utm_campaign=rog_codex_2025" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800 transition" onclick="trackClick('link-faq-workshop')">ROG 校園菁英工作坊</a>」，邀請世界冠軍親自帶領同學從零入門。
                         </p>                  
                     </div>
                 </div>
@@ -862,7 +872,7 @@
               <div class="text-center"><span id="minutes" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">分</span></div>
               <div class="text-center"><span id="seconds" class="block font-bold text-4xl md:text-6xl text-pink-400">00</span><span class="text-xs md:text-sm text-gray-400">秒</span></div>
           </div>
-          <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-xl btn-hover">立即報名，錯過再等一年！</a>
+          <a href="https://eSurvey.asus.com/?id=9942&code=19ab0fde-468c-4393-aa87-f9f37e514003&lang=zh_TW" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-xl btn-hover" onclick="trackClick('cta-register-final')">立即報名，錯過再等一年！</a>
       </div>
     </section>
 
@@ -874,7 +884,7 @@
     <!-- Modal: ROG 菁英通行證 -->
     <div id="pass-modal" class="fixed inset-0 bg-black/70 flex items-start sm:items-center justify-center p-4 z-[999] hidden font-sans overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="bg-gradient-to-br from-[#382626] to-[#1e1c26] text-white rounded-lg shadow-xl w-full max-w-2xl relative border-t-2 border-red-500/50 overflow-hidden my-auto">
-            <button id="close-pass-modal" type="button" class="absolute top-2 right-2 text-gray-400 hover:text-white transition z-20">
+            <button id="close-pass-modal" type="button" class="absolute top-2 right-2 text-gray-400 hover:text-white transition z-20" onclick="trackClick('modal-pass-close')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 <span class="sr-only">關閉視窗</span>
             </button>
@@ -884,7 +894,7 @@
                 <div class="space-y-6">
                     <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">1</div><div><strong class="block text-lg md:text-xl font-semibold">新品搶先體驗</strong><span class="text-gray-300">每季皆有機會優先開箱 ROG 最新產品，直接寄到你家試用，第一手體驗最酷最潮的 ROG 新品！分享使用心得，還有精美好禮等你拿！</span></div></div>
                     <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">2</div><div><strong class="block text-lg md:text-xl font-semibold">活動優先權</strong><span class="text-gray-300">年底的 ROG DAY 等熱門活動皆名額有限、報名踴躍，校園菁英可享專屬保障名額 (每場高達 5 名)，讓你不再錯過任何精彩現場！</span></div></div>
-                    <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">3</div><div><strong class="block text-lg md:text-xl font-semibold">專屬購機回饋金</strong><span class="text-gray-300">享有 專屬菁英購機回饋金 600 元 × 30 組！於各大通路購買指定 ROG 產品時，每件商品可折抵一次 600 元（需至<a href="https://www.asus.com/tw/events/infoM/activity_2025Campus_pass" target="_blank" class="text-blue-600 underline font-semibold hover:text-blue-800 transition">活動頁面</a>登錄領取回饋金），讓你輕鬆用超值價格入手全新 ROG 裝備。不只自己享好康，還能分享給親友、同學一起拿優惠！一年內使用滿 10 組，還可再延長通行證效期一年（限延長一次）。</span></div></div>
+                    <div class="flex items-start"><div class="flex-shrink-0 w-8 h-8 mr-4 bg-white/10 rounded-full flex items-center justify-center font-bold text-lg">3</div><div><strong class="block text-lg md:text-xl font-semibold">專屬購機回饋金</strong><span class="text-gray-300">享有 專屬菁英購機回饋金 600 元 × 30 組！於各大通路購買指定 ROG 產品時，每件商品可折抵一次 600 元（需至<a href="https://www.asus.com/tw/events/infoM/activity_2025Campus_pass" target="_blank" class="text-blue-600 underline font-semibold hover:text-blue-800 transition" onclick="trackClick('link-pass-modal-rebate-page')">活動頁面</a>登錄領取回饋金），讓你輕鬆用超值價格入手全新 ROG 裝備。不只自己享好康，還能分享給親友、同學一起拿優惠！一年內使用滿 10 組，還可再延長通行證效期一年（限延長一次）。</span></div></div>
                 </div>
                 <hr class="border-gray-700 my-8">
                 <div>
@@ -904,7 +914,7 @@
       <div class="bg-white rounded-lg shadow-xl w-full max-w-lg relative max-h-[80vh] flex flex-col">
           <div class="flex justify-between items-center p-4 border-b">
               <h3 id="school-modal-title" class="text-xl font-bold text-gray-800">ROG 盟校列表</h3>
-              <button id="close-school-modal-button" type="button" class="text-gray-400 hover:text-gray-700 transition">
+              <button id="close-school-modal-button" type="button" class="text-gray-400 hover:text-gray-700 transition" onclick="trackClick('modal-school-close')">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                   <span class="sr-only">關閉視窗</span>
               </button>
@@ -941,7 +951,7 @@
    <!-- 區塊: 活動條款與注意事項 (可折疊) -->
    <section id="terms" class="w-full bg-gray-200">
     <div class="max-w-7xl mx-auto">
-        <button id="terms-accordion-button" type="button" class="relative w-full flex justify-center items-center p-6 text-left transition duration-300 hover:bg-gray-300" aria-expanded="false" aria-controls="terms-content">
+        <button id="terms-accordion-button" type="button" class="relative w-full flex justify-center items-center p-6 text-left transition duration-300 hover:bg-gray-300" aria-expanded="false" aria-controls="terms-content" onclick="trackClick('accordion-terms-toggle')">
             <h2 class="text-xl md:text-2xl font-bold text-gray-700">活動條款與注意事項</h2>
             <svg id="terms-accordion-icon" class="absolute right-6 h-6 w-6 text-gray-600 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1005,10 +1015,10 @@
     <div class="max-w-7xl mx-auto px-6 text-center sm:text-left sm:flex sm:justify-between items-center">
         <p class="text-sm">© ASUSTeK Computer Inc. All rights reserved.</p>
         <div class="flex justify-center items-center gap-4 mt-4 sm:mt-0">
-          <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Facebook 粉絲專頁"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.198 21.5h4v-8.01h2.667l.267-2.99H13.198v-1.5c0-.996.193-1.333 1.333-1.333h1.333v-2.667H13.5C10.167 6.5 9.198 8.167 9.198 9.998v1.503H6.865v2.99h2.333v8.01Z"></path></svg></a>
-          <a href="https://www.instagram.com/rog_taiwan/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Instagram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.013 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.013-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.013-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.883 4.883 0 0 1 1.153-1.772A4.915 4.915 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path></svg></a>
-          <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Official-Site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm">使用條款</a>
-          <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Privacy_Policy/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm">隱私權保護政策</a>
+          <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Facebook 粉絲專頁" onclick="trackClick('footer-social-facebook')"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.198 21.5h4v-8.01h2.667l.267-2.99H13.198v-1.5c0-.996.193-1.333 1.333-1.333h1.333v-2.667H13.5C10.167 6.5 9.198 8.167 9.198 9.998v1.503H6.865v2.99h2.333v8.01Z"></path></svg></a>
+          <a href="https://www.instagram.com/rog_taiwan/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Instagram" onclick="trackClick('footer-social-instagram')"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.013 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.013-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.013-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.883 4.883 0 0 1 1.153-1.772A4.915 4.915 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path></svg></a>
+          <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Official-Site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm" onclick="trackClick('footer-link-terms')">使用條款</a>
+          <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Privacy_Policy/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm" onclick="trackClick('footer-link-privacy')">隱私權保護政策</a>
         </div>
     </div>
   </footer>
@@ -1018,5 +1028,4 @@
   <script src="v1/js/script.js" defer></script>
 
 </body>
-
 </html>

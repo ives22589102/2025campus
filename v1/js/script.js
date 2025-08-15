@@ -1,3 +1,25 @@
+
+/**
+ * 處理按鈕點擊追蹤事件
+ * @param {string} identifier - 用於在分析工具中識別按鈕的唯一字串
+ */
+function trackClick(identifier) {
+  console.log('Button Clicked ->', identifier); // 在開發者工具中顯示日誌，方便除錯
+
+  // 檢查 dataLayer 是否存在，如果不存在則初始化
+  window.dataLayer = window.dataLayer || [];
+  
+  // 推送一個事件到 Google Tag Manager 的 dataLayer
+  window.dataLayer.push({
+    'event': 'button_click',     // 自訂事件名稱，GTM 中會用這個來觸發代碼
+    'button_id': identifier      // 被點擊的按鈕識別碼，可以在 GTM 中建立變數來抓取
+  });
+}
+
+
+// ============================================================
+//  頁面載入後執行的主要腳本
+// ============================================================
 window.addEventListener('load', () => {
       // --- 1. AOS Initialization ---
       AOS.init({
@@ -211,4 +233,4 @@ window.addEventListener('load', () => {
           });
         }
       });
-    });
+});
