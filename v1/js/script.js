@@ -1,19 +1,18 @@
-
 /**
- * 處理按鈕點擊追蹤事件
- * @param {string} identifier - 用於在分析工具中識別按鈕的唯一字串
+ * @param {Event} event 
  */
-function trackClick(identifier) {
-  console.log('Button Clicked ->', identifier); // 在開發者工具中顯示日誌，方便除錯
-
-  // 檢查 dataLayer 是否存在，如果不存在則初始化
-  window.dataLayer = window.dataLayer || [];
+function openSchoolModal(event) {
   
-  // 推送一個事件到 Google Tag Manager 的 dataLayer
-  window.dataLayer.push({
-    'event': 'button_click',     // 自訂事件名稱，GTM 中會用這個來觸發代碼
-    'button_id': identifier      // 被點擊的按鈕識別碼，可以在 GTM 中建立變數來抓取
-  });
+  if (event) {
+    event.preventDefault();
+  }
+  
+  const modal = document.getElementById('school-list-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+   
+    document.body.style.overflow = 'hidden'; 
+  }
 }
 
 
@@ -201,14 +200,12 @@ window.addEventListener('load', () => {
         });
       });
 
-      // --- 10. School List Modal Logic ---
-      const openSchoolModalBtn = document.getElementById('open-school-modal-button');
+      // --- 10. School List Modal Logic  ---
+      
       const closeSchoolModalBtn = document.getElementById('close-school-modal-button');
       const schoolListModal = document.getElementById('school-list-modal');
       if (schoolListModal) {
-          const openModal = () => { schoolListModal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
           const closeModal = () => { schoolListModal.classList.add('hidden'); document.body.style.overflow = ''; };
-          if (openSchoolModalBtn) openSchoolModalBtn.addEventListener('click', openModal);
           if (closeSchoolModalBtn) closeSchoolModalBtn.addEventListener('click', closeModal);
           schoolListModal.addEventListener('click', (e) => { if (e.target === schoolListModal) closeModal(); });
           document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !schoolListModal.classList.contains('hidden')) closeModal(); });
