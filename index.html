@@ -112,7 +112,7 @@
     
     <!-- 外部資源載入 -->
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+   
     
     <!-- AOS (Animate On Scroll) Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -298,13 +298,13 @@
 
           <!-- Grid 容器: 讓左右兩欄等高 -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
-              
-            <!-- 左側: 獎品圖片展示 (已修改) -->
-            <div class="prize-showcase rounded-2xl shadow-2xl min-h-[300px] md:min-h-[500px] overflow-hidden">
-                <img src="v1/img/price_all.jpg" 
-                     alt="ASUS 全系列獎品，包含組裝電腦、電競耳機、鍵盤與滑鼠" 
-                     class="w-full h-full object-cover transition-transform duration-300 ease-in-out" 
-                     loading="lazy">
+                        
+            <!-- 步驟1: 將左側區塊設為 1:1 正方形 -->
+            <div class="prize-showcase rounded-2xl shadow-2xl overflow-hidden aspect-square lg:self-center">
+                <img src="v1/img/prize_all.jpg" 
+                    alt="ASUS 全系列獎品，包含組裝電腦、電競耳機、鍵盤與滑鼠" 
+                    class="w-full h-full object-cover transition-transform duration-300 ease-in-out" 
+                    loading="lazy">
             </div>
         
             <!-- 右側: 獎品內容與通行證介紹 (維持不變) -->
@@ -643,9 +643,15 @@
                       <p class="text-gray-500 font-medium mt-1 mb-4">電競短影音流量密碼</p>
                       <div class="w-12 h-0.5 bg-[#a74a57] mx-auto"></div>
                        <div class=" flex-grow flex flex-col justify-center items-center min-h-[100px]">
-                        <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="trackClick('link-kol-blue-tour')">
-                          校園巡迴講座限定
-                        </a>
+                        <a href="https://asus.feversocial.com/ASUSOPMKT/183#%E9%97%9C%E6%96%BC_ROG%E6%A0%A1%E5%9C%92%E9%9B%BB%E7%AB%B6%E8%81%AF%E7%9B%9F" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-[#a74a57] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#8f3e4a] transition-colors duration-300" onclick="window.dataLayer.push({
+                          'event': 'data_layer_event',
+                          'event_name_ga4': 'campus_tour_click',  // 自訂一個符合 GA4 命名規則的事件名稱
+                          'event_category_DL': 'Campaign Promotion', // 事件類別，例如：行銷活動推廣
+                          'event_action_DL': 'click',             // 動作是點擊
+                          'event_label_DL': '校園巡迴講座限定'      // 標籤就是按鈕上的文字
+                      });">
+                      校園巡迴講座限定
+                      </a>
                       </div>
                   </div>
               </article>
