@@ -275,11 +275,17 @@
   .right-4 {
     right: calc(var(--spacing) * 4);
   }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
   .right-6 {
     right: calc(var(--spacing) * 6);
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
+  }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -295,6 +301,9 @@
   }
   .z-50 {
     z-index: 50;
+  }
+  .z-\[100\] {
+    z-index: 100;
   }
   .z-\[999\] {
     z-index: 999;
@@ -530,6 +539,9 @@
   .list-inside {
     list-style-position: inside;
   }
+  .list-decimal {
+    list-style-type: decimal;
+  }
   .list-disc {
     list-style-type: disc;
   }
@@ -566,6 +578,9 @@
   .justify-start {
     justify-content: flex-start;
   }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
@@ -574,6 +589,9 @@
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
   }
   .space-y-1 {
     :where(& > :not(:last-child)) {
@@ -715,6 +733,9 @@
       border-color: color-mix(in oklab, var(--color-black) 10%, transparent);
     }
   }
+  .border-gray-200 {
+    border-color: var(--color-gray-200);
+  }
   .border-gray-300 {
     border-color: var(--color-gray-300);
   }
@@ -723,6 +744,9 @@
   }
   .border-gray-700 {
     border-color: var(--color-gray-700);
+  }
+  .border-gray-800 {
+    border-color: var(--color-gray-800);
   }
   .border-red-500\/50 {
     border-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 50%, transparent);
@@ -1400,11 +1424,6 @@
       padding-inline: calc(var(--spacing) * 6);
     }
   }
-  .sm\:text-left {
-    @media (width >= 40rem) {
-      text-align: left;
-    }
-  }
   .sm\:text-3xl {
     @media (width >= 40rem) {
       font-size: var(--text-3xl);
@@ -1970,7 +1989,6 @@
 }
 
 
-
 /* --- 1. FONTS & BASIC SETUP --- */
 @font-face {
   font-family: 'ROGFonts-Regular';
@@ -2346,3 +2364,166 @@ p {
   }
 }
 
+/* --- 11. SOCIAL SHARE WIDGET (Collapsible) --- */
+#social-share-widget .share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.share-btn.line svg {
+  transform: scale(1.8);
+}
+
+#social-share-widget .share-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#social-share-widget .share-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Platform specific colors */
+.share-btn.facebook { background-color: #1877F2; }
+.share-btn.twitter { background-color: #000000; }
+.share-btn.line { background-color: #06C755; }
+.share-btn.copy-link { background-color: #95a5a6; }
+.share-btn.threads { background-color: #000000; } 
+
+/* Main toggle button style */
+.share-btn.main-btn {
+  background-color: #D70026; /* ROG Red */
+  z-index: 10;
+}
+.main-btn .share-icon, .main-btn .close-icon {
+  position: absolute;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.main-btn .close-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Options container and animation */
+.share-options {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+.share-options .share-btn {
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Active (Expanded) state */
+#social-share-widget.active .share-options {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#social-share-widget.active .share-options .share-btn {
+  transform: scale(1);
+}
+/* Staggered animation delay */
+#social-share-widget.active .share-options .share-btn:nth-child(1) { transition-delay: 0.2s; }
+#social-share-widget.active .share-options .share-btn:nth-child(2) { transition-delay: 0.15s; }
+#social-share-widget.active .share-options .share-btn:nth-child(3) { transition-delay: 0.1s; }
+#social-share-widget.active .share-options .share-btn:nth-child(4) { transition-delay: 0.05s; }
+
+#social-share-widget.active .main-btn {
+  transform: rotate(360deg);
+}
+#social-share-widget.active .main-btn .share-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+#social-share-widget.active .main-btn .close-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Copy link button feedback */
+.share-btn.copy-link .copied-feedback {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: bold;
+  background-color: #2ecc71; color: white;
+  opacity: 0; transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.share-btn.copy-link.copied .copied-feedback { opacity: 1; }
+.share-btn.copy-link.copied .copy-icon { opacity: 0; }
+
+
+#content-phase1 table tbody td {
+  vertical-align: middle; 
+}
+
+
+#content-phase1 table tbody tr td:nth-child(1),
+#content-phase1 table tbody tr td:nth-child(2) {
+  white-space: nowrap; 
+}
+
+/* --- Scoring Badge for Application Form --- */
+.score-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem; 
+  font-size: 0.8rem;      
+  font-weight: 700;       
+  border-radius: 9999px; 
+  flex-shrink: 0;         
+  line-height: 1.2;       
+}
+
+/* --- 12. ENHANCED FOOTER STYLES --- */
+.footer-section-title {
+  color: #a0aec0; 
+  font-size: 0.875rem; 
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem; 
+}
+
+.partner-logos {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  justify-content: center; 
+}
+
+
+@media (min-width: 768px) {
+  .partner-logos {
+    justify-content: flex-start;
+  }
+}
+
+.partner-logos img {
+  max-height: 40px; 
+  width: auto;
+  filter: grayscale(100%) brightness(1.5); 
+  transition: filter 0.3s ease;
+  opacity: 0.8;
+}
+
+.partner-logos img:hover {
+  filter: none; 
+  opacity: 1;
+}

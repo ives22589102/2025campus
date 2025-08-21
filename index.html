@@ -121,6 +121,8 @@
     <!-- Swiper.js (輪播元件) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     
+  
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,6 +133,9 @@
   
   </head>
 <body class="overflow-x-hidden">
+
+   
+  
 
   <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJRLM8"
@@ -302,7 +307,7 @@
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
           <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
               <p class="max-w-5xl mx-auto text-gray-800 leading-relaxed text-lg md:text-2xl font-semibold">
-                  華碩校園組裝王是專為學生打造的電腦組裝競賽，透過<span class="text-highlight relative font-bold">三階段挑戰</span>，尋找最強的 DIY 王者！<br>
+                  華碩校園組裝王是專為學生打造的<span class="text-highlight relative font-bold">電腦組裝競賽</span>，透過<span class="text-highlight relative font-bold">三階段挑戰</span>，尋找最強的 DIY 王者！<br>
                   從線上報名到實戰組裝，每一步都是對技術與熱情的考驗。<br>
                   玩家除了可以與眾多組裝高手一決高下，展現你的硬實力，還有機會把<span class="text-highlight relative font-bold">萬元好禮帶回家</span>！
               </p>
@@ -406,7 +411,7 @@
             <div class="timeline-pin-line"></div>
             <div class="timeline-pin-desc">
               <time datetime="2025-11-15" class="timeline-pin-date">11/15 (六)</time>
-              <h4 class="font-bold">總部挑戰賽</h4>
+              <h4 class="font-bold">挑戰賽</h4>
               <p>地點：華碩總部</p>
             </div>
           </div>
@@ -418,7 +423,7 @@
             <div class="timeline-pin-line"></div>
             <div class="timeline-pin-desc">
               <time datetime="2025-12-20" class="timeline-pin-date">12/20 (六)</time>
-              <h4 class="font-bold">決戰組裝王</h4>
+              <h4 class="font-bold">決賽</h4>
               <p>地點：Gamforce 現場</p>
             </div>
           </div>
@@ -450,11 +455,11 @@
                         </button>
                         <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase2" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'tab_click','event_category_DL':'Tab Navigation','event_action_DL':'click','event_label_DL':'階段二：總部挑戰賽'});">
                             <span class="text-xs md:text-lg">STAGE 02</span>
-                            <span class="block text-base md:text-xl font-bold">總部挑戰賽</span>
+                            <span class="block text-base md:text-xl font-bold">挑戰賽</span>
                         </button>
                         <button type="button" class="phase-tab flex-shrink-0" data-target="#content-phase3" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'tab_click','event_category_DL':'Tab Navigation','event_action_DL':'click','event_label_DL':'階段三：決戰組裝王'});">
                             <span class="text-sm md:text-lg">FINAL STAGE</span>
-                            <span class="block text-base md:text-xl font-bold">決戰組裝王</span>
+                            <span class="block text-base md:text-xl font-bold">決賽</span>
                         </button>
                     </div>
                 </div>
@@ -482,19 +487,50 @@
                                   <li>活動小組將於 10/24(五) 起陸續寄發入選通知，請務必回信確認參加，逾期未回視同放棄，名額將遞補。</li>
                                 </ul>
                             </div>
+                             <!-- 右側: 填寫項目 (含分數佔比) -->
                             <div class="bg-white/90 p-6 rounded-lg shadow-lg h-full border border-black/10">
-                                <h3 class="font-bold text-xl mb-3 text-gray-900">📂 填寫項目</h3>
-                                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                                  <li>基本資料：姓名、聯絡方式、系級及相關證明。</li>
-                                  <li>PC DIY 經歷分享：請詳細描述你與 PC DIY 的故事。</li>
-                                  <li>報名動機：為何想報名「2025 華碩校園組裝王」？</li>
-                                  <li>選繳文件：加分項目（詳見下方說明及報名簡章）</li>
-                                </ul>
-                            </div>
+                              <h3 class="font-bold text-xl mb-3 text-gray-900">📂 基本項目</h3>
+                              <ul class="space-y-4 text-gray-700">
+                                  <li class="flex justify-between items-start gap-4">
+                                    <span><strong>基本資料：</strong>姓名、聯絡方式、系級及相關證明。</span>
+                                    
+                                  </li>
+                                  <li class="flex justify-between items-start gap-4">
+                                    <span><strong>PC DIY 經歷分享：</strong>請詳細描述你與 PC DIY 的故事。</span>
+                                    
+                                  </li>
+                                  <li class="flex justify-between items-start gap-4">
+                                    <span><strong>報名動機：</strong>為何想報名「2025 華碩校園組裝王」？</span>
+                                    
+                                  </li>
+                                  <li class="pt-2 border-t border-gray-200">
+                                      <strong>選繳文件：</strong>加分項目（詳見下方說明及報名簡章）
+                                  </li>
+                              </ul>
+                          </div>
+
+                          <!-- [新增] 評分標準區塊，跨兩欄顯示 -->
+                          <div class="md:col-span-2 bg-white/90 p-6 rounded-lg shadow-lg border border-black/10">
+                              <h3 class="font-bold text-xl mb-4 text-gray-900">⭐ 評分標準  (100 分)</h3>
+                              <ol class="list-decimal list-inside space-y-4 text-gray-700">
+                                  <li>
+                                      <strong>基本資料 (50%)</strong><br>
+                                      <span class="text-sm text-gray-600">此項目的評分重點在於資料的<strong class="text-gray-800">完整性</strong>與<strong class="text-gray-800">真實性</strong>。請務必確實填寫所有欄位，並上傳清晰可辨的學生身份證明文件，以確保您獲得滿分。</span>
+                                  </li>
+                                  <li>
+                                      <strong>PC DIY 經歷分享 (25%)</strong><br>
+                                      <span class="text-sm text-gray-600">我們期待看到您獨一無二的 DIY 故事！評分標準包含<strong class="text-gray-800">故事性、熱情展現</strong>與<strong class="text-gray-800">獨特性</strong>。無論是第一次組裝的趣事、改造電腦的挑戰，或是您對特定零件的熱愛，都請大方分享。</span>
+                                  </li>
+                                  <li>
+                                      <strong>報名動機 (25%)</strong><br>
+                                      <span class="text-sm text-gray-600">讓我們知道您為何而來！評分標準著重於<strong class="text-gray-800">目標清晰度、企圖心</strong>以及<strong class="text-gray-800">您與 ROG 品牌的連結</strong>。清晰表達您想透過比賽達成什麼目標，將會是加分的關鍵。</span>
+                                  </li>
+                              </ol>
+                          </div>
                             <!-- 加分項目 (可折疊) -->
                             <div class="md:col-span-2 bg-white/90 rounded-lg shadow-lg border border-black/10">
                                 <button id="accordion-button-phase1" type="button" class="accordion-trigger w-full flex justify-between items-center p-4 text-left font-bold text-xl text-gray-900" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'accordion_toggle','event_category_DL':'Accordion','event_action_DL':'toggle','event_label_DL':'加分項'});">
-                                  <span>🌟 加分項</span>
+                                  <span>⭐ 加分項 (50 分)</span>
                                   <svg class="h-6 w-6 accordion-icon transition-transform text-gray-700 open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 <div class="accordion-content px-4 pb-4 open">
@@ -506,7 +542,7 @@
                                             <tr class="border-b border-black/10"><td class="p-2">加入 ROG玩家基地</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">點擊 <a href="https://www.facebook.com/groups/192931181825656" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'link_click','event_category_DL':'Bonus Section Link','event_action_DL':'click','event_label_DL':'ROG 玩家基地'});">連結</a> 加入 ROG 官方社團。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">分享活動貼文</td><td class="p-2 font-bold text-green-600">+5分</td><td class="p-2">分享 <a href="https://tw.rog.gg/campus_post" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'link_click','event_category_DL':'Bonus Section Link','event_action_DL':'click','event_label_DL':'ROG 活動貼文'});">ROG 粉絲團活動貼文</a>，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10"><td class="p-2">創意加分 (圖文)</td><td class="p-2 font-bold text-orange-600">+10分</td><td class="p-2">創作一篇含「個人與主機合照」的短圖文，分享於個人社群平台，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
-                                            <tr class="border-b border-black/10"><td class="p-2">創意加分 (影片)</td><td class="p-2 font-bold text-red-600">+20分</td><td class="p-2">結合自身 DIY PC 的經歷、故事、學校等元素，拍攝一部「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台，影片中需要出現個人 DIY PC 電腦，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
+                                            <tr class="border-b border-black/10"><td class="p-2">創意加分 (影片)</td><td class="p-2 font-bold text-red-600">+15分</td><td class="p-2">結合自身 DIY PC 的經歷、故事、學校等元素，拍攝一部「個人 DIY PC」的短影片 (60s內)，分享於個人社群平台，影片中需要出現個人 DIY PC 電腦，標註 <strong>#2025華碩校園組裝王</strong> 並設為公開。</td></tr>
                                             <tr class="border-b border-black/10">
                                               <td class="p-2">全校加分 (盟校)</td>
                                               <td class="p-2 font-bold text-green-600">+5分</td>
@@ -521,7 +557,7 @@
                                 </div>
                             </div>
                             <!-- 攻略提示 -->
-                            <div class="md:col-span-2"><h3 class="font-bold text-lg mb-2 text-white">💡 高分攻略</h3><div class="bg-amber-100 border-l-4 border-amber-400 p-4 rounded-r-lg text-amber-800 font-medium"><p>想從眾多報名者中脫穎而出？優先完成「創意影片創作」(+20分) 、「創意圖文創作」(+10分)，是快速累積積分、搶下總部門票的關鍵！</p></div></div>
+                            <div class="md:col-span-2"><h3 class="font-bold text-lg mb-2 text-white">💡 高分攻略</h3><div class="bg-amber-100 border-l-4 border-amber-400 p-4 rounded-r-lg text-amber-800 font-medium"><p>想從眾多報名者中脫穎而出？優先完成「創意影片創作」(+15分) 、「創意圖文創作」(+10分)，是快速累積積分、搶下總部門票的關鍵！</p></div></div>
                         </div>
                     </div>
                     <!-- ----- 階段二: 總部挑戰賽 ----- -->
@@ -594,6 +630,7 @@
                       <li class="flex items-start"><span class="text-red-500 mr-3 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></span><p class="text-lg text-gray-700 font-medium"><strong>活動參與</strong> — 視品牌需求出席線下活動或影片拍攝</p></li>
                       
                   </ul>
+
               </div>
           </div>
       </div>
@@ -776,24 +813,54 @@
       </div>
     </section>
 
-    <!-- 內容區塊: 嵌入式 YouTube 影片 -->
+    <!-- 內容區塊: 嵌入式 YouTube 影片 (新版 - 雙影片) -->
     <section class="py-12 md:py-20 bg-gray-100">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" >
-        <!-- RWD Video Wrapper -->
-        <div class="relative w-full overflow-hidden rounded-xl shadow-2xl aspect-video">
-          <iframe 
-            class="absolute top-0 left-0 w-full h-full" 
-            src="https://www.youtube.com/embed/2Tr3m6RW1CY" 
-            title="YouTube video player: 和泥妮汝一起組電腦！2024 校園組裝王冠軍圓夢計畫" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 響應式 Grid 容器，電腦版兩欄，手機版一欄 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+
+          
+          <!-- 影片: 2023 冠軍 (這是您提供的影片) -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- RWD Video Wrapper -->
+            <div class="relative w-full overflow-hidden rounded-xl shadow-2xl aspect-video">
+              <iframe 
+                class="absolute top-0 left-0 w-full h-full" 
+                src="https://www.youtube.com/embed/6KAIvDztEWU" 
+                title="YouTube video player: 情人節禮物首選！ROG校園組裝王教你DIY一台兔兔主題機！" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+            <p class="text-center text-gray-600 mt-6 font-medium text-lg">
+             2023 年的冠軍黃羿捷同學幫超 Q 實況主 <span class="text-pink-600 font-bold">趙兔兔</span> 打造一台 Powered by ASUS 專屬主機！
+            </p>
+          </div>
+
+          <!-- 影片: 2024 冠軍 -->
+          <div data-aos="fade-up">
+            
+            <!-- RWD Video Wrapper -->
+            <div class="relative w-full overflow-hidden rounded-xl shadow-2xl aspect-video">
+              <iframe 
+                class="absolute top-0 left-0 w-full h-full" 
+                src="https://www.youtube.com/embed/2Tr3m6RW1CY" 
+                title="YouTube video player: 和泥妮汝一起組電腦！2024 校園組裝王冠軍圓夢計畫" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+            <p class="text-center text-gray-600 mt-6 font-medium text-lg">
+              2024 年的冠軍鄧仰軒同學和超人氣實況主 <span class="text-pink-600 font-bold">泥妮汝</span> 一起完成她的 Powered by ASUS 夢幻主機！
+            </p>
+          </div>
+
         </div>
-        <p class="text-center text-gray-600 mt-6 font-medium text-lg">
-          來瞧瞧 2024 年的冠軍鄧仰軒同學，怎麼和超人氣實況主 <span rel="noopener noreferrer" class="text-pink-600 font-bold">泥妮汝</span> 一起完成她的 Powered by ASUS 夢幻主機！
-        </p>
       </div>
     </section>
 
@@ -1030,22 +1097,107 @@
     </div>
 </section>
   
-  <!-- 頁尾 (Footer) -->
-  <footer class="bg-black text-gray-400 py-8">
-    <div class="max-w-7xl mx-auto px-6 text-center sm:text-left sm:flex sm:justify-between items-center">
-        <p class="text-sm">© ASUSTeK Computer Inc. All rights reserved.</p>
+   <!-- 頁尾 (Footer) - 新版 -->
+   <footer class="bg-black text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-center md:text-left mb-8">
+        <!-- 合作夥伴 -->
+        <div>
+          <h4 class="footer-section-title">合作夥伴</h4>
+          <div class="partner-logos">
+            <a href="https://www.xfastest.com/" target="_blank" rel="noopener noreferrer" title="XFastest">
+              <img src="./v1/img/XFNews-LOGOx2.png" alt="XFastest Logo">
+            </a>
+            <a href="https://www.kingston.com/tw/gaming" target="_blank" rel="noopener noreferrer" title="Kingston FURY">
+              
+              <img src="./v1/img/kingston.png" alt="Kingston FURY Logo">
+            </a>
+          </div>
+        </div>
+        <!-- 指導單位 -->
+        <div>
+          <h4 class="footer-section-title">指導單位</h4>
+          <p class="text-gray-300 font-semibold">中華民國電子競技運動協會</p>
+        </div>
+      </div>
+
+      <!-- 分隔線 -->
+      <div class="border-t border-gray-800 my-8"></div>
+
+      <!-- 下半部: 版權 & 原始連結 -->
+      <div class="text-center sm:flex sm:justify-between sm:items-center">
+        <p class="text-sm text-gray-500">© ASUSTeK Computer Inc. All rights reserved.</p>
         <div class="flex justify-center items-center gap-4 mt-4 sm:mt-0">
           <a href="https://www.facebook.com/asusrog.tw" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Facebook 粉絲專頁" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'footer_click','event_category_DL':'Footer','event_action_DL':'click','event_label_DL':'Facebook'});"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.198 21.5h4v-8.01h2.667l.267-2.99H13.198v-1.5c0-.996.193-1.333 1.333-1.333h1.333v-2.667H13.5C10.167 6.5 9.198 8.167 9.198 9.998v1.503H6.865v2.99h2.333v8.01Z"></path></svg></a>
           <a href="https://www.instagram.com/rog_taiwan/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="前往 ROG Instagram" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'footer_click','event_category_DL':'Footer','event_action_DL':'click','event_label_DL':'Instagram'});"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.013 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.013-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.013-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.883 4.883 0 0 1 1.153-1.772A4.915 4.915 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path></svg></a>
           <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Official-Site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'footer_click','event_category_DL':'Footer','event_action_DL':'click','event_label_DL':'使用條款'});">使用條款</a>
           <a href="https://www.asus.com/tw/Terms_of_Use_Notice_Privacy_Policy/Privacy_Policy/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-sm" onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'footer_click','event_category_DL':'Footer','event_action_DL':'click','event_label_DL':'隱私權保護政策'});">隱私權保護政策</a>
         </div>
+      </div>
     </div>
   </footer>
 
   <!-- 頁面所需腳本 -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="v1/js/script.js" defer></script>
+
+      <!-- ============================================================
+    懸浮社群分享按鈕 (可收合版本)
+    ============================================================ -->
+  <div id="social-share-widget" class="fixed bottom-5 right-5 z-[100] flex flex-col items-center gap-3">
+    <!-- 選項按鈕容器 (預設隱藏) -->
+    <div class="share-options flex flex-col items-center gap-3">
+      <!-- Facebook 分享按鈕 -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frog.asus.com%2Fevent%2Fcampus_PCDIY%2Ftw" 
+         target="_blank" rel="noopener noreferrer" class="share-btn facebook" title="分享至 Facebook" aria-label="分享至 Facebook"
+         onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'share','event_category_DL':'Social Share','event_action_DL':'click','event_label_DL':'Facebook'});">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.198 21.5h4v-8.01h2.667l.267-2.99H13.198v-1.5c0-.996.193-1.333 1.333-1.333h1.333v-2.667H13.5C10.167 6.5 9.198 8.167 9.198 9.998v1.503H6.865v2.99h2.333v8.01Z"></path></svg>
+      </a>
+      <!-- X (Twitter) 分享按鈕 -->
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Frog.asus.com%2Fevent%2Fcampus_PCDIY%2Ftw&text=%E6%8C%91%E6%88%B0%E6%9C%80%E5%BC%B7%E7%B5%84%E8%A3%9D%E7%8E%8B%EF%BC%81ROG%20%E6%A0%A1%E5%9C%92%E8%8F%81%E8%8B%B1%E5%8F%AC%E9%9B%86%E4%BB%A4%20Code-X%20%E7%8F%BE%E6%AD%A3%E5%A0%B1%E5%90%8D%E4%B8%AD%EF%BC%81%20%232025%E8%8F%AF%E7%A2%A9%E6%A0%A1%E5%9C%92%E7%B5%84%E8%A3%9D%E7%8E%8B" 
+         target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="分享至 X (Twitter)" aria-label="分享至 X (Twitter)"
+         onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'share','event_category_DL':'Social Share','event_action_DL':'click','event_label_DL':'Twitter'});">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+      </a>
+      <!-- LINE 分享按鈕 -->
+      <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Frog.asus.com%2Fevent%2Fcampus_PCDIY%2Ftw" 
+         target="_blank" rel="noopener noreferrer" class="share-btn line" title="分享至 LINE" aria-label="分享至 LINE"
+         onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'share','event_category_DL':'Social Share','event_action_DL':'click','event_label_DL':'LINE'});">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" fill="currentColor">
+          <path d="M37.113,22.417c0-5.865-5.88-10.637-13.107-10.637s-13.108,4.772-13.108,10.637c0,5.258,4.663,9.662,10.962,10.495c0.427,0.092,1.008,0.282,1.155,0.646c0.132,0.331,0.086,0.85,0.042,1.185c0,0-0.153,0.925-0.187,1.122c-0.057,0.331-0.263,1.296,1.135,0.707c1.399-0.589,7.548-4.445,10.298-7.611h-0.001C36.203,26.879,37.113,24.764,37.113,22.417z M18.875,25.907h-2.604c-0.379,0-0.687-0.308-0.687-0.688V20.01c0-0.379,0.308-0.687,0.687-0.687c0.379,0,0.687,0.308,0.687,0.687v4.521h1.917c0.379,0,0.687,0.308,0.687,0.687C19.562,25.598,19.254,25.907,18.875,25.907z M21.568,25.219c0,0.379-0.308,0.688-0.687,0.688s-0.687-0.308-0.687-0.688V20.01c0-0.379,0.308-0.687,0.687-0.687s0.687,0.308,0.687,0.687V25.219z M27.838,25.219c0,0.297-0.188,0.559-0.47,0.652c-0.071,0.024-0.145,0.036-0.218,0.036c-0.215,0-0.42-0.103-0.549-0.275l-2.669-3.635v3.222c0,0.379-0.308,0.688-0.688,0.688c-0.379,0-0.688-0.308-0.688-0.688V20.01c0-0.296,0.189-0.558,0.47-0.652c0.071-0.024,0.144-0.035,0.218-0.035c0.214,0,0.42,0.103,0.549,0.275l2.67,3.635V20.01c0-0.379,0.309-0.687,0.688-0.687c0.379,0,0.687,0.308,0.687,0.687V25.219z M32.052,21.927c0.379,0,0.688,0.308,0.688,0.688c0,0.379-0.308,0.687-0.688,0.687h-1.917v1.23h1.917c0.379,0,0.688,0.308,0.688,0.687c0,0.379-0.309,0.688-0.688,0.688h-2.604c-0.378,0-0.687-0.308-0.687-0.688v-2.603c0-0.001,0-0.001,0-0.001c0,0,0-0.001,0-0.001v-2.601c0-0.001,0-0.001,0-0.002c0-0.379,0.308-0.687,0.687-0.687h2.604c0.379,0,0.688,0.308,0.688,0.687s-0.308,0.687-0.688,0.687h-1.917v1.23H32.052z"></path>
+        </svg>
+      </a>
+      <!-- Threads 分享按鈕 -->
+      <a href="#" id="threads-share-btn" class="share-btn threads" title="分享至 Threads" aria-label="分享至 Threads"
+         onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'share','event_category_DL':'Social Share','event_action_DL':'click','event_label_DL':'Threads'});">
+        <!-- 這是您提供的 SVG，我已將顏色改為 currentColor 以便 CSS 控制 -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.258 11.197a7.545 7.545 0 00-.288-.131c-.17-3.13-1.88-4.92-4.75-4.939h-.04c-1.717 0-3.145.733-4.024 2.067l1.58 1.083c.656-.997 1.686-1.209 2.445-1.209h.027c.945.006 1.658.281 2.12.817.336.39.56.93.672 1.61a12.085 12.085 0 00-2.714-.13c-2.73.156-4.484 1.748-4.366 3.96.06 1.122.619 2.087 1.574 2.718.807.533 1.847.794 2.928.735 1.428-.079 2.547-.623 3.329-1.62.593-.755.968-1.735 1.134-2.97.68.41 1.184.95 1.463 1.6.473 1.104.501 2.918-.98 4.397-1.296 1.296-2.855 1.857-5.211 1.874-2.614-.02-4.59-.858-5.876-2.491-1.203-1.53-1.825-3.74-1.848-6.568.023-2.828.645-5.038 1.848-6.568 1.285-1.633 3.262-2.471 5.875-2.49 2.633.019 4.644.86 5.978 2.502.655.805 1.148 1.818 1.473 2.998l1.85-.493c-.394-1.453-1.014-2.705-1.858-3.744-1.71-2.104-4.213-3.183-7.436-3.205h-.013c-3.217.022-5.69 1.105-7.353 3.217-1.478 1.88-2.241 4.496-2.267 7.775v.016c.026 3.279.789 5.895 2.267 7.775C6.46 21.895 8.933 22.978 12.15 23h.013c2.86-.02 4.876-.769 6.537-2.428 2.173-2.17 2.107-4.892 1.391-6.562-.514-1.198-1.493-2.17-2.833-2.813zm-4.938 4.642c-1.196.068-2.439-.47-2.5-1.62-.046-.852.607-1.803 2.573-1.917.226-.013.447-.02.664-.02.714 0 1.383.07 1.99.203-.226 2.83-1.556 3.29-2.727 3.354z"></path>
+        </svg>
+      </a>
+      <!-- 複製連結按鈕 -->
+      <button type="button" id="copy-link-btn" class="share-btn copy-link" title="複製活動連結" aria-label="複製活動連結"
+              onclick="window.dataLayer.push({'event':'data_layer_event','event_name_ga4':'share','event_category_DL':'Social Share','event_action_DL':'click','event_label_DL':'Copy Link'});">
+        <span class="copy-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>
+        </span>
+        <span class="copied-feedback">已複製!</span>
+      </button>
+
+      
+    </div>
+    
+    <!-- 主要觸發按鈕 -->
+    <button type="button" id="main-share-btn" class="share-btn main-btn" title="分享活動" aria-label="開啟或關閉分享選項">
+      <span class="share-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
+      </span>
+      <span class="close-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+      </span>
+    </button>
+  </div>
 
 </body>
 </html>
