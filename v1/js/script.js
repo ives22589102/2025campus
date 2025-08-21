@@ -259,67 +259,103 @@ window.addEventListener('load', () => {
   });
 
   // --- 12. Social Share Logic ---
-  const shareWidget = document.getElementById('social-share-widget');
-  const mainShareBtn = document.getElementById('main-share-btn');
-  const copyLinkBtn = document.getElementById('copy-link-btn');
-  const threadsShareBtn = document.getElementById('threads-share-btn');
+const shareWidget = document.getElementById('social-share-widget');
+const mainShareBtn = document.getElementById('main-share-btn');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+const threadsShareBtn = document.getElementById('threads-share-btn');
+const facebookShareBtn = document.getElementById('facebook-share-btn'); // 新增 Facebook 按鈕變數
 
-  // Toggle widget on main button click
-  if (shareWidget && mainShareBtn) {
-    mainShareBtn.addEventListener('click', (event) => {
-      event.stopPropagation();
-      shareWidget.classList.toggle('active');
+// 取得標準分享網址
+const shareUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+const encodedShareUrl = encodeURIComponent(shareUrl);
+
+// Toggle widget on main button click
+if (shareWidget && mainShareBtn) {
+  mainShareBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    shareWidget.classList.toggle('active');
+  });
+  // Close widget when clicking outside
+  document.addEventListener('click', (event) => {
+    if (!shareWidget.contains(event.target)) {
+      shareWidget.classList.remove('active');
+    }
+  });
+}
+
+// Copy Link Button
+if (copyLinkBtn) {
+  copyLinkBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      copyLinkBtn.classList.add('copied');
+      setTimeout(() => {
+        copyLinkBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('無法複製連結:', err);
     });
-    // Close widget when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!shareWidget.contains(event.target)) {
-        shareWidget.classList.remove('active');
-      }
-    });
-  }
+  });
+}
 
-  // Copy Link Button
-  if (copyLinkBtn) {
-    copyLinkBtn.addEventListener('click', () => {
-      const urlToCopy = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
-      navigator.clipboard.writeText(urlToCopy).then(() => {
-        copyLinkBtn.classList.add('copied');
-        setTimeout(() => {
-          copyLinkBtn.classList.remove('copied');
-        }, 2000);
-      }).catch(err => {
-        console.error('無法複製連結:', err);
-      });
-    });
-  }
+// [已修正] Facebook Share Button
+if (facebookShareBtn) {
+  facebookShareBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // 在行動裝置上，嘗試開啟 App
+      const appUrl = `fb://sharer/sharer.php?u=${encodedShareUrl}`;
+      // 設定一個計時器，如果 App 沒有成功開啟，就跳轉到網頁版
+      const fallbackUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`;
+      const timeout = setTimeout(() => {
+        window.location.href = fallbackUrl;
+      }, 2500);
 
-  // Threads Share Button
-  if (threadsShareBtn) {
-    threadsShareBtn.addEventListener('click', (event) => {
-      event.preventDefault();
+      // 監聽頁面是否變得不可見，如果 App 成功開啟，頁面會變得不可見
+      const visibilityChangeHandler = () => {
+        if (document.visibilityState === 'hidden') {
+          clearTimeout(timeout);
+          document.removeEventListener('visibilitychange', visibilityChangeHandler);
+        }
+      };
+      document.addEventListener('visibilitychange', visibilityChangeHandler);
 
-      const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-      const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
-      const textToShare = `${shareTitle} ${shareUrl}`;
-      const encodedText = encodeURIComponent(textToShare);
+      // 嘗試開啟 App
+      window.location.href = appUrl;
+      
+    } else {
+      // 在桌機上，開啟網頁版分享視窗
+      const webUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`;
+      window.open(webUrl, '_blank', 'noopener,noreferrer,width=600,height=400');
+    }
+  });
+}
 
-      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-      let finalUrl;
 
-      if (isMobile) {
-        // Mobile: Use URL Scheme to open the app
-        finalUrl = `threads://post?text=${encodedText}`;
-      } else {
-        // Desktop: Use web intent URL
-        finalUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
-      }
+// [已修正] Threads Share Button
+if (threadsShareBtn) {
+  threadsShareBtn.addEventListener('click', (event) => {
+    event.preventDefault();
 
-      if (isMobile) {
-        window.location.href = finalUrl;
-      } else {
-        window.open(finalUrl, '_blank', 'noopener,noreferrer');
-      }
-    });
-  }
+    const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
+    const textToShare = `${shareTitle} ${shareUrl}`;
+    const encodedText = encodeURIComponent(textToShare);
+
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+    let finalUrl;
+
+    if (isMobile) {
+      // Mobile: Use URL Scheme to open the app
+      finalUrl = `threads://post?text=${encodedText}`;
+      // 使用 window.open() 提高在行動裝置上的成功率
+      window.open(finalUrl, '_blank'); 
+    } else {
+      // Desktop: Use web intent URL
+      finalUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
+      window.open(finalUrl, '_blank', 'noopener,noreferrer');
+    }
+  });
+}
 
 });
