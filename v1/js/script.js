@@ -268,47 +268,51 @@ window.addEventListener('load', () => {
 
       });
 
-      // --- Threads Share Button Logic ---
-document.addEventListener('DOMContentLoaded', function() {
-  const threadsBtn = document.getElementById('threads-share-btn');
-  
-  if (threadsBtn) {
-    threadsBtn.addEventListener('click', function(event) {
-      event.preventDefault(); // 防止 <a> 標籤的默認跳轉行為
-      shareToThreads();
-    });
-  }
+      // --- 13. Social Share Logic (Corrected for Threads) ---
+      const copyLinkBtn = document.getElementById('copy-link-btn');
+      if (copyLinkBtn) {
+        copyLinkBtn.addEventListener('click', () => {
+          const urlToCopy = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+          navigator.clipboard.writeText(urlToCopy).then(() => {
+            copyLinkBtn.classList.add('copied');
+            setTimeout(() => {
+              copyLinkBtn.classList.remove('copied');
+            }, 2000);
+          }).catch(err => {
+            console.error('無法複製連結:', err);
+          });
+        });
+      }
 
-  function shareToThreads() {
-    // 1. 從 meta tag 中獲取分享的標題和 URL，更具彈性
-    const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-    const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
-    
-    // 2. 組合要分享的文字內容
-    const textToShare = `${shareTitle} ${shareUrl}`;
-    
-    // 3. 對文字進行 URL 編碼，確保特殊字符能被正確處理
-    const encodedText = encodeURIComponent(textToShare);
-    
-    // 4. 判斷是否為行動裝置
-    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-    
-    let finalUrl;
+      // Threads Share Button Logic (Corrected)
+      const threadsShareBtn = document.getElementById('threads-share-btn');
+      if (threadsShareBtn) {
+        threadsShareBtn.addEventListener('click', (event) => {
+          event.preventDefault();
+          
+          const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
+          const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
+          const textToShare = `${shareTitle} ${shareUrl}`;
+          const encodedText = encodeURIComponent(textToShare);
+          
+          const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+          
+          let finalUrl;
 
-    if (isMobile) {
-      // 在行動裝置上，使用 threads:// URL scheme 來嘗試喚醒 App
-      finalUrl = `threads://app/post?text=${encodedText}`;
-    } else {
-      // 在桌面上，使用標準的網頁分享連結
-      finalUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
-    }
-    
-    // 5. 執行跳轉
-    if (isMobile) {
-      window.location.href = finalUrl;
-    } else {
-      // 桌面版在新分頁中打開，體驗更好
-      window.open(finalUrl, '_blank', 'noopener,noreferrer');
-    }
-  }
+          if (isMobile) {
+            // 【已修正】使用更通用的 URL Scheme，移除 /app/
+            finalUrl = `threads://post?text=${encodedText}`;
+          } else {
+            // 桌面版連結不變
+            finalUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
+          }
+          
+          // 執行跳轉
+          if (isMobile) {
+            window.location.href = finalUrl;
+          } else {
+            window.open(finalUrl, '_blank', 'noopener,noreferrer');
+          }
+        });
+      }
 });
