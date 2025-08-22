@@ -230,7 +230,7 @@ window.addEventListener('load', () => {
         }
       });
       
-           // --- 12. Social Share Widget Logic (Optimized) ---
+                // --- 12. Social Share Widget Logic (Final Optimized Version) ---
       function setupShareWidget() {
         const shareWidget = document.getElementById('social-share-widget');
         const mainShareBtn = document.getElementById('main-share-btn');
@@ -251,54 +251,80 @@ window.addEventListener('load', () => {
         // --- Share Logic ---
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        // 從 Meta Tags 獲取分享資訊，更具彈性
         const shareUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
         const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-        const shareText = `${shareTitle} ${shareUrl}`; // 常用於 Threads 和 Twitter
+        const shareText = `${shareTitle} ${shareUrl}`;
         
         const encodedUrl = encodeURIComponent(shareUrl);
         const encodedText = encodeURIComponent(shareText);
 
+        // 專門處理 Threads 的 Fallback 機制
+        const handleThreadsShare = () => {
+            const deepLink = `threads://app/post?text=${encodedText}`;
+            const webLink = `https://www.threads.net/intent/post?text=${encodedText}`;
+
+            if (isMobile) {
+                // 嘗試打開 Deep Link，並設定一個後備方案
+                const timeout = setTimeout(() => {
+                    // 如果 2.5 秒後使用者還在此頁面，代表 App 未安裝或無法開啟，跳轉到網頁版
+                    window.location.href = webLink;
+                }, 2500);
+
+                // 當使用者切換到 App 時，瀏覽器頁面會變為 hidden，我們可以利用此特性取消後備跳轉
+                const visibilityChangeHandler = () => {
+                    if (document.hidden) {
+                        clearTimeout(timeout);
+                        document.removeEventListener('visibilitychange', visibilityChangeHandler);
+                    }
+                };
+                document.addEventListener('visibilitychange', visibilityChangeHandler);
+
+                // 執行 Deep Link
+                window.location.href = deepLink;
+            } else {
+                // 桌面版直接開新視窗
+                window.open(webLink, '_blank', 'noopener,noreferrer,width=600,height=400');
+            }
+        };
+
         shareButtons.forEach(button => {
           button.addEventListener('click', (event) => {
-            event.preventDefault(); // 阻止 <a> 標籤的默認跳轉行為
+            // 阻止事件冒泡，避免點擊按鈕後分享選單立刻關閉
+            event.stopPropagation();
+            event.preventDefault(); 
+            
             const network = button.dataset.shareNetwork;
             let url;
 
-            // --- GTM Data Layer Push ---
-            // 將 GTM 追蹤集中到此處
             if (window.dataLayer) {
               window.dataLayer.push({
-                'event': 'data_layer_event',
-                'event_name_ga4': 'share',  
-                'event_category_DL': 'Social Share', 
-                'event_action_DL': 'click',             
-                'event_label_DL': network.charAt(0).toUpperCase() + network.slice(1) // e.g., 'Facebook'
+                'event': 'data_layer_event', 'event_name_ga4': 'share',  
+                'event_category_DL': 'Social Share', 'event_action_DL': 'click',             
+                'event_label_DL': network.charAt(0).toUpperCase() + network.slice(1)
               });
             }
 
             switch (network) {
               case 'facebook':
-                // 手機版使用 fb:// deeplink，桌面版使用網頁 sharer
-                url = isMobile 
-                  ? `fb://sharer/sharer.php?u=${encodedUrl}` 
-                  : `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+                // 為求穩定，手機和桌面都使用 Web Sharer
+                url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+                window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
                 break;
 
               case 'threads':
-                // 手機版使用 threads:// deeplink，桌面版使用網頁 intent
-                url = isMobile
-                  ? `threads://app/post?text=${encodedText}`
-                  : `https://www.threads.net/intent/post?text=${encodedText}`;
-                break;
+                // 使用帶有 Fallback 機制的專用函式
+                handleThreadsShare();
+                return; // 因為 handleThreadsShare 內部已處理跳轉，這裡直接結束
 
               case 'twitter':
                 const twitterText = encodeURIComponent('挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中！ #2025華碩校園組裝王 ' + shareUrl);
                 url = `https://twitter.com/intent/tweet?text=${twitterText}`;
+                window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
                 break;
               
               case 'line':
                 url = `https://social-plugins.line.me/lineit/share?url=${encodedUrl}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
                 break;
 
               case 'copy':
@@ -306,16 +332,7 @@ window.addEventListener('load', () => {
                   button.classList.add('copied');
                   setTimeout(() => button.classList.remove('copied'), 2000);
                 }).catch(err => console.error('無法複製連結:', err));
-                return; // 複製功能不需要跳轉，直接結束
-            }
-
-            // --- 執行跳轉 ---
-            if (isMobile && (network === 'facebook' || network === 'threads')) {
-              // 在手機上，直接跳轉以觸發 App
-              window.location.href = url;
-            } else {
-              // 在桌面版，開啟新視窗，避免離開活動頁
-              window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
+                return; 
             }
           });
         });
@@ -324,3 +341,4 @@ window.addEventListener('load', () => {
       // 呼叫新的函式來設定分享按鈕
       setupShareWidget();
 });
+
