@@ -230,7 +230,7 @@ window.addEventListener('load', () => {
         }
       });
       
-                // --- 12. Social Share Widget Logic (Final Optimized Version) ---
+                   // --- 12. Social Share Widget Logic (Universal Link Version) ---
       function setupShareWidget() {
         const shareWidget = document.getElementById('social-share-widget');
         const mainShareBtn = document.getElementById('main-share-btn');
@@ -249,47 +249,17 @@ window.addEventListener('load', () => {
         });
 
         // --- Share Logic ---
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
         const shareUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
         const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-        const shareText = `${shareTitle} ${shareUrl}`;
         
         const encodedUrl = encodeURIComponent(shareUrl);
-        const encodedText = encodeURIComponent(shareText);
-
-        // 專門處理 Threads 的 Fallback 機制
-        const handleThreadsShare = () => {
-            const deepLink = `threads://app/post?text=${encodedText}`;
-            const webLink = `https://www.threads.net/intent/post?text=${encodedText}`;
-
-            if (isMobile) {
-                // 嘗試打開 Deep Link，並設定一個後備方案
-                const timeout = setTimeout(() => {
-                    // 如果 2.5 秒後使用者還在此頁面，代表 App 未安裝或無法開啟，跳轉到網頁版
-                    window.location.href = webLink;
-                }, 2500);
-
-                // 當使用者切換到 App 時，瀏覽器頁面會變為 hidden，我們可以利用此特性取消後備跳轉
-                const visibilityChangeHandler = () => {
-                    if (document.hidden) {
-                        clearTimeout(timeout);
-                        document.removeEventListener('visibilitychange', visibilityChangeHandler);
-                    }
-                };
-                document.addEventListener('visibilitychange', visibilityChangeHandler);
-
-                // 執行 Deep Link
-                window.location.href = deepLink;
-            } else {
-                // 桌面版直接開新視窗
-                window.open(webLink, '_blank', 'noopener,noreferrer,width=600,height=400');
-            }
-        };
+        const encodedTitle = encodeURIComponent(shareTitle);
+        
+        // 為了 Threads 和 Twitter，將標題和網址組合
+        const encodedTextForThreads = encodeURIComponent(`${shareTitle} ${shareUrl}`);
 
         shareButtons.forEach(button => {
           button.addEventListener('click', (event) => {
-            // 阻止事件冒泡，避免點擊按鈕後分享選單立刻關閉
             event.stopPropagation();
             event.preventDefault(); 
             
@@ -306,25 +276,22 @@ window.addEventListener('load', () => {
 
             switch (network) {
               case 'facebook':
-                // 為求穩定，手機和桌面都使用 Web Sharer
+                // 使用標準 Web Sharer，在行動裝置上會由 OS 或瀏覽器提示用 App 開啟
                 url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-                window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
                 break;
 
               case 'threads':
-                // 使用帶有 Fallback 機制的專用函式
-                handleThreadsShare();
-                return; // 因為 handleThreadsShare 內部已處理跳轉，這裡直接結束
+                // **【關鍵更新】** 直接使用 Web Intent URL，讓 Universal Link 機制處理
+                url = `https://www.threads.net/intent/post?text=${encodedTextForThreads}`;
+                break;
 
               case 'twitter':
                 const twitterText = encodeURIComponent('挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中！ #2025華碩校園組裝王 ' + shareUrl);
                 url = `https://twitter.com/intent/tweet?text=${twitterText}`;
-                window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
                 break;
               
               case 'line':
                 url = `https://social-plugins.line.me/lineit/share?url=${encodedUrl}`;
-                window.open(url, '_blank', 'noopener,noreferrer');
                 break;
 
               case 'copy':
@@ -332,8 +299,13 @@ window.addEventListener('load', () => {
                   button.classList.add('copied');
                   setTimeout(() => button.classList.remove('copied'), 2000);
                 }).catch(err => console.error('無法複製連結:', err));
-                return; 
+                return; // 複製功能不需開啟新視窗
             }
+            
+            // 對所有社群平台統一使用 window.open，這是最穩定的做法
+            // 在桌面，它會開一個小彈窗
+            // 在手機，它會開一個新分頁，然後觸發 Universal Link
+            window.open(url, '_blank', 'noopener,noreferrer,width=600,height=450');
           });
         });
       }
@@ -341,4 +313,5 @@ window.addEventListener('load', () => {
       // 呼叫新的函式來設定分享按鈕
       setupShareWidget();
 });
+
 
