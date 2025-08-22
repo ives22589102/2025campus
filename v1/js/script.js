@@ -230,7 +230,7 @@ window.addEventListener('load', () => {
         }
       });
       
-                   // --- 12. Social Share Widget Logic (Universal Link Version) ---
+             // --- 12. Social Share Widget Logic (Unified Text for PCDIY Contest) ---
       function setupShareWidget() {
         const shareWidget = document.getElementById('social-share-widget');
         const mainShareBtn = document.getElementById('main-share-btn');
@@ -250,13 +250,12 @@ window.addEventListener('load', () => {
 
         // --- Share Logic ---
         const shareUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
-        const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-        
         const encodedUrl = encodeURIComponent(shareUrl);
-        const encodedTitle = encodeURIComponent(shareTitle);
-        
-        // 為了 Threads 和 Twitter，將標題和網址組合
-        const encodedTextForThreads = encodeURIComponent(`${shareTitle} ${shareUrl}`);
+
+       
+        const customShareText = `挑戰最強組裝王！ 2025 華碩校園組裝大賽正式開跑，即日起至 10/20 前立即報名！總價值超過八萬元的大獎等你帶回家，晉級挑戰賽再送你限量「ROG 菁英通行證」！ #ROG菁英召集令 #2025華碩校園組裝王 #ROG #電腦組裝 #PCDIY ${shareUrl}`;
+        const encodedCustomShareText = encodeURIComponent(customShareText);
+
 
         shareButtons.forEach(button => {
           button.addEventListener('click', (event) => {
@@ -276,18 +275,17 @@ window.addEventListener('load', () => {
 
             switch (network) {
               case 'facebook':
-                // 使用標準 Web Sharer，在行動裝置上會由 OS 或瀏覽器提示用 App 開啟
                 url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
                 break;
 
               case 'threads':
-                // **【關鍵更新】** 直接使用 Web Intent URL，讓 Universal Link 機制處理
-                url = `https://www.threads.net/intent/post?text=${encodedTextForThreads}`;
+              
+                url = `https://www.threads.net/intent/post?text=${encodedCustomShareText}`;
                 break;
 
               case 'twitter':
-                const twitterText = encodeURIComponent('挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中！ #2025華碩校園組裝王 ' + shareUrl);
-                url = `https://twitter.com/intent/tweet?text=${twitterText}`;
+               
+                url = `https://twitter.com/intent/tweet?text=${encodedCustomShareText}`;
                 break;
               
               case 'line':
@@ -299,12 +297,9 @@ window.addEventListener('load', () => {
                   button.classList.add('copied');
                   setTimeout(() => button.classList.remove('copied'), 2000);
                 }).catch(err => console.error('無法複製連結:', err));
-                return; // 複製功能不需開啟新視窗
+                return; 
             }
             
-            // 對所有社群平台統一使用 window.open，這是最穩定的做法
-            // 在桌面，它會開一個小彈窗
-            // 在手機，它會開一個新分頁，然後觸發 Universal Link
             window.open(url, '_blank', 'noopener,noreferrer,width=600,height=450');
           });
         });
@@ -313,5 +308,6 @@ window.addEventListener('load', () => {
       // 呼叫新的函式來設定分享按鈕
       setupShareWidget();
 });
+
 
 
