@@ -230,85 +230,97 @@ window.addEventListener('load', () => {
         }
       });
       
-      // --- 12. Collapsible Social Share Widget Logic ---
-      const shareWidget = document.getElementById('social-share-widget');
-      const mainShareBtn = document.getElementById('main-share-btn');
-      const copyLinkBtn = document.getElementById('copy-link-btn');
+           // --- 12. Social Share Widget Logic (Optimized) ---
+      function setupShareWidget() {
+        const shareWidget = document.getElementById('social-share-widget');
+        const mainShareBtn = document.getElementById('main-share-btn');
+        const shareButtons = document.querySelectorAll('[data-share-network]');
+        
+        if (!shareWidget || !mainShareBtn) return;
 
-      if (shareWidget && mainShareBtn) {
-        // Toggle widget on main button click
+        // --- Basic Widget Toggle ---
         mainShareBtn.addEventListener('click', (event) => {
-          event.stopPropagation(); // Prevent click from bubbling up to document
+          event.stopPropagation();
           shareWidget.classList.toggle('active');
         });
 
-        // Close widget when clicking outside
-        document.addEventListener('click', (event) => {
-          if (!shareWidget.contains(event.target)) {
-            shareWidget.classList.remove('active');
-          }
+        document.addEventListener('click', () => {
+          shareWidget.classList.remove('active');
         });
-      }
-      
-      if (copyLinkBtn) {
-        copyLinkBtn.addEventListener('click', () => {
-          const urlToCopy = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
-          navigator.clipboard.writeText(urlToCopy).then(() => {
-            copyLinkBtn.classList.add('copied');
-            setTimeout(() => {
-              copyLinkBtn.classList.remove('copied');
-            }, 2000);
-          }).catch(err => {
-            console.error('無法複製連結:', err);
+
+        // --- Share Logic ---
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // 從 Meta Tags 獲取分享資訊，更具彈性
+        const shareUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+        const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
+        const shareText = `${shareTitle} ${shareUrl}`; // 常用於 Threads 和 Twitter
+        
+        const encodedUrl = encodeURIComponent(shareUrl);
+        const encodedText = encodeURIComponent(shareText);
+
+        shareButtons.forEach(button => {
+          button.addEventListener('click', (event) => {
+            event.preventDefault(); // 阻止 <a> 標籤的默認跳轉行為
+            const network = button.dataset.shareNetwork;
+            let url;
+
+            // --- GTM Data Layer Push ---
+            // 將 GTM 追蹤集中到此處
+            if (window.dataLayer) {
+              window.dataLayer.push({
+                'event': 'data_layer_event',
+                'event_name_ga4': 'share',  
+                'event_category_DL': 'Social Share', 
+                'event_action_DL': 'click',             
+                'event_label_DL': network.charAt(0).toUpperCase() + network.slice(1) // e.g., 'Facebook'
+              });
+            }
+
+            switch (network) {
+              case 'facebook':
+                // 手機版使用 fb:// deeplink，桌面版使用網頁 sharer
+                url = isMobile 
+                  ? `fb://sharer/sharer.php?u=${encodedUrl}` 
+                  : `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+                break;
+
+              case 'threads':
+                // 手機版使用 threads:// deeplink，桌面版使用網頁 intent
+                url = isMobile
+                  ? `threads://app/post?text=${encodedText}`
+                  : `https://www.threads.net/intent/post?text=${encodedText}`;
+                break;
+
+              case 'twitter':
+                const twitterText = encodeURIComponent('挑戰最強組裝王！ROG 校園菁英召集令 Code-X 現正報名中！ #2025華碩校園組裝王 ' + shareUrl);
+                url = `https://twitter.com/intent/tweet?text=${twitterText}`;
+                break;
+              
+              case 'line':
+                url = `https://social-plugins.line.me/lineit/share?url=${encodedUrl}`;
+                break;
+
+              case 'copy':
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                  button.classList.add('copied');
+                  setTimeout(() => button.classList.remove('copied'), 2000);
+                }).catch(err => console.error('無法複製連結:', err));
+                return; // 複製功能不需要跳轉，直接結束
+            }
+
+            // --- 執行跳轉 ---
+            if (isMobile && (network === 'facebook' || network === 'threads')) {
+              // 在手機上，直接跳轉以觸發 App
+              window.location.href = url;
+            } else {
+              // 在桌面版，開啟新視窗，避免離開活動頁
+              window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
+            }
           });
         });
       }
-
       
-
-      });
-
-      // --- Threads Share Button Logic ---
-document.addEventListener('DOMContentLoaded', function() {
-  const threadsBtn = document.getElementById('threads-share-btn');
-  
-  if (threadsBtn) {
-    threadsBtn.addEventListener('click', function(event) {
-      event.preventDefault(); // 防止 <a> 標籤的默認跳轉行為
-      shareToThreads();
-    });
-  }
-
-  function shareToThreads() {
-    // 1. 從 meta tag 中獲取分享的標題和 URL，更具彈性
-    const shareTitle = document.querySelector('meta[property="og:title"]')?.content || document.title;
-    const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
-    
-    // 2. 組合要分享的文字內容
-    const textToShare = `${shareTitle} ${shareUrl}`;
-    
-    // 3. 對文字進行 URL 編碼，確保特殊字符能被正確處理
-    const encodedText = encodeURIComponent(textToShare);
-    
-    // 4. 判斷是否為行動裝置
-    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-    
-    let finalUrl;
-
-    if (isMobile) {
-      // 在行動裝置上，使用 threads:// URL scheme 來嘗試喚醒 App
-      finalUrl = `threads://app/post?text=${encodedText}`;
-    } else {
-      // 在桌面上，使用標準的網頁分享連結
-      finalUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
-    }
-    
-    // 5. 執行跳轉
-    if (isMobile) {
-      window.location.href = finalUrl;
-    } else {
-      // 桌面版在新分頁中打開，體驗更好
-      window.open(finalUrl, '_blank', 'noopener,noreferrer');
-    }
-  }
+      // 呼叫新的函式來設定分享按鈕
+      setupShareWidget();
 });
